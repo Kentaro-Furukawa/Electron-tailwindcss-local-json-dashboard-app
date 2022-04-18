@@ -1,0 +1,22 @@
+{
+  "name": "electron-tailwind-local-dashboard-app",
+  "version": "1.0.0",
+  "description": "Electron app",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "keywords": [
+    "Electron",
+    "Taiwindcss",
+    "Local",
+    "Json",
+    "file"
+  ],
+  "author": "Kentaro Furukawa",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^18.0.4",
+    "tailwindcss": "^3.0.24"
+  }
+}
