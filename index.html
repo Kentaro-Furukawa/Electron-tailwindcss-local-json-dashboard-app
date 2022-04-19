@@ -15,9 +15,41 @@
 
   <div class="flex">
     <section class="content-container">
+      <section class="top-navigation">
+        <div class="user-select">
+          <select id="user-selecter" x-model="user">
+            <option value="" disabled>Select user...</option>
+            <option value="Ken">Ken</option>
+            <option value="John">John</option>
+            <option value="Evan">Evan</option>
+            <option value="Tim">Tim</option>
+            <option value="Ryu">Ryu Murakami</option>
+            <option value="柳生 石舟斎">柳生 石舟斎</option>
+            <option value="村上 龍">村上 龍</option>
+            <option value="平賀 源内">平賀 源内</option>
+            <option value="秋田屋 九五郎">秋田屋 九五郎</option>
+          </select>
+        </div>
 
+        <div class="top-navigation-icons">
+          <div class="refresh-button">
+            <button>
+              <i data-feather="rotate-cw"></i>
+            </button>
+          </div>
+          <div class="topbar-divider"></div>
+          <div class="theme-toggle-button">
+            <button>
+              <i data-feather="sun"></i>
+            </button>
+          </div>
+        </div>
+      </section>
     </section>
   </div>
+
+
+
 
   <section class="sidebar-container">
 
