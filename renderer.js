@@ -1,6 +1,7 @@
 let currentState = 'globalState';
 
 const stateIconButtonContainer = document.querySelector('.state-icon-button-container');
+// const stateIconButtons = document.querySelectorAll('.state-icon-button');
 
 const stateIcons = [
     { value: 'available', icon: 'user-check', caption: 'Available' },
@@ -14,7 +15,11 @@ const stateIcons = [
 stateIcons.forEach(iconItem => {
     const iconElement = document.createElement('button');
     iconElement.classList.add("state-icon-button", "sidebar-icon", "group")
-    iconElement.setAttribute("value", iconItem.value);
+    iconElement.addEventListener('click', (e) => {
+            e.preventDefault();
+            currentState = iconItem.value;
+        });
+
     iconElement.innerHTML =
     `
     <i data-feather="${iconItem.icon}"></i>
@@ -25,17 +30,6 @@ stateIcons.forEach(iconItem => {
     stateIconButtonContainer.appendChild(iconElement);
 });
 
-//working on this event button 
-
-const stateIconButtons = document.querySelectorAll('.state-icon-button');
-
-// stateIconButtons.addEventListener('click', (e) => {
-//     e.preventDefault();
-//     console.log(currentState);
-//     currentState = this.value;
-//     console.log(currentState);
- 
-// });
 
 
 
