@@ -14,10 +14,12 @@ stateIcons.forEach(iconItem => {
     iconElement.classList.add("sidebar-icon", "group")
     iconElement.innerHTML =
         `
+    <button>
     <i data-feather="${iconItem.icon}"></i>
     <span class="sidebar-caption group-hover:scale-100">
     ${iconItem.caption}
     </span>
+    </button>
     `
     stateIconButtons.appendChild(iconElement);
 });
