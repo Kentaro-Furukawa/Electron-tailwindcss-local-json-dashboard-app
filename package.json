@@ -7,14 +7,6 @@
     "tw": "tailwindcss -i ./src/input.css -o ./dist/output.css --watch",
     "start": "electron ."
   },
-  "keywords": [
-    "Electron",
-    "Taiwindcss",
-    "feathericon",
-    "Local",
-    "Json",
-    "file"
-  ],
   "author": "Kentaro Furukawa",
   "license": "MIT",
   "devDependencies": {
