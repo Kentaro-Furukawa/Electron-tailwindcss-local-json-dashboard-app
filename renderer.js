@@ -18,6 +18,9 @@ stateIcons.forEach(iconItem => {
     iconElement.addEventListener('click', (e) => {
             e.preventDefault();
             currentState = iconItem.value;
+            document.querySelector('.current-state-icon').innerHTML =
+            `<i data-feather="${iconItem.icon}"></i>`;
+            feather.replace();
         });
 
     iconElement.innerHTML =
