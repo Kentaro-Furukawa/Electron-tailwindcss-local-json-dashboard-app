@@ -4,6 +4,7 @@
   "description": "Electron app",
   "main": "main.js",
   "scripts": {
+    "tw": "tailwindcss -i ./src/input.css -o ./dist/output.css --watch",
     "start": "electron ."
   },
   "keywords": [
