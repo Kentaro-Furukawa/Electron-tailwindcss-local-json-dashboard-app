@@ -1,22 +1,49 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
-    <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'">
-    <link rel="stylesheet" href="./dist/output.css">
-    <script src="./dist/feather.min.js"></script>
-    <title>Electron app tailwind css</title>
-  </head>
-  <body>
-    <h1 class="text-3xl font-bold underline my-10 text-green-800 text-center">
-        Hello world!
-      </h1>
-      <i data-feather="sun"></i>
-      We are using Node.js <span id="node-version"></span>,
-    Chromium <span id="chrome-version"></span>,
-    and Electron <span id="electron-version"></span>.
-    <script src="./renderer.js"></script>
-  </body>
+
+<head>
+  <meta charset="UTF-8">
+  <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+  <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+  <link rel="stylesheet" href="./dist/output.css">
+  <script src="./dist/feather.min.js"></script>
+  <title>Electron app tailwind css</title>
+</head>
+
+<body>
+
+  <div class="flex">
+    <section class="content-container">
+
+    </section>
+  </div>
+
+  <section class="sidebar-container">
+
+    <div class="current-state-icon">
+      <i data-feather="user-check"></i>
+    </div>
+
+    <hr class="sidebar-hr" />
+
+    <div class="state-icon-buttons"></div>
+
+    <hr class="sidebar-hr" />
+
+    <div class="sidebar-icon group">
+      <i data-feather="inbox"></i>
+      <span class="sidebar-caption group-hover:scale-100">
+        Recipient
+      </span>
+
+
+  </section>
+
+
+
+
+  <script src="./renderer.js"></script>
+</body>
+
 </html>
