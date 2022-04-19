@@ -1,6 +1,6 @@
 let currentState = 'globalState';
 
-const stateIconButtons = document.querySelector('.state-icon-buttons');
+const stateIconButtonContainer = document.querySelector('.state-icon-button-container');
 
 const stateIcons = [
     { value: 'available', icon: 'user-check', caption: 'Available' },
@@ -22,20 +22,21 @@ stateIcons.forEach(iconItem => {
     ${iconItem.caption}
     </span>
     `
-    stateIconButtons.appendChild(iconElement);
+    stateIconButtonContainer.appendChild(iconElement);
 });
 
 //working on this event button 
 
-const stateIconButton = document.querySelectorAll('.state-icon-button');
+const stateIconButtons = document.querySelectorAll('.state-icon-button');
 
-// stateIconButton.addEventListener('click', (e) => {
+// stateIconButtons.addEventListener('click', (e) => {
 //     e.preventDefault();
 //     console.log(currentState);
 //     currentState = this.value;
 //     console.log(currentState);
  
 // });
+
 
 
 
