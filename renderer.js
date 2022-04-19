@@ -25,16 +25,17 @@ stateIcons.forEach(iconItem => {
     stateIconButtons.appendChild(iconElement);
 });
 
-const stateIconButton = document.querySelector('.state-icon-button');
-
 //working on this event button 
-stateIconButton.addEventListener('click', (e) => {
-    e.preventDefault();
-    console.log(currentState);
-    currentState = this.value;
-    console.log(currentState);
+
+const stateIconButton = document.querySelectorAll('.state-icon-button');
+
+// stateIconButton.addEventListener('click', (e) => {
+//     e.preventDefault();
+//     console.log(currentState);
+//     currentState = this.value;
+//     console.log(currentState);
  
-});
+// });
 
 
 
