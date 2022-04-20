@@ -27,7 +27,10 @@
   .sidebar-hr {
     @apply bg-gray-400 border border-gray-100 dark:border-gray-800 rounded-full mx-2 my-3;
   }
-
+  
+  .modal-icon {
+    @apply flex mt-auto mx-auto mb-3 text-gray-400 dark:text-gray-300;
+  }
 
 
   .content-container {
