@@ -1,7 +1,8 @@
 let currentState = 'globalState';
-
+let isRecipient = false;
 const stateIconButtonContainer = document.querySelector('.state-icon-button-container');
-// const stateIconButtons = document.querySelectorAll('.state-icon-button');
+const recipientIconButton = document.querySelector('.recipient-icon-button');
+const recipientLabel = document.querySelector('.recipient-label');
 
 const stateIcons = [
     { value: 'available', icon: 'user-check', caption: 'Available' },
@@ -33,6 +34,22 @@ stateIcons.forEach(iconItem => {
     stateIconButtonContainer.appendChild(iconElement);
 });
 
+recipientIconButton.addEventListener('click', (e) => {
+    e.preventDefault();
+    if ( isRecipient === false ) {
+        const recipientStart = new Date();
+        currentHours = ('0' + recipientStart.getHours()).slice(-2);
+        currentMinutes = ('0' + recipientStart.getMinutes()).slice(-2);
+        const recipientStartTime = `${currentHours}:${currentMinutes}`;
+        recipientLabel.innerHTML = `You are recipient since ${recipientStartTime}.`;
+        recipientLabel.classList.add('recipient-label-on');
+        isRecipient = true;
+    } else {
+        recipientLabel.innerHTML = '';
+        recipientLabel.classList.remove('recipient-label-on');
+        isRecipient = false;
+    }
+});
 
 
 

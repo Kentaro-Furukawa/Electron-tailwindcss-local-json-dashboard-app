@@ -79,6 +79,15 @@
     @apply mb-4;
   }
 
+  .recipient-label {
+    @apply text-center bg-green-400;
+  }
+
+  .recipient-label-on {
+    @apply mb-4 py-2;
+  }
+
+
   .msg {
     @apply text-center bg-red-400;
   }
