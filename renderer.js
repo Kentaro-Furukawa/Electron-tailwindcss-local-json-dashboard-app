@@ -3,6 +3,7 @@ let isRecipient = false;
 const stateIconButtonContainer = document.querySelector('.state-icon-button-container');
 const recipientIconButton = document.querySelector('.recipient-icon-button');
 const recipientLabel = document.querySelector('.recipient-label');
+const themeToggleButton = document.querySelector('.theme-toggle-button');
 
 const stateIcons = [
     { value: 'available', icon: 'user-check', caption: 'Available' },
@@ -19,8 +20,7 @@ stateIcons.forEach(iconItem => {
     iconElement.addEventListener('click', (e) => {
             e.preventDefault();
             currentState = iconItem.value;
-            document.querySelector('.current-state-icon').innerHTML =
-            `<i data-feather="${iconItem.icon}"></i>`;
+            document.querySelector('.current-state-icon').innerHTML = `<i data-feather="${iconItem.icon}"></i>`;
             feather.replace();
         });
 
@@ -51,8 +51,17 @@ recipientIconButton.addEventListener('click', (e) => {
     }
 });
 
+themeToggleButton.addEventListener('click', (e) => {
+    e.preventDefault();
+    if (localStorage.theme === 'dark') {
+        localStorage.theme = 'light';
+        document.documentElement.classList.remove('dark');
+    } else {
+        localStorage.theme = 'dark';
+        document.documentElement.classList.add('dark');
 
-
+    }
+});
 
 
 

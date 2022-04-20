@@ -80,7 +80,7 @@
   }
 
   .recipient-label {
-    @apply text-center bg-green-400;
+    @apply text-center bg-green-500 dark:bg-green-600;
   }
 
   .recipient-label-on {
