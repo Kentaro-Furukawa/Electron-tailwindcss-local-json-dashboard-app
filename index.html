@@ -13,7 +13,6 @@
 </head>
 
 <body>
-
   <div class="flex">
     <section class="content-container">
       <section class="top-navigation">
@@ -86,7 +85,6 @@
             <div class="msg"></div>
           </form>
         </section>
-
         <section class="table-container">
           <table>
             <tr>
@@ -99,44 +97,41 @@
               <td class="td-time">09:21:20</td>
               <td class="td-value">INC1234568</td>
             </tr>
+            <tr>
+              <td class="td-key">Alfreds Futterkiste</td>
+              <td class="td-time">09:21:20</td>
+              <td class="td-value">INC1234568</td>
+            </tr>
           </table>
         </section>
-
-
       </section>
     </section>
   </div>
-
-
-
-
   <section class="sidebar-container">
-
     <div class="current-state-icon">
       <i data-feather="user-check"></i>
     </div>
-
     <hr class="sidebar-hr" />
-
     <div class="state-icon-button-container"></div>
-
     <hr class="sidebar-hr" />
-
     <button class="recipient-icon-button sidebar-icon group">
       <i data-feather="inbox"></i>
       <span class="sidebar-caption group-hover:scale-100">
         Recipient
       </span>
     </button>
-
     <div class="modal-icon">
-    <button class="modal-icon-button">
-      <i data-feather="more-horizontal"></i>      
-    </button>
-  </div>
+      <button class="modal-icon-button">
+        <i data-feather="more-horizontal"></i>
+      </button>
+    </div>
   </section>
-
-
+  <section class="modal-background">
+    <div class="modal-content">
+      <button class="modal-close-button"><i data-feather="x-circle"></i></button>
+      <p>Some text in the Modal..</p>
+    </div>
+  </section>
 
   <script src="./renderer.js"></script>
 </body>
