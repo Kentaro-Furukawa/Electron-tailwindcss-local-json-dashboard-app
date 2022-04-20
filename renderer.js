@@ -5,6 +5,7 @@ const recipientIconButton = document.querySelector('.recipient-icon-button');
 const recipientLabel = document.querySelector('.recipient-label');
 const themeToggleButton = document.querySelector('.theme-toggle-button');
 const modalBackground = document.querySelector('.modal-background');
+const modalInner = document.querySelector('.modal-inner');
 const modalIconButton = document.querySelector('.modal-icon-button');
 const modalCloseButton = document.querySelector('.modal-close-button');
 
@@ -69,6 +70,11 @@ themeToggleButton.addEventListener('click', (e) => {
 modalIconButton.addEventListener('click', (e) => {
     e.preventDefault();
     modalBackground.style.display = 'block';
+    modalInner.innerHTML = `
+<h1>Login to admin page</h1>
+<input type="text" placeholder="Enter password...">
+<button type="submit">Submit</button>
+    `;
 });
 
 modalCloseButton.addEventListener('click', (e) => {

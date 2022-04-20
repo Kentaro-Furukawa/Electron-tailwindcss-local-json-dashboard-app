@@ -190,7 +190,7 @@
   }
 
   .modal-content {
-    @apply mt-8 p-4 mx-auto w-3/4 h-3/4 rounded-lg bg-slate-100 dark:bg-slate-600 text-gray-800 dark:text-gray-200 shadow-md;
+    @apply mt-12 p-4 mx-auto w-3/4 h-3/4 rounded-lg bg-slate-100 dark:bg-slate-600 text-gray-800 dark:text-gray-200 shadow-md;
   }
 
   .modal-close-button {
