@@ -35,8 +35,8 @@ const createMainWindow = () => {
     if (process.platform !== 'darwin') app.quit()
   })
 
-  ipcMain.on("admin:login", (event, loginData) => {
-    console.log(loginData.adminUsername);
-    console.log(loginData.dateTime);
+  ipcMain.on("admin:login", (event, adminLog) => {
+    console.log(adminLog.username);
+    console.log(adminLog.date);
     createAdminWindow()
   });

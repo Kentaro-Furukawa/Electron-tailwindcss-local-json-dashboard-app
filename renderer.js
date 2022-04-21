@@ -10,9 +10,6 @@ const modalBackground = document.querySelector('.modal-background');
 const modalInner = document.querySelector('.modal-inner');
 const modalIconButton = document.querySelector('.modal-icon-button');
 const modalCloseButton = document.querySelector('.modal-close-button');
-// const adminErrorMessage = document.querySelector('admin-error-message');
-// const adminPassInput = document.querySelector('#admin-pass-input');
-// const adminPassSubmit = document.querySelector('#admin-pass-submit');
 
 const stateIcons = [
     { value: 'available', icon: 'user-check', caption: 'Available' },
@@ -60,6 +57,12 @@ recipientIconButton.addEventListener('click', (e) => {
     }
 });
 
+userSelecter.value = localStorage.user;
+userSelecter.addEventListener('change', (e) =>{
+    localStorage.user = userSelecter.value;
+    userSelecter.value = localStorage.user;
+})
+
 themeToggleButton.addEventListener('click', (e) => {
     e.preventDefault();
     if (localStorage.theme === 'dark') {
@@ -75,7 +78,6 @@ themeToggleButton.addEventListener('click', (e) => {
 modalIconButton.addEventListener('click', (e) => {
     e.preventDefault();
     modalBackground.style.display = 'block';
-    const adminUsername = userSelecter.value;
     const adminErrorMessage = document.querySelector('.admin-error-message');
     const modalOn = true;
     modalInner.innerHTML = `
@@ -89,7 +91,7 @@ modalIconButton.addEventListener('click', (e) => {
 `;
     feather.replace();
 
-    if (adminUsername == '') {
+    if (localStorage.user == '') {
         document.querySelector('#admin-pass-input').disabled = true;
         document.querySelector('#admin-pass-submit').disabled = true;
         document.querySelector('.admin-error-message').innerHTML = "Please select username first."
@@ -122,14 +124,12 @@ modalIconButton.addEventListener('click', (e) => {
                     document.querySelector('.admin-error-message').classList.remove("admin-error-message-On");
                     modalBackground.style.display = 'none';
 
-                    const loginData = {
-                        adminUsername: adminUsername,
-                        dateTime: Date(Date.now()),
+                    const adminLog = {
+                        username: localStorage.user,
+                        date: Date(Date.now()),
                       };
-
-                      console.log(loginData);
-
-                      window.electron.admin(loginData);
+                      console.log(adminLog);
+                      window.electron.admin(adminLog);
 
                 }
         })

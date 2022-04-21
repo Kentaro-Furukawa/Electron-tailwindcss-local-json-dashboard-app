@@ -14,6 +14,6 @@ const { contextBridge, ipcRenderer } = require("electron");
 contextBridge.exposeInMainWorld(
   'electron',
   {
-    admin: (loginData) => ipcRenderer.send("admin:login", loginData)
+    admin: (adminLog) => ipcRenderer.send("admin:login", adminLog)
   }
 );

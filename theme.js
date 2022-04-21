@@ -13,3 +13,6 @@ if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.match
 
 // Whenever the user explicitly chooses to respect the OS preference
 // localStorage.removeItem('theme')
+
+localStorage.user = ''
+// localStorage.currentState = 'away'
