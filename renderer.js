@@ -122,6 +122,13 @@ modalIconButton.addEventListener('click', (e) => {
                     document.querySelector('.admin-error-message').classList.remove("admin-error-message-On");
                     modalBackground.style.display = 'none';
 
+                    const loginData = {
+                        adminUsername: adminUsername,
+                        dateTime: Date(Date.now()),
+                      };
+
+                      console.log(loginData);
+
                 }
         })
     }
