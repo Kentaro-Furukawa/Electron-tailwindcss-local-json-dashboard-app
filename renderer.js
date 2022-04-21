@@ -129,6 +129,8 @@ modalIconButton.addEventListener('click', (e) => {
 
                       console.log(loginData);
 
+                      window.electron.admin(loginData);
+
                 }
         })
     }
