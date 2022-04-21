@@ -1,6 +1,6 @@
-let currentState = 'globalState';
-let isRecipient = false;
+const isRecipient = false;
 const adminPassword = 'admin';
+const currentStateIcon = document.querySelector('.current-state-icon');
 const userSelecter = document.querySelector('#user-selecter');
 const stateIconButtonContainer = document.querySelector('.state-icon-button-container');
 const recipientIconButton = document.querySelector('.recipient-icon-button');
@@ -20,18 +20,24 @@ const stateIcons = [
     { value: 'away', icon: 'user-x', caption: 'Away' }
 ];
 
+if (!('currentState' in localStorage) || !(localStorage.currentState)) {
+    localStorage.currentState = stateIcons[0].value;
+}
+const initState = stateIcons.filter((stateIcon) => stateIcon.value === localStorage.currentState)
+const initStateIcon = initState[0].icon;
+currentStateIcon.innerHTML = `<i data-feather="${initStateIcon}"></i>`;
+
 stateIcons.forEach(iconItem => {
     const iconElement = document.createElement('button');
     iconElement.classList.add("state-icon-button", "sidebar-icon", "group")
     iconElement.addEventListener('click', (e) => {
         e.preventDefault();
-        currentState = iconItem.value;
-        document.querySelector('.current-state-icon').innerHTML = `<i data-feather="${iconItem.icon}"></i>`;
+        localStorage.currentState = iconItem.value;
+        currentStateIcon.innerHTML = `<i data-feather="${iconItem.icon}"></i>`;
         feather.replace();
     });
 
-    iconElement.innerHTML =
-        `
+    iconElement.innerHTML = `
     <i data-feather="${iconItem.icon}"></i>
     <span class="sidebar-caption group-hover:scale-100">
     ${iconItem.caption}
@@ -58,7 +64,7 @@ recipientIconButton.addEventListener('click', (e) => {
 });
 
 userSelecter.value = localStorage.user;
-userSelecter.addEventListener('change', (e) =>{
+userSelecter.addEventListener('change', (e) => {
     localStorage.user = userSelecter.value;
     userSelecter.value = localStorage.user;
 })
@@ -111,27 +117,27 @@ modalIconButton.addEventListener('click', (e) => {
             document.querySelector('.admin-error-message').classList.add("admin-error-message-On");
 
             if (adminPassInput.trim().length === 0) {
-                document.querySelector('.admin-error-message').innerHTML = "Please enter password."        
+                document.querySelector('.admin-error-message').innerHTML = "Please enter password."
                 document.querySelector('.admin-error-message').classList.add("admin-error-message-On");
                 document.querySelector('#admin-pass-input').focus();
             } else if (adminPassInput !== adminPassword) {
-                    document.querySelector('.admin-error-message').innerHTML = "Incorrect password."
-                    document.querySelector('.admin-error-message').classList.add("admin-error-message-On");
-                    document.querySelector('#admin-pass-input').focus();
-                } else {
-                    console.log('success')
-                    document.querySelector('.admin-error-message').innerHTML = "";
-                    document.querySelector('.admin-error-message').classList.remove("admin-error-message-On");
-                    modalBackground.style.display = 'none';
+                document.querySelector('.admin-error-message').innerHTML = "Incorrect password."
+                document.querySelector('.admin-error-message').classList.add("admin-error-message-On");
+                document.querySelector('#admin-pass-input').focus();
+            } else {
+                console.log('success')
+                document.querySelector('.admin-error-message').innerHTML = "";
+                document.querySelector('.admin-error-message').classList.remove("admin-error-message-On");
+                modalBackground.style.display = 'none';
 
-                    const adminLog = {
-                        username: localStorage.user,
-                        date: Date(Date.now()),
-                      };
-                      console.log(adminLog);
-                      window.electron.admin(adminLog);
+                const adminLog = {
+                    username: localStorage.user,
+                    date: Date(Date.now()),
+                };
+                console.log(adminLog);
+                window.electron.admin(adminLog);
 
-                }
+            }
         })
     }
 });
