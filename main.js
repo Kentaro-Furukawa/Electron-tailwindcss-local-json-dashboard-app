@@ -1,26 +1,42 @@
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow, ipcMain } = require('electron')
 const path = require('path')
 
-const createWindow = () => {
-    const win = new BrowserWindow({
+const createMainWindow = () => {
+    const mainWindow = new BrowserWindow({
       width: 600,
       height: 630,
       webPreferences: {
         preload: path.join(__dirname, 'preload.js')
       }
     })
-  
-    win.loadFile('index.html')
+    mainWindow.loadFile('index.html')
   }
 
+  const createAdminWindow = () => {
+    const adminWindow = new BrowserWindow({
+      width: 400,
+      height: 400,
+      webPreferences: {
+        preload: path.join(__dirname, 'preload.js')
+      }
+    })
+    adminWindow.loadFile('admin.html')
+  }
+  
   app.whenReady().then(() => {
-    createWindow()
+    createMainWindow()
   
     app.on('activate', () => {
-      if (BrowserWindow.getAllWindows().length === 0) createWindow()
+      if (BrowserWindow.getAllWindows().length === 0) createMainWindow()
     })
   })
 
   app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') app.quit()
   })
+
+  ipcMain.on("admin:login", (event, loginData) => {
+    console.log(loginData.user);
+    console.log(loginData.time);
+    createAdminWindow()
+  });

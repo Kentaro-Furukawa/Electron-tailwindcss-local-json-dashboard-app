@@ -194,11 +194,11 @@
   }
 
   .modal-content {
-    @apply mt-12 pt-4 px-4 mx-auto w-3/4 rounded-lg bg-slate-100 dark:bg-slate-600 text-gray-800 dark:text-gray-200 shadow-md;
+    @apply mt-16 pt-4 mx-auto w-3/4 rounded-lg bg-slate-100 dark:bg-slate-600 text-gray-800 dark:text-gray-200 shadow-md;
   }
 
   .modal-close-button {
-    @apply  float-right text-gray-700 dark:text-gray-300 hover:text-gray-400 hover:dark:text-gray-500;
+    @apply float-right mr-4 text-gray-700 dark:text-gray-300 hover:text-gray-400 hover:dark:text-gray-500;
   }
  
   .modal-inner {
@@ -209,7 +209,7 @@
     @apply mt-4 mb-8 text-3xl ;
   }
   
-  .admin-pass-input {
+  #admin-pass-input {
     @apply w-48 h-10 mb-2 indent-2 border-2  rounded-md border-gray-600 dark:border-gray-300 bg-gray-200 dark:bg-gray-600 text-gray-700 dark:text-gray-50;
   }
 
@@ -217,8 +217,12 @@
     @apply block text-gray-400 dark:text-gray-500;
   }
 
-  .admin-pass-button {
+  #admin-pass-submit {
     @apply h-10 mt-4 px-16 bg-green-600 text-gray-100 dark:text-gray-200 rounded-md shadow-md;
+  }
+
+  .admin-error-message-On {
+    @apply w-full mb-4 py-2 text-gray-50 bg-red-500;
   }
 
 }

@@ -1,5 +1,7 @@
 let currentState = 'globalState';
 let isRecipient = false;
+const adminPassword = 'admin';
+const userSelecter = document.querySelector('#user-selecter');
 const stateIconButtonContainer = document.querySelector('.state-icon-button-container');
 const recipientIconButton = document.querySelector('.recipient-icon-button');
 const recipientLabel = document.querySelector('.recipient-label');
@@ -8,6 +10,9 @@ const modalBackground = document.querySelector('.modal-background');
 const modalInner = document.querySelector('.modal-inner');
 const modalIconButton = document.querySelector('.modal-icon-button');
 const modalCloseButton = document.querySelector('.modal-close-button');
+// const adminErrorMessage = document.querySelector('admin-error-message');
+// const adminPassInput = document.querySelector('#admin-pass-input');
+// const adminPassSubmit = document.querySelector('#admin-pass-submit');
 
 const stateIcons = [
     { value: 'available', icon: 'user-check', caption: 'Available' },
@@ -22,14 +27,14 @@ stateIcons.forEach(iconItem => {
     const iconElement = document.createElement('button');
     iconElement.classList.add("state-icon-button", "sidebar-icon", "group")
     iconElement.addEventListener('click', (e) => {
-            e.preventDefault();
-            currentState = iconItem.value;
-            document.querySelector('.current-state-icon').innerHTML = `<i data-feather="${iconItem.icon}"></i>`;
-            feather.replace();
-        });
+        e.preventDefault();
+        currentState = iconItem.value;
+        document.querySelector('.current-state-icon').innerHTML = `<i data-feather="${iconItem.icon}"></i>`;
+        feather.replace();
+    });
 
     iconElement.innerHTML =
-    `
+        `
     <i data-feather="${iconItem.icon}"></i>
     <span class="sidebar-caption group-hover:scale-100">
     ${iconItem.caption}
@@ -40,7 +45,7 @@ stateIcons.forEach(iconItem => {
 
 recipientIconButton.addEventListener('click', (e) => {
     e.preventDefault();
-    if ( isRecipient === false ) {
+    if (isRecipient === false) {
         const recipientStart = new Date();
         currentHours = ('0' + recipientStart.getHours()).slice(-2);
         currentMinutes = ('0' + recipientStart.getMinutes()).slice(-2);
@@ -70,15 +75,56 @@ themeToggleButton.addEventListener('click', (e) => {
 modalIconButton.addEventListener('click', (e) => {
     e.preventDefault();
     modalBackground.style.display = 'block';
+    const adminUsername = userSelecter.value;
+    const adminErrorMessage = document.querySelector('.admin-error-message');
+    const modalOn = true;
     modalInner.innerHTML = `
 <h1>Login to admin page</h1>
+<div class="admin-error-message"></div>
 <form>
-<input class="admin-pass-input" type="password" name="adminpass" minlength="5" required placeholder="Enter password...">
-<lable for="adminpass" class="admin-pass-hint">🔑 : admin</lable>
-<button class="admin-pass-button" type="submit"><i data-feather="log-in"></i></button>
+<input id="admin-pass-input" type="password" name="adminpass" minlength="5" required placeholder="Enter password...">
+<lable for="adminpass" class="admin-pass-hint">🔑 : ${adminPassword}</lable>
+<button id="admin-pass-submit" type="submit"><i data-feather="log-in"></i></button>
 </form>
 `;
-    feather.replace()    
+    feather.replace();
+
+    if (adminUsername == '') {
+        document.querySelector('#admin-pass-input').disabled = true;
+        document.querySelector('#admin-pass-submit').disabled = true;
+        document.querySelector('.admin-error-message').innerHTML = "Please select username first."
+        document.querySelector('.admin-error-message').classList.add("admin-error-message-On");
+        userSelecter.focus();
+    } else {
+        document.querySelector('#admin-pass-input').disabled = false;
+        document.querySelector('#admin-pass-submit').disabled = false;
+        document.querySelector('.admin-error-message').classList.remove("admin-error-message-On");
+
+    }
+
+    if (modalOn) {
+        document.querySelector('#admin-pass-submit').addEventListener('click', (e) => {
+            e.preventDefault();
+            const adminPassInput = document.querySelector('#admin-pass-input').value;
+            document.querySelector('.admin-error-message').classList.add("admin-error-message-On");
+
+            if (adminPassInput.trim().length === 0) {
+                document.querySelector('.admin-error-message').innerHTML = "Please enter password."        
+                document.querySelector('.admin-error-message').classList.add("admin-error-message-On");
+                document.querySelector('#admin-pass-input').focus();
+            } else if (adminPassInput !== adminPassword) {
+                    document.querySelector('.admin-error-message').innerHTML = "Incorrect password."
+                    document.querySelector('.admin-error-message').classList.add("admin-error-message-On");
+                    document.querySelector('#admin-pass-input').focus();
+                } else {
+                    console.log('success')
+                    document.querySelector('.admin-error-message').innerHTML = "";
+                    document.querySelector('.admin-error-message').classList.remove("admin-error-message-On");
+                    modalBackground.style.display = 'none';
+
+                }
+        })
+    }
 });
 
 modalCloseButton.addEventListener('click', (e) => {
@@ -87,10 +133,11 @@ modalCloseButton.addEventListener('click', (e) => {
 });
 
 window.addEventListener('click', (e) => {
-    if(e.target === modalBackground) {
+    if (e.target === modalBackground) {
         modalBackground.style.display = 'none';
     }
 });
+
 
 
 
