@@ -210,15 +210,15 @@
   }
   
   .admin-pass-input {
-    @apply w-48 h-10 mb-3 indent-2 border-2  rounded-md border-gray-600 dark:border-gray-300 bg-gray-200 dark:bg-gray-600 text-gray-700 dark:text-gray-50;
+    @apply w-48 h-10 mb-2 indent-2 border-2  rounded-md border-gray-600 dark:border-gray-300 bg-gray-200 dark:bg-gray-600 text-gray-700 dark:text-gray-50;
   }
 
   .admin-pass-hint {
-    @apply mb-3 text-gray-400 dark:text-gray-500;
+    @apply block text-gray-400 dark:text-gray-500;
   }
 
   .admin-pass-button {
-    @apply h-10 px-16 bg-green-600 text-gray-100 dark:text-gray-200 rounded-md shadow-md;
+    @apply h-10 mt-4 px-16 bg-green-600 text-gray-100 dark:text-gray-200 rounded-md shadow-md;
   }
 
 }

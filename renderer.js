@@ -73,8 +73,8 @@ modalIconButton.addEventListener('click', (e) => {
     modalInner.innerHTML = `
 <h1>Login to admin page</h1>
 <form>
-<input class="admin-pass-input" type="password" minlength="5" required placeholder="Enter password...">
-<p class="admin-pass-hint">Hint: admin</p>
+<input class="admin-pass-input" type="password" name="adminpass" minlength="5" required placeholder="Enter password...">
+<lable for="adminpass" class="admin-pass-hint">🔑 : admin</lable>
 <button class="admin-pass-button" type="submit"><i data-feather="log-in"></i></button>
 </form>
 `;
