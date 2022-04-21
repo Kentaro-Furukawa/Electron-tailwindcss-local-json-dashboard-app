@@ -36,7 +36,7 @@ const createMainWindow = () => {
   })
 
   ipcMain.on("admin:login", (event, loginData) => {
-    console.log(loginData.user);
-    console.log(loginData.time);
+    console.log(loginData.adminUsername);
+    console.log(loginData.dateTime);
     createAdminWindow()
   });
