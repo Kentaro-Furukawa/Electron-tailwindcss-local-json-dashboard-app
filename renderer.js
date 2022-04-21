@@ -72,9 +72,13 @@ modalIconButton.addEventListener('click', (e) => {
     modalBackground.style.display = 'block';
     modalInner.innerHTML = `
 <h1>Login to admin page</h1>
-<input type="text" placeholder="Enter password...">
-<button type="submit">Submit</button>
-    `;
+<form>
+<input class="admin-pass-input" type="password" minlength="5" required placeholder="Enter password...">
+<p class="admin-pass-hint">Hint: admin</p>
+<button class="admin-pass-button" type="submit"><i data-feather="log-in"></i></button>
+</form>
+`;
+    feather.replace()    
 });
 
 modalCloseButton.addEventListener('click', (e) => {
