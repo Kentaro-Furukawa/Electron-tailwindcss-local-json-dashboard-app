@@ -1,4 +1,3 @@
-// const isRecipient = false;
 const adminPassword = 'admin';
 const currentStateIcon = document.querySelector('.current-state-icon');
 const userSelecter = document.querySelector('#user-selecter');
@@ -10,6 +9,7 @@ const modalBackground = document.querySelector('.modal-background');
 const modalInner = document.querySelector('.modal-inner');
 const modalIconButton = document.querySelector('.modal-icon-button');
 const modalCloseButton = document.querySelector('.modal-close-button');
+let isRecipient = false;
 
 const stateIcons = [
     { value: 'available', icon: 'user-check', caption: 'Available' },
@@ -46,23 +46,20 @@ stateIcons.forEach(iconItem => {
     stateIconButtonContainer.appendChild(iconElement);
 });
 
-if (!('isRecipient' in localStorage)) {
-    localStorage.isRecipient = 'no';
-};
 recipientIconButton.addEventListener('click', (e) => {
     e.preventDefault();
-    if (localStorage.isRecipient === 'no') {
+    if (isRecipient === false) {
         const recipientStart = new Date();
         currentHours = ('0' + recipientStart.getHours()).slice(-2);
         currentMinutes = ('0' + recipientStart.getMinutes()).slice(-2);
         const recipientStartTime = `${currentHours}:${currentMinutes}`;
         recipientLabel.innerHTML = `💌 You are recipient since ${recipientStartTime} 💌`;
         recipientLabel.classList.add('recipient-label-on');
-        localStorage.isRecipient = 'yes';
+        isRecipient = true;
     } else {
         recipientLabel.innerHTML = '';
         recipientLabel.classList.remove('recipient-label-on');
-        localStorage.isRecipient = 'no';
+        isRecipient = false;
     }
 });
 

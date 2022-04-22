@@ -16,3 +16,5 @@ if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.match
 
 // localStorage.user = ''
 // localStorage.currentState = ''
+
+localStorage.clear();
