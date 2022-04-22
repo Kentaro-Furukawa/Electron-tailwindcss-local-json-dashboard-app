@@ -1,43 +1,102 @@
-const { app, BrowserWindow, ipcMain } = require('electron')
-const path = require('path')
+const { app, BrowserWindow, ipcMain } = require('electron');
+const fs = require('fs');
+const fsPromises = require('fs').promises;
+const path = require('path');
+
+
+const current = new Date();
+const currentYear = current.getFullYear();
+const currentMonth = ('0' + current.getMonth()).slice(-2);
+const archiveFilename = `archive-${currentYear}-${currentMonth}.json`;
+const initUserContent = JSON.stringify({ name: 'admin' });
+
+const initDirs = [
+  { dir: "active", file: "activeRecord.json", content: "" },
+  { dir: "archive", file: archiveFilename, content: "" },
+  { dir: "log", file: ["activeLog.json", "adminLog.json", "errorLog.json"], content: `created: ${current}` },
+  { dir: "user", file: "user.json", content: initUserContent }
+];
+
+const dataDir = path.join(__dirname, 'data');
+
+if (!fs.existsSync(dataDir)) {
+  fs.mkdirSync(dataDir, (err) => {
+    if (err) throw err;
+  });
+  initDirs.forEach((initDir) => {
+    fs.mkdir(path.join(dataDir, initDir.dir), (err) => {
+      if (err) throw err;
+    });
+  });
+} else {
+  initDirs.forEach((initDir) => {
+    if (!fs.existsSync(path.join(dataDir, initDir.dir))) {
+      fs.mkdir(path.join(dataDir, initDir.dir), (err) => {
+        if (err) throw err;
+      });
+    }
+  });
+}
+
+
+
+
+
+
+
+// const initDir = async () => {
+//   try {
+//     await fsPromises.writeFile(path.join(__dirname, 'init.txt'), 'initial text file');
+//     console.log('write');
+//   } catch (error) {
+//       console.error(error);
+//   }
+// }
+
+
+
+
+
+
 
 const createMainWindow = () => {
-    const mainWindow = new BrowserWindow({
-      width: 600,
-      height: 630,
-      webPreferences: {
-        preload: path.join(__dirname, 'preload.js')
-      }
-    })
-    mainWindow.loadFile('index.html')
-  }
-
-  const createAdminWindow = () => {
-    const adminWindow = new BrowserWindow({
-      width: 950,
-      height: 680,
-      webPreferences: {
-        preload: path.join(__dirname, 'preload.js')
-      }
-    })
-    adminWindow.loadFile('admin.html')
-  }
-  
-  app.whenReady().then(() => {
-    createMainWindow()
-  
-    app.on('activate', () => {
-      if (BrowserWindow.getAllWindows().length === 0) createMainWindow()
-    })
+  const mainWindow = new BrowserWindow({
+    width: 600,
+    height: 630,
+    webPreferences: {
+      preload: path.join(__dirname, 'preload.js')
+    }
   })
+  mainWindow.loadFile('index.html')
+}
 
-  app.on('window-all-closed', () => {
-    if (process.platform !== 'darwin') app.quit()
+const createAdminWindow = () => {
+  const adminWindow = new BrowserWindow({
+    width: 950,
+    height: 680,
+    webPreferences: {
+      preload: path.join(__dirname, 'preload.js')
+    }
   })
+  adminWindow.loadFile('admin.html')
+}
 
-  ipcMain.on("admin:login", (event, adminLog) => {
-    console.log(adminLog.username);
-    console.log(adminLog.date);
-    console.log('Admin login Success');
-    createAdminWindow()
-  });
+app.whenReady().then(() => {
+
+  createMainWindow()
+
+  app.on('activate', () => {
+    if (BrowserWindow.getAllWindows().length === 0) createMainWindow()
+  })
+})
+
+app.on('window-all-closed', () => {
+  if (process.platform !== 'darwin') app.quit()
+})
+
+ipcMain.on("admin:login", (event, adminLog) => {
+  console.log(adminLog.username);
+  console.log(adminLog.date);
+  console.log('Admin login Success');
+  createAdminWindow()
+});
