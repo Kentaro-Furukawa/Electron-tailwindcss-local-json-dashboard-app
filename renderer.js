@@ -109,7 +109,7 @@ modalIconButton.addEventListener('click', (e) => {
         document.querySelector('#admin-pass-input').disabled = false;
         document.querySelector('#admin-pass-submit').disabled = false;
         document.querySelector('.admin-error-message').classList.remove("admin-error-message-On");
-
+        document.querySelector('#admin-pass-input').focus();
     }
 
     if (modalOn) {

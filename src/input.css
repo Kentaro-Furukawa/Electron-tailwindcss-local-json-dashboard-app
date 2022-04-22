@@ -225,4 +225,76 @@
     @apply w-full mb-4 py-2 text-gray-50 bg-red-500;
   }
 
+/* ---------------  admin page  ---------------  */
+
+#admin-body {
+  @apply text-neutral-300 bg-green-800;
+}
+
+#admin-body h1 {
+  @apply my-4 text-3xl text-center;
+}
+
+.hr-x {
+  @apply bg-gray-500 border border-gray-500 rounded-full mx-6 my-3;
+}
+
+.columns-container {
+  @apply flex;
+}
+
+#admin-body .column-left {
+  @apply w-1/2 text-center;
+}
+
+#admin-body .column-right {
+  @apply  w-fit mt-4 py-4 px-10 border-l-2 border-gray-500;
+}
+
+
+#admin-body h2 {
+  @apply my-4 text-2xl;
+}
+
+#userlist-input {
+  @apply w-4/5 mx-auto mb-6 p-2 text-gray-900 rounded-md;
+}
+
+#userlist-submit {
+  @apply m-2  px-32 h-10 bg-violet-500  text-gray-100 rounded-md shadow-md;
+}
+
+#userlist-reset {
+  @apply m-2 px-32 h-10 bg-gray-500  text-gray-100 rounded-md shadow-md;
+}
+
+.export-text-file-container {
+  @apply pb-12 border-b-2 border-gray-500;
+}
+
+
+.export-text-file-container p {
+  @apply mb-8;
+}
+
+.export-text-file-form {
+  @apply text-center;
+}
+
+.start-date-container, .end-date-container {
+  @apply m-4
+}
+
+#start-date, #end-date {
+  @apply w-48 h-10 p-2 text-lg text-gray-900 rounded-md;
+}
+
+#export-text-file-submit {
+  @apply mt-2 px-20 h-10 text-gray-50 bg-yellow-500 rounded-md shadow-md;
+}
+
+
+
+
+
 }

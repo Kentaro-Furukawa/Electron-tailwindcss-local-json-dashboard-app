@@ -14,8 +14,8 @@ const createMainWindow = () => {
 
   const createAdminWindow = () => {
     const adminWindow = new BrowserWindow({
-      width: 400,
-      height: 400,
+      width: 950,
+      height: 680,
       webPreferences: {
         preload: path.join(__dirname, 'preload.js')
       }
