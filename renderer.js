@@ -63,7 +63,9 @@ recipientIconButton.addEventListener('click', (e) => {
     }
 });
 
-userSelecter.value = localStorage.user;
+if (localStorage.user) {
+    userSelecter.value = localStorage.user;
+}
 userSelecter.addEventListener('change', (e) => {
     localStorage.user = userSelecter.value;
     userSelecter.value = localStorage.user;
@@ -97,7 +99,7 @@ modalIconButton.addEventListener('click', (e) => {
 `;
     feather.replace();
 
-    if (localStorage.user == '') {
+    if (!('user' in localStorage) || !(localStorage.user)) {
         document.querySelector('#admin-pass-input').disabled = true;
         document.querySelector('#admin-pass-submit').disabled = true;
         document.querySelector('.admin-error-message').innerHTML = "Please select username first."
