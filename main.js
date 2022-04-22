@@ -11,10 +11,10 @@ const archiveFilename = `archive-${currentYear}-${currentMonth}.json`;
 const initUserContent = JSON.stringify({ name: 'admin' });
 
 const initDirs = [
-  { dir: "active", file: "activeRecord.json", content: "" },
-  { dir: "archive", file: archiveFilename, content: "" },
-  { dir: "log", file: ["activeLog.json", "adminLog.json", "errorLog.json"], content: `created: ${current}` },
-  { dir: "user", file: "user.json", content: initUserContent }
+  { dir: "active", files: ["activeRecord.json"], content: "" },
+  { dir: "archive", files: [archiveFilename], content: "" },
+  { dir: "log", files: ["activeLog.json", "adminLog.json", "errorLog.json"], content: "" },
+  { dir: "user", files: ["user.json"], content: initUserContent }
 ];
 
 const dataDir = path.join(__dirname, 'data');
@@ -37,9 +37,6 @@ if (!fs.existsSync(dataDir)) {
     }
   });
 }
-
-
-
 
 
 
