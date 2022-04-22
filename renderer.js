@@ -1,4 +1,4 @@
-const isRecipient = false;
+// const isRecipient = false;
 const adminPassword = 'admin';
 const currentStateIcon = document.querySelector('.current-state-icon');
 const userSelecter = document.querySelector('#user-selecter');
@@ -46,20 +46,23 @@ stateIcons.forEach(iconItem => {
     stateIconButtonContainer.appendChild(iconElement);
 });
 
+if (!('isRecipient' in localStorage)) {
+    localStorage.isRecipient = 'no';
+};
 recipientIconButton.addEventListener('click', (e) => {
     e.preventDefault();
-    if (isRecipient === false) {
+    if (localStorage.isRecipient === 'no') {
         const recipientStart = new Date();
         currentHours = ('0' + recipientStart.getHours()).slice(-2);
         currentMinutes = ('0' + recipientStart.getMinutes()).slice(-2);
         const recipientStartTime = `${currentHours}:${currentMinutes}`;
         recipientLabel.innerHTML = `💌 You are recipient since ${recipientStartTime} 💌`;
         recipientLabel.classList.add('recipient-label-on');
-        isRecipient = true;
+        localStorage.isRecipient = 'yes';
     } else {
         recipientLabel.innerHTML = '';
         recipientLabel.classList.remove('recipient-label-on');
-        isRecipient = false;
+        localStorage.isRecipient = 'no';
     }
 });
 
