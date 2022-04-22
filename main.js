@@ -8,16 +8,16 @@ const current = new Date();
 const currentYear = current.getFullYear();
 const currentMonth = ('0' + current.getMonth()).slice(-2);
 const archiveFilename = `archive-${currentYear}-${currentMonth}.json`;
-const initUserContent = JSON.stringify({ name: 'admin' });
+// const initUserContent = JSON.stringify({ name: 'admin' });
 
 const initDirs = [
   { dir: "active", files: ["activeRecord.json"], content: "" },
   { dir: "archive", files: [archiveFilename], content: "" },
   { dir: "log", files: ["activeLog.json", "adminLog.json", "errorLog.json"], content: "" },
-  { dir: "user", files: ["user.json"], content: initUserContent }
+  { dir: "user", files: ["user.text"], content: "admin" }
 ];
 
-const dataDir = path.join(__dirname, 'data');
+const dataDir = path.join(__dirname, '.app-data');
 
 if (!fs.existsSync(dataDir)) {
   fs.mkdirSync(dataDir, (err) => {
