@@ -19,18 +19,15 @@ const initDirs = [
 
 const dataDir = path.join(__dirname, '.app-data');
 
+// checkInitDirs
 if (!fs.existsSync(dataDir)) {
-  fs.mkdirSync(dataDir, (err) => {
-    if (err) throw err;
-
-  });
- 
-  initDirs.forEach((initDir) => {
-    fs.mkdir(path.join(dataDir, initDir.dir), (err) => {
-      if (err) throw err;
+  const mkInitDirs = async () => {
+    await fsPromises.mkdir(dataDir);
+    initDirs.forEach((initDir) => {
+      fsPromises.mkdir(path.join(dataDir, initDir.dir));
     });
-  });
-
+  };
+  mkInitDirs();
 } else {
   initDirs.forEach((initDir) => {
     if (!fs.existsSync(path.join(dataDir, initDir.dir))) {
@@ -40,6 +37,8 @@ if (!fs.existsSync(dataDir)) {
     }
   });
 }
+
+
 
 
 
