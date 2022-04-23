@@ -21,11 +21,11 @@ if (!fs.existsSync(dataDir)) {
   const mkInitDirs = () => {
     fs.mkdirSync(dataDir);
     initDirs.forEach((initDir) => {
-    fs.mkdirSync(path.join(dataDir, initDir.dir));
+      fs.mkdirSync(path.join(dataDir, initDir.dir));
     });
   };
   mkInitDirs();
-  
+
 } else {
   initDirs.forEach((initDir) => {
     if (!fs.existsSync(path.join(dataDir, initDir.dir))) {
@@ -48,6 +48,16 @@ initDirs.forEach((initDir) => {
     }
   });
 });
+
+const userData = fs.readFileSync(path.join(dataDir, "user", "user.txt"), 'utf-8', (err, data) => {
+  if (err) throw err;
+})
+if (userData.trim().length === 0) {
+  fs.writeFile(path.join(dataDir, "user", "user.txt"), "admin", (err) => {
+    if (err) throw err;
+  })
+}
+
 
 
 
