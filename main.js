@@ -2,59 +2,52 @@ const { app, BrowserWindow, ipcMain } = require('electron');
 const fs = require('fs');
 const fsPromises = require('fs').promises;
 const path = require('path');
-
-
 const current = new Date();
 const currentYear = current.getFullYear();
-const currentMonth = ('0' + current.getMonth()).slice(-2);
+const currentMonth = ("0" + (current.getMonth() + 1)).slice(-2);
 const archiveFilename = `archive-${currentYear}-${currentMonth}.json`;
-// const initUserContent = JSON.stringify({ name: 'admin' });
 
 const initDirs = [
-  { dir: "active", files: ["activeRecord.json"], content: "" },
-  { dir: "archive", files: [archiveFilename], content: "" },
-  { dir: "log", files: ["activeLog.json", "adminLog.json", "errorLog.json"], content: "" },
-  { dir: "user", files: ["user.text"], content: "admin" }
+  { dir: "active", files: ["activeRecord.json"], content: "fdfd" },
+  { dir: "archive", files: [archiveFilename], content: "arc" },
+  { dir: "log", files: ["activeLog.json", "adminLog.json", "errorLog.json"], content: "log" },
+  { dir: "user", files: ["user.txt"], content: "admin" }
 ];
 
 const dataDir = path.join(__dirname, '.app-data');
 
 // checkInitDirs
 if (!fs.existsSync(dataDir)) {
-  const mkInitDirs = async () => {
-    await fsPromises.mkdir(dataDir);
+  const mkInitDirs = () => {
+    fs.mkdirSync(dataDir);
     initDirs.forEach((initDir) => {
-      fsPromises.mkdir(path.join(dataDir, initDir.dir));
+    fs.mkdirSync(path.join(dataDir, initDir.dir));
     });
   };
   mkInitDirs();
+  
 } else {
   initDirs.forEach((initDir) => {
     if (!fs.existsSync(path.join(dataDir, initDir.dir))) {
-      fs.mkdir(path.join(dataDir, initDir.dir), (err) => {
-        if (err) throw err;
+      fs.mkdirSync(path.join(dataDir, initDir.dir), (err) => {
+        if (err)
+          throw err;
       });
     }
   });
-}
+};
 
-
-
-
-
-
-// const initDir = async () => {
-//   try {
-//     await fsPromises.writeFile(path.join(__dirname, 'init.txt'), 'initial text file');
-//     console.log('write');
-//   } catch (error) {
-//       console.error(error);
-//   }
-// }
-
-
-
-
+// checkInitFiles
+initDirs.forEach((initDir) => {
+  const targetDir = initDir.dir;
+  const targetFiles = initDir.files;
+  targetFiles.forEach((targetFile) => {
+    if (!fs.existsSync(path.join(dataDir, targetDir, targetFile))) {
+      console.log(path.join(dataDir, targetDir, targetFile));
+      fs.openSync(path.join(dataDir, targetDir, targetFile), 'a')
+    }
+  });
+});
 
 
 
@@ -94,8 +87,6 @@ app.on('window-all-closed', () => {
 })
 
 ipcMain.on("admin:login", (event, adminLog) => {
-  console.log(adminLog.username);
-  console.log(adminLog.date);
-  console.log('Admin login Success');
+  console.log('Admin login Success: ', adminLog.username, adminLog.date);
   createAdminWindow()
 });
