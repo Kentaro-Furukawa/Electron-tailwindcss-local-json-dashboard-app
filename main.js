@@ -16,58 +16,69 @@ const initDirs = [
 
 const dataDir = path.join(__dirname, '.app-data');
 
-// checkInitDirs
-if (!fs.existsSync(dataDir)) {
-  const mkInitDirs = () => {
-    fs.mkdirSync(dataDir);
-    initDirs.forEach((initDir) => {
-      fs.mkdirSync(path.join(dataDir, initDir.dir));
-    });
-  };
-  mkInitDirs();
-
-} else {
-  initDirs.forEach((initDir) => {
-    if (!fs.existsSync(path.join(dataDir, initDir.dir))) {
-      fs.mkdirSync(path.join(dataDir, initDir.dir), (err) => {
-        if (err)
-          throw err;
-      });
-    }
-  });
+const mkInitDirs = async () => {
+  for await ( const initDir of initDirs ) {
+   fsPromises.mkdir(path.join(dataDir, initDir.dir), { recursive: true });
+   initDir.files.forEach((file) => fsPromises.open(path.join(dataDir, initDir.dir, file), 'a'));
 };
-
-// checkInitFiles
-initDirs.forEach((initDir) => {
-  const targetDir = initDir.dir;
-  const targetFiles = initDir.files;
-  targetFiles.forEach((targetFile) => {
-    if (!fs.existsSync(path.join(dataDir, targetDir, targetFile))) {
-      console.log(path.join(dataDir, targetDir, targetFile));
-      fs.openSync(path.join(dataDir, targetDir, targetFile), 'a')
-    }
-  });
-});
-
-const getUserList = () => {
-// if user.txt is empty add "admin"
-let userTxtData = fs.readFileSync(path.join(dataDir, "user", "user.txt"), 'utf-8', (err) => {
-  if (err) throw err;
-})
-if (userTxtData.trim().length === 0) {
-  fs.writeFileSync(path.join(dataDir, "user", "user.txt"), "admin", (err) => {
-    if (err) throw err;
-  })
 }
-//create user array
-userTxtData = fs.readFileSync(path.join(dataDir, "user", "user.txt"), 'utf-8', (err) => {
-  if (err) throw err;
-})
-const userArray = userTxtData.toString().trim().split("\n")
-return userArray
-}
-getUserList();
-console.log(getUserList())
+mkInitDirs();
+
+
+
+
+// checkInitDirs **************************************************
+// if (!fs.existsSync(dataDir)) {
+//   const mkInitDirs = () => {
+//     fs.mkdirSync(dataDir);
+//     initDirs.forEach((initDir) => {
+//       fs.mkdirSync(path.join(dataDir, initDir.dir));
+//     });
+//   };
+//   mkInitDirs();
+
+// } else {
+//   initDirs.forEach((initDir) => {
+//     if (!fs.existsSync(path.join(dataDir, initDir.dir))) {
+//       fs.mkdirSync(path.join(dataDir, initDir.dir), (err) => {
+//         if (err)
+//           throw err;
+//       });
+//     }
+//   });
+// };
+
+// // checkInitFiles
+// initDirs.forEach((initDir) => {
+//   const targetDir = initDir.dir;
+//   const targetFiles = initDir.files;
+//   targetFiles.forEach((targetFile) => {
+//     if (!fs.existsSync(path.join(dataDir, targetDir, targetFile))) {
+//       console.log(path.join(dataDir, targetDir, targetFile));
+//       fs.openSync(path.join(dataDir, targetDir, targetFile), 'a')
+//     }
+//   });
+// });
+
+// const getUserList = () => {
+// // if user.txt is empty add "admin"
+// let userTxtData = fs.readFileSync(path.join(dataDir, "user", "user.txt"), 'utf-8', (err) => {
+//   if (err) throw err;
+// })
+// if (userTxtData.trim().length === 0) {
+//   fs.writeFileSync(path.join(dataDir, "user", "user.txt"), "admin", (err) => {
+//     if (err) throw err;
+//   })
+// }
+// //create user array
+// userTxtData = fs.readFileSync(path.join(dataDir, "user", "user.txt"), 'utf-8', (err) => {
+//   if (err) throw err;
+// })
+// const userArray = userTxtData.toString().trim().split("\n")
+// return userArray
+// }
+// getUserList();
+// console.log(getUserList())
 
 // *************************************************
 
