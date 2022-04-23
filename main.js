@@ -16,12 +16,31 @@ const initDirs = [
 
 const dataDir = path.join(__dirname, '.app-data');
 
+
+
+
 const mkInitDirs = async () => {
-  for await ( const initDir of initDirs ) {
-   fsPromises.mkdir(path.join(dataDir, initDir.dir), { recursive: true });
-   initDir.files.forEach((file) => fsPromises.open(path.join(dataDir, initDir.dir, file), 'a'));
-};
+  for await (const initDir of initDirs) {
+    await fsPromises.mkdir(path.join(dataDir, initDir.dir), { recursive: true });
+    initDir.files.forEach((file) => fsPromises.open(path.join(dataDir, initDir.dir, file), 'a')); // convert to for await of then add more code after
+  }
 }
+
+// const mkInitDirs = async () => {
+//   try {
+//     for await (const initDir of initDirs) {
+//       fsPromises.mkdir(path.join(dataDir, initDir.dir), { recursive: true });
+//       // initDir.files.forEach((file) => fsPromises.open(path.join(dataDir, initDir.dir, file), 'a'));
+//     };
+//     for await (const initDir of initDirs) {
+//       for (const file of initDir.files) {
+//         fsPromises.open(path.join(dataDir, initDir.dir, file), 'a');
+//       }
+//     };
+//   } catch (err) {
+//     console.log(err);
+//   }
+// }
 mkInitDirs();
 
 
