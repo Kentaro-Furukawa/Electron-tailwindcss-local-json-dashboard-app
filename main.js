@@ -22,10 +22,10 @@ const dataDir = path.join(__dirname, '.app-data');
 if (!fs.existsSync(dataDir)) {
   fs.mkdirSync(dataDir, (err) => {
     if (err) throw err;
-  });
-  initDirs.forEach((initDir) => {
-    fs.mkdir(path.join(dataDir, initDir.dir), (err) => {
-      if (err) throw err;
+    initDirs.forEach((initDir) => {
+      fs.mkdir(path.join(dataDir, initDir.dir), (err) => {
+        if (err) throw err;
+      });
     });
   });
 } else {
