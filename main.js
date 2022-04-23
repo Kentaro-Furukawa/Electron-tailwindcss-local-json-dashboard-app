@@ -8,10 +8,10 @@ const currentMonth = ("0" + (current.getMonth() + 1)).slice(-2);
 const archiveFilename = `archive-${currentYear}-${currentMonth}.json`;
 
 const initDirs = [
-  { dir: "active", files: ["activeRecord.json"], content: "fdfd" },
-  { dir: "archive", files: [archiveFilename], content: "arc" },
-  { dir: "log", files: ["activeLog.json", "adminLog.json", "errorLog.json"], content: "log" },
-  { dir: "user", files: ["user.txt"], content: "admin" }
+  { dir: "active", files: ["activeRecord.json"] },
+  { dir: "archive", files: [archiveFilename] },
+  { dir: "log", files: ["activeLog.json", "adminLog.json", "errorLog.json"] },
+  { dir: "user", files: ["user.txt"] }
 ];
 
 const dataDir = path.join(__dirname, '.app-data');
@@ -49,14 +49,27 @@ initDirs.forEach((initDir) => {
   });
 });
 
-const userData = fs.readFileSync(path.join(dataDir, "user", "user.txt"), 'utf-8', (err) => {
+const getUserList = () => {
+// if user.txt is empty add "admin"
+let userTxtData = fs.readFileSync(path.join(dataDir, "user", "user.txt"), 'utf-8', (err) => {
   if (err) throw err;
 })
-if (userData.trim().length === 0) {
-  fs.writeFile(path.join(dataDir, "user", "user.txt"), "admin", (err) => {
+if (userTxtData.trim().length === 0) {
+  fs.writeFileSync(path.join(dataDir, "user", "user.txt"), "admin", (err) => {
     if (err) throw err;
   })
 }
+//create user array
+userTxtData = fs.readFileSync(path.join(dataDir, "user", "user.txt"), 'utf-8', (err) => {
+  if (err) throw err;
+})
+const userArray = userTxtData.toString().trim().split("\n")
+return userArray
+}
+getUserList();
+console.log(getUserList())
+
+// *************************************************
 
 const createMainWindow = () => {
   const mainWindow = new BrowserWindow({
