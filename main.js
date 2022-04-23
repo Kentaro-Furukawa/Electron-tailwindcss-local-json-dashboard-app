@@ -16,83 +16,27 @@ const initDirs = [
 
 const dataDir = path.join(__dirname, '.app-data');
 
-
-
-
 const mkInitDirs = async () => {
   try {
-  for await (const initDir of initDirs) {
-    await fsPromises.mkdir(path.join(dataDir, initDir.dir), { recursive: true });
-    initDir.files.forEach((file) => fsPromises.open(path.join(dataDir, initDir.dir, file), 'a')); // convert to for await of then add more code after
+    for await (const initDir of initDirs) {
+      await fsPromises.mkdir(path.join(dataDir, initDir.dir), { recursive: true });
+      for await (const file of initDir.files) {
+        fsPromises.open(path.join(dataDir, initDir.dir, file), 'a');
+      }
+    }
+    const userData = await fsPromises.readFile(path.join(dataDir, "user", "user.txt"), { encoding: 'utf8' });
+    if (userData.trim().length === 0) {
+      await fsPromises.writeFile(path.join(dataDir, "user", "user.txt"), 'admin');
+    }
+  } catch (err) {
+    console.error(err);
   }
-} catch (err) {
-  console.error(err);
-}
 }
 
-// const mkInitDirs = async () => {
-//   try {
-//     for await (const initDir of initDirs) {
-//       fsPromises.mkdir(path.join(dataDir, initDir.dir), { recursive: true });
-//       // initDir.files.forEach((file) => fsPromises.open(path.join(dataDir, initDir.dir, file), 'a'));
-//     };
-//     for await (const initDir of initDirs) {
-//       for (const file of initDir.files) {
-//         fsPromises.open(path.join(dataDir, initDir.dir, file), 'a');
-//       }
-//     };
-//   } catch (err) {
-//     console.log(err);
-//   }
-// }
 mkInitDirs();
 
 
 
-
-// checkInitDirs **************************************************
-// if (!fs.existsSync(dataDir)) {
-//   const mkInitDirs = () => {
-//     fs.mkdirSync(dataDir);
-//     initDirs.forEach((initDir) => {
-//       fs.mkdirSync(path.join(dataDir, initDir.dir));
-//     });
-//   };
-//   mkInitDirs();
-
-// } else {
-//   initDirs.forEach((initDir) => {
-//     if (!fs.existsSync(path.join(dataDir, initDir.dir))) {
-//       fs.mkdirSync(path.join(dataDir, initDir.dir), (err) => {
-//         if (err)
-//           throw err;
-//       });
-//     }
-//   });
-// };
-
-// // checkInitFiles
-// initDirs.forEach((initDir) => {
-//   const targetDir = initDir.dir;
-//   const targetFiles = initDir.files;
-//   targetFiles.forEach((targetFile) => {
-//     if (!fs.existsSync(path.join(dataDir, targetDir, targetFile))) {
-//       console.log(path.join(dataDir, targetDir, targetFile));
-//       fs.openSync(path.join(dataDir, targetDir, targetFile), 'a')
-//     }
-//   });
-// });
-
-// const getUserList = () => {
-// // if user.txt is empty add "admin"
-// let userTxtData = fs.readFileSync(path.join(dataDir, "user", "user.txt"), 'utf-8', (err) => {
-//   if (err) throw err;
-// })
-// if (userTxtData.trim().length === 0) {
-//   fs.writeFileSync(path.join(dataDir, "user", "user.txt"), "admin", (err) => {
-//     if (err) throw err;
-//   })
-// }
 // //create user array
 // userTxtData = fs.readFileSync(path.join(dataDir, "user", "user.txt"), 'utf-8', (err) => {
 //   if (err) throw err;
