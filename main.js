@@ -20,10 +20,14 @@ const dataDir = path.join(__dirname, '.app-data');
 
 
 const mkInitDirs = async () => {
+  try {
   for await (const initDir of initDirs) {
     await fsPromises.mkdir(path.join(dataDir, initDir.dir), { recursive: true });
     initDir.files.forEach((file) => fsPromises.open(path.join(dataDir, initDir.dir, file), 'a')); // convert to for await of then add more code after
   }
+} catch (err) {
+  console.error(err);
+}
 }
 
 // const mkInitDirs = async () => {
