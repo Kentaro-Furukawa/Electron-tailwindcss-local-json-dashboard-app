@@ -49,7 +49,7 @@ initDirs.forEach((initDir) => {
   });
 });
 
-const userData = fs.readFileSync(path.join(dataDir, "user", "user.txt"), 'utf-8', (err, data) => {
+const userData = fs.readFileSync(path.join(dataDir, "user", "user.txt"), 'utf-8', (err) => {
   if (err) throw err;
 })
 if (userData.trim().length === 0) {
@@ -57,9 +57,6 @@ if (userData.trim().length === 0) {
     if (err) throw err;
   })
 }
-
-
-
 
 const createMainWindow = () => {
   const mainWindow = new BrowserWindow({
