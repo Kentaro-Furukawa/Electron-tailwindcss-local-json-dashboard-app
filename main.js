@@ -66,13 +66,12 @@ const createMainWindow = () => {
     }
   })
   mainWindow.loadFile('index.html')
-  mainWindow.webContents.focus();
+  // mainWindow.webContents.focus();
   mainWindow.webContents.openDevTools();
 
 
   userList = getUserList();
   mainWindow.webContents.on("did-finish-load", () => {
-    console.warn('loaded')
     mainWindow.webContents.send("sendUserList", userList);
   })
 

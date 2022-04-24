@@ -11,11 +11,10 @@ const modalIconButton = document.querySelector('.modal-icon-button');
 const modalCloseButton = document.querySelector('.modal-close-button');
 let isRecipient = false;
 
-let userList = Array;
-window.api.onUserList((list) => {
-    userList = list;
-});
-
+let userList = null;
+window.api.onUserList((data) => {
+    userList = data;
+})
 console.log(userList);
 
 const stateIcons = [
