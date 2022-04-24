@@ -92,7 +92,7 @@ app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') app.quit()
 })
 
-ipcMain.on("admin:login", (event, adminLog) => {
+ipcMain.on("adminLoginAttempt", (event, adminLog) => {
   console.log('Admin login Success: ', adminLog.username, adminLog.date);
   userList = getUserList();
   console.log(userList);

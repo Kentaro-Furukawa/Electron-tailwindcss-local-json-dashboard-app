@@ -1,7 +1,7 @@
 const { contextBridge, ipcRenderer } = require("electron");
 
 const API = {
-  adminLogin: (adminLog) => ipcRenderer.send("admin:login", adminLog),
+  adminLogin: (adminLog) => ipcRenderer.send("adminLoginAttempt", adminLog),
 }
 
 contextBridge.exposeInMainWorld('api', API);
