@@ -260,7 +260,7 @@
 }
 
 .column-left-header #user-list-edit {
-  @apply flex h-10 px-5 items-center bg-violet-500  text-gray-100 rounded-md shadow-md;
+  @apply flex h-10 px-5 items-center bg-indigo-500  text-gray-100 rounded-md shadow-md;
 }
 
 #userlist-input {
@@ -268,7 +268,7 @@
 }
 
 #userlist-submit {
-  @apply m-2 px-28 h-10 bg-orange-500  text-gray-100 rounded-md shadow-md;
+  @apply m-2 px-28 h-10 bg-yellow-500  text-gray-100 rounded-md shadow-md;
 }
 
 #userlist-reset {
@@ -293,11 +293,11 @@
 }
 
 #start-date, #end-date {
-  @apply w-48 h-10 p-2 text-lg text-gray-900 rounded-md;
+  @apply w-48 h-10 py-2 pl-4 pr-2 text-lg tracking-widest text-gray-900 rounded-md;
 }
 
 #export-text-file-submit {
-  @apply mt-2 px-20 h-10 text-gray-50 bg-yellow-500 rounded-md shadow-md;
+  @apply mt-2 px-20 h-10 text-gray-50 bg-orange-500 rounded-md shadow-md;
 }
 
 }
