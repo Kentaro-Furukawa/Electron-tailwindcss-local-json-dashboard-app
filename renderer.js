@@ -10,11 +10,7 @@ const modalInner = document.querySelector('.modal-inner');
 const modalIconButton = document.querySelector('.modal-icon-button');
 const modalCloseButton = document.querySelector('.modal-close-button');
 let isRecipient = false;
-
 let userList = null;
-window.api.onUserList((data) => {
-    userList = data;
-});
 
 const stateIcons = [
     { value: 'available', icon: 'user-check', caption: 'Available' },
@@ -68,13 +64,22 @@ recipientIconButton.addEventListener('click', (e) => {
     }
 });
 
-if (localStorage.user) {
-    userSelecter.value = localStorage.user;
-}
+window.api.onUserList((userList) => {
+    userList.forEach((user) => {
+        let node = document.createElement("option");
+        node.setAttribute("value", user);
+        node.innerHTML = user;
+        userSelecter.appendChild(node);
+    });
+    if ( userList.includes(localStorage.user) ) {
+        userSelecter.value = localStorage.user;
+    }    
+});
+
 userSelecter.addEventListener('change', (e) => {
     localStorage.user = userSelecter.value;
     userSelecter.value = localStorage.user;
-})
+});
 
 themeToggleButton.addEventListener('click', (e) => {
     e.preventDefault();
@@ -91,7 +96,6 @@ themeToggleButton.addEventListener('click', (e) => {
 modalIconButton.addEventListener('click', (e) => {
     e.preventDefault();
     modalBackground.style.display = 'block';
-    const adminErrorMessage = document.querySelector('.admin-error-message');
     const modalOn = true;
     modalInner.innerHTML = `
 <h1>Login to admin page</h1>
