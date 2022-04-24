@@ -51,7 +51,7 @@ const getUserList = () => {
   })
   const userList = userTxtData.toString().trim().split("\n")
   return userList
-  }
+}
 
 mkInitDirs();
 
@@ -66,6 +66,16 @@ const createMainWindow = () => {
     }
   })
   mainWindow.loadFile('index.html')
+  mainWindow.webContents.focus();
+  mainWindow.webContents.openDevTools();
+
+
+  userList = getUserList();
+  mainWindow.webContents.on("did-finish-load", () => {
+    console.warn('loaded')
+    mainWindow.webContents.send("sendUserList", userList);
+  })
+
 }
 
 const createAdminWindow = () => {
@@ -76,13 +86,12 @@ const createAdminWindow = () => {
       preload: path.join(__dirname, 'preload.js')
     }
   })
-  adminWindow.loadFile('admin.html')
+  adminWindow.loadFile('admin.html')  
 }
 
 app.whenReady().then(() => {
   createMainWindow()
-  userList = getUserList();
-  console.log(userList);
+
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) createMainWindow()
   })

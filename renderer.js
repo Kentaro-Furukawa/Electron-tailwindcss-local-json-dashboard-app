@@ -11,6 +11,13 @@ const modalIconButton = document.querySelector('.modal-icon-button');
 const modalCloseButton = document.querySelector('.modal-close-button');
 let isRecipient = false;
 
+let userList = Array;
+window.api.onUserList((list) => {
+    userList = list;
+});
+
+console.log(userList);
+
 const stateIcons = [
     { value: 'available', icon: 'user-check', caption: 'Available' },
     { value: 'nextUp', icon: 'phone-call', caption: 'Next up' },
@@ -155,10 +162,6 @@ window.addEventListener('click', (e) => {
     }
 });
 
-
-
-
 // ****************************************
 
 feather.replace()
-
