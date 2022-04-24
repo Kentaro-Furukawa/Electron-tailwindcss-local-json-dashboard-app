@@ -6,6 +6,8 @@ const current = new Date();
 const currentYear = current.getFullYear();
 const currentMonth = ("0" + (current.getMonth() + 1)).slice(-2);
 const archiveFilename = `archive-${currentYear}-${currentMonth}.json`;
+const userList = [];
+
 
 const initDirs = [
   { dir: "active", files: ["activeRecord.json"] },
@@ -33,19 +35,29 @@ const mkInitDirs = async () => {
   }
 }
 
+const getUserList = () => {
+  // if user.txt is empty add "admin"
+  let userData = fs.readFileSync(path.join(dataDir, "user", "user.txt"), 'utf-8', (err) => {
+    if (err) throw err;
+  })
+  if (userData.trim().length === 0) {
+    fs.writeFileSync(path.join(dataDir, "user", "user.txt"), "admin", (err) => {
+      if (err) throw err;
+    })
+  }
+  //create user array
+  userTxtData = fs.readFileSync(path.join(dataDir, "user", "user.txt"), 'utf-8', (err) => {
+    if (err) throw err;
+  })
+  const userList = userTxtData.toString().trim().split("\n")
+  return userList
+  }
+
+
 mkInitDirs();
 
-
-
-// //create user array
-// userTxtData = fs.readFileSync(path.join(dataDir, "user", "user.txt"), 'utf-8', (err) => {
-//   if (err) throw err;
-// })
-// const userArray = userTxtData.toString().trim().split("\n")
-// return userArray
-// }
-// getUserList();
-// console.log(getUserList())
+const x = getUserList();
+console.log(x);
 
 // *************************************************
 
@@ -65,14 +77,13 @@ const createAdminWindow = () => {
     width: 950,
     height: 680,
     webPreferences: {
-      preload: path.join(__dirname, 'preload.js')
+      preload: path.join(__dirname, 'admin-preload.js')
     }
   })
   adminWindow.loadFile('admin.html')
 }
 
 app.whenReady().then(() => {
-
   createMainWindow()
 
   app.on('activate', () => {

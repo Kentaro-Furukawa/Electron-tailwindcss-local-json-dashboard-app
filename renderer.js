@@ -137,7 +137,7 @@ modalIconButton.addEventListener('click', (e) => {
                     date: Date(Date.now()),
                 };
                 console.log(adminLog);
-                window.api.admin(adminLog);
+                window.api.adminLogin(adminLog);
 
             }
         })
