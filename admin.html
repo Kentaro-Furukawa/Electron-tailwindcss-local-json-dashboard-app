@@ -16,16 +16,19 @@
     <hr class="hr-x">
     <div class="columns-container">
         <div class="column-left">
-            <h2>User list</h2>
+            <div class="column-left-header">
+                <h2>User list :</h2>
+                <button type="button" id="user-list-edit" ><i data-feather="edit-3"></i></button>
+            </div>
             <form>
                 <textarea name="userlist" id="userlist-input" cols="30" rows="10"></textarea>
-                <button type="submit" id="userlist-submit"><i data-feather="edit-3"></i></button>
+                <button type="submit" id="userlist-submit"><i data-feather="feather"></i></button>
                 <button type="reset" id="userlist-reset"><i data-feather="x-octagon"></i></button>
             </form>
         </div>
         <div class="column-right">
             <div class="export-text-file-container">
-                <h2>Export text file:</h2>
+                <h2>Export text file :</h2>
                 <p>Select date range, and click to export.</p>
                 <form class="export-text-file-form">
                     <div class="start-date-container">

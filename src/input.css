@@ -43,31 +43,31 @@
   }
 
   .user-select {
-    @apply bg-gray-300 dark:bg-gray-700 bg-opacity-90 w-56 h-16 py-3 pl-3 m-0
+    @apply bg-gray-300 dark:bg-gray-700 bg-opacity-90 w-56 h-16 py-3 pl-3 m-0;
   }
 
   .user-select select {
-    @apply w-full h-10 bg-gray-100 dark:bg-gray-300 rounded-md
+    @apply w-full h-10 bg-gray-100 dark:bg-gray-300 rounded-md;
   }
 
   .top-navigation-icons {
-    @apply flex py-3 pr-3 h-16 m-0
+    @apply flex py-3 pr-3 h-16 m-0;
   }
 
   .refresh-button {
-    @apply bg-gray-500 dark:bg-gray-800 rounded-md text-white
+    @apply bg-gray-500 dark:bg-gray-800 rounded-md text-white;
   }
 
   .refresh-button button {
-    @apply h-10 w-full px-10
+    @apply h-10 w-full px-10;
   }
 
   .theme-toggle-button {
-    @apply bg-gray-400 dark:bg-gray-600 rounded-md text-yellow-200 dark:text-yellow-100
+    @apply bg-gray-400 dark:bg-gray-600 rounded-md text-yellow-200 dark:text-yellow-100;
   }
 
   .theme-toggle-button button {
-    @apply h-10 w-full px-3
+    @apply h-10 w-full px-3;
   }
 
   .topbar-divider {
@@ -206,7 +206,7 @@
   }
   
   .modal-inner h1 {
-    @apply mt-4 mb-8 text-3xl ;
+    @apply mt-4 mb-8 text-3xl;
   }
   
   #admin-pass-input {
@@ -244,28 +244,35 @@
 }
 
 #admin-body .column-left {
-  @apply w-1/2 text-center;
+  @apply w-1/2 mt-4 pt-4 pl-20 pr-10 text-center;
 }
 
 #admin-body .column-right {
   @apply  w-fit mt-4 py-4 px-10 border-l-2 border-gray-500;
 }
 
+.column-left-header {
+  @apply flex flex-row mb-4 items-center justify-between;
+}
 
 #admin-body h2 {
-  @apply my-4 text-2xl;
+  @apply flex text-2xl text-left;
+}
+
+.column-left-header #user-list-edit {
+  @apply flex h-10 px-5 items-center bg-violet-500  text-gray-100 rounded-md shadow-md;
 }
 
 #userlist-input {
-  @apply w-4/5 mx-auto mb-6 p-2 text-gray-900 rounded-md;
+  @apply w-full min-h-[300px] mx-auto mb-6 py-2 px-4 leading-7 text-gray-900 rounded-md;
 }
 
 #userlist-submit {
-  @apply m-2  px-32 h-10 bg-violet-500  text-gray-100 rounded-md shadow-md;
+  @apply m-2 px-28 h-10 bg-orange-500  text-gray-100 rounded-md shadow-md;
 }
 
 #userlist-reset {
-  @apply m-2 px-32 h-10 bg-gray-500  text-gray-100 rounded-md shadow-md;
+  @apply m-2 px-28 h-10 bg-sky-500  text-gray-100 rounded-md shadow-md;
 }
 
 .export-text-file-container {
@@ -282,7 +289,7 @@
 }
 
 .start-date-container, .end-date-container {
-  @apply m-4
+  @apply m-4;
 }
 
 #start-date, #end-date {
@@ -292,9 +299,5 @@
 #export-text-file-submit {
   @apply mt-2 px-20 h-10 text-gray-50 bg-yellow-500 rounded-md shadow-md;
 }
-
-
-
-
 
 }
