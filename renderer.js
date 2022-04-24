@@ -14,8 +14,7 @@ let isRecipient = false;
 let userList = null;
 window.api.onUserList((data) => {
     userList = data;
-})
-console.log(userList);
+});
 
 const stateIcons = [
     { value: 'available', icon: 'user-check', caption: 'Available' },
