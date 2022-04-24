@@ -6,7 +6,7 @@ const current = new Date();
 const currentYear = current.getFullYear();
 const currentMonth = ("0" + (current.getMonth() + 1)).slice(-2);
 const archiveFilename = `archive-${currentYear}-${currentMonth}.json`;
-const userList = [];
+let userList = Array;
 
 
 const initDirs = [
@@ -53,11 +53,7 @@ const getUserList = () => {
   return userList
   }
 
-
 mkInitDirs();
-
-const x = getUserList();
-console.log(x);
 
 // *************************************************
 
@@ -85,7 +81,8 @@ const createAdminWindow = () => {
 
 app.whenReady().then(() => {
   createMainWindow()
-
+  userList = getUserList();
+  console.log(userList);
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) createMainWindow()
   })
@@ -97,5 +94,7 @@ app.on('window-all-closed', () => {
 
 ipcMain.on("admin:login", (event, adminLog) => {
   console.log('Admin login Success: ', adminLog.username, adminLog.date);
+  userList = getUserList();
+  console.log(userList);
   createAdminWindow()
 });
