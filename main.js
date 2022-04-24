@@ -73,7 +73,7 @@ const createAdminWindow = () => {
     width: 950,
     height: 680,
     webPreferences: {
-      preload: path.join(__dirname, 'admin-preload.js')
+      preload: path.join(__dirname, 'preload.js')
     }
   })
   adminWindow.loadFile('admin.html')
