@@ -1,13 +1,12 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
 const fs = require('fs');
-const fsPromises = require('fs').promises;
+// const fsPromises = require('fs').promises;
 const path = require('path');
 const current = new Date();
 const currentYear = current.getFullYear();
 const currentMonth = ("0" + (current.getMonth() + 1)).slice(-2);
 const archiveFilename = `archive-${currentYear}-${currentMonth}.json`;
 let userList = Array;
-
 
 const initDirs = [
   { dir: "active", files: ["activeRecord.json"] },
@@ -18,22 +17,16 @@ const initDirs = [
 
 const dataDir = path.join(__dirname, '.app-data');
 
-const mkInitDirs = async () => {
-  try {
-    for await (const initDir of initDirs) {
-      await fsPromises.mkdir(path.join(dataDir, initDir.dir), { recursive: true });
-      for await (const file of initDir.files) {
-        fsPromises.open(path.join(dataDir, initDir.dir, file), 'a');
-      }
-    }
-    const userData = await fsPromises.readFile(path.join(dataDir, "user", "user.txt"), { encoding: 'utf8' });
-    if (userData.trim().length === 0) {
-      await fsPromises.writeFile(path.join(dataDir, "user", "user.txt"), 'admin');
-    }
-  } catch (err) {
-    console.error(err);
-  }
-}
+// make initial dirs
+initDirs.forEach((initDir) => {
+  fs.mkdirSync(path.join(dataDir, initDir.dir), { recursive: true })
+});
+// make initial files
+initDirs.forEach((initDir) => {
+  initDir.files.forEach((file) => {
+    fs.closeSync(fs.openSync(path.join(dataDir, initDir.dir, file), 'a' ))
+  });
+});
 
 const getUserList = () => {
   // if user.txt is empty add "admin"
@@ -49,11 +42,9 @@ const getUserList = () => {
   userTxtData = fs.readFileSync(path.join(dataDir, "user", "user.txt"), 'utf-8', (err) => {
     if (err) throw err;
   })
-  const userList = userTxtData.toString().trim().split("\n")
+  const userList = userTxtData.toString().trim().split("\n");
   return userList
-}
-
-mkInitDirs();
+};
 
 // *************************************************
 
@@ -66,16 +57,13 @@ const createMainWindow = () => {
     }
   })
   mainWindow.loadFile('index.html')
-  // mainWindow.webContents.focus();
   mainWindow.webContents.openDevTools();
-
 
   userList = getUserList();
   mainWindow.webContents.on("did-finish-load", () => {
     mainWindow.webContents.send("sendUserList", userList);
   })
-
-}
+};
 
 const createAdminWindow = () => {
   const adminWindow = new BrowserWindow({
@@ -85,7 +73,7 @@ const createAdminWindow = () => {
       preload: path.join(__dirname, 'preload.js')
     }
   })
-  adminWindow.loadFile('admin.html')  
+  adminWindow.loadFile('admin.html')
 }
 
 app.whenReady().then(() => {
