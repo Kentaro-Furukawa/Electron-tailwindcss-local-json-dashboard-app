@@ -4,7 +4,7 @@
 
 @layer components {
 
-  .sidebar-container {
+  .sidebar-section {
     @apply fixed top-0 left-0 h-screen w-16 m-0 flex flex-col bg-white dark:bg-gray-900 text-white shadow-lg;
   }
   
@@ -78,7 +78,7 @@
     @apply pt-4 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-100;
   }
 
-  .target-content {
+  .record-form-section {
     @apply mb-4;
   }
 
@@ -91,68 +91,68 @@
   }
 
 
-  .msg {
+  .record-form-section-message {
     @apply text-center bg-red-400;
   }
 
-  .msg-on {
+  .record-form-section-message-on {
     @apply my-3 py-3;
   }
 
-  .target-content-first {
+  .record-form-first {
     @apply flex flex-row justify-center mb-4;
   }
 
-  .target-input input {
+  .record-input-wrap input {
     @apply w-56 h-10 mr-2 border border-gray-400 dark:border-gray-50 bg-gray-200 dark:bg-gray-700 bg-opacity-90 rounded-md shadow-sm indent-3;
   }
 
-  .target-send {
+  .record-send-wrap {
     @apply mr-4;
   }
 
-  .target-send button {
+  .record-send-wrap button {
     @apply w-full h-10 px-7 bg-purple-400 dark:bg-purple-500 text-gray-100 dark:text-gray-200 rounded-md shadow-md;
   }
 
-  .target-clear button {
+  .record-clear-wrap button {
     @apply w-full h-10 px-3 bg-gray-400 dark:bg-gray-500 text-gray-100 dark:text-gray-200 rounded-md shadow-md;
   }
 
-  .target-content-second {
+  .record-form-second {
     @apply flex flex-row justify-center;
   }
 
-  .target-tag {
+  .record-tag-wrap {
     @apply mr-2;
   }
 
-  .target-tag button {
+  .record-tag-wrap button {
     @apply w-full h-10 px-7 bg-orange-400 dark:bg-orange-500 text-gray-100 dark:text-gray-200 rounded-md shadow-md;
   }
 
-  .target-external-link {
+  .record-external-link-wrap {
     @apply mr-2;
   }
 
-  .target-external-link button {
+  .record-external-link-wrap button {
     @apply w-full h-10 px-7 bg-blue-400 dark:bg-blue-500 text-gray-100 dark:text-gray-200 rounded-md shadow-md;
   }
 
-  .target-check button {
+  .record-check-wrap button {
     @apply w-full h-10 px-7 bg-yellow-400 dark:bg-yellow-500 text-gray-100 dark:text-gray-200 rounded-md shadow-md;
   }
 
 
-  .table-container {
+  .active-record-table-section {
     @apply p-4 h-full bg-gray-200 dark:bg-gray-700;
   }
 
-  .table-container table {
+  .active-record-table-section table {
     @apply w-full border-collapse border border-gray-400 bg-gray-50 dark:bg-gray-600;
   }
 
-  .table-container table th {
+  .active-record-table-section table th {
     @apply text-center border border-gray-400 py-2 bg-gray-100 dark:bg-gray-700 rounded-md;
   }
 
@@ -169,7 +169,7 @@
   }
 
 
-  .table-container table td {
+  .active-record-table-section table td {
     @apply border border-gray-400 py-1 rounded-md;
   }
 
