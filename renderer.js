@@ -107,14 +107,13 @@ themeToggleButton.addEventListener('click', (e) => {
 
 function createRecord() {
     return new Promise((resolve, reject) => {
-        let record = {
+        const record = {
             username: localStorage.user,
             state: localStorage.currentState,
             time: getCurrentDateTime(),
             value: recordInput.value,
             recipient: isRecipient,
         };
-        record = JSON.stringify(record)
         const error = false;
         if (!error) {
             resolve(record);
@@ -185,11 +184,10 @@ modalIconButton.addEventListener('click', (e) => {
                 document.querySelector('.admin-error-message').classList.remove("admin-error-message-On");
                 modalBackground.style.display = 'none';
 
-                let adminLog = {
+                const adminLog = {
                     username: localStorage.user,
                     date: getCurrentDateTime(),
                 };
-                adminLog = JSON.stringify(adminLog);
                 console.log(adminLog);
                 window.api.adminLogin(adminLog);
 
