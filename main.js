@@ -24,7 +24,15 @@ initDirs.forEach((initDir) => {
 // make initial files
 initDirs.forEach((initDir) => {
   initDir.files.forEach((file) => {
-    fs.closeSync(fs.openSync(path.join(dataDir, initDir.dir, file), 'a'))
+    const targetFilePath = path.join(dataDir, initDir.dir, file);
+    const targetFile = fs.openSync(targetFilePath, 'a');
+    const targetFileData = fs.readFileSync(targetFilePath, 'utf-8');
+    if (file.endsWith("json") && targetFileData.trim().length === 0) {
+      fs.writeFileSync(targetFile, '[]');
+    } else if (file === "user.txt" && targetFileData.trim().length === 0) {
+      fs.writeFileSync(targetFile, 'admin');
+    }
+    fs.closeSync(targetFile);
   });
 });
 
