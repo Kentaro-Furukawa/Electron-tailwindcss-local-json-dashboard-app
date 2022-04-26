@@ -107,11 +107,14 @@ themeToggleButton.addEventListener('click', (e) => {
 
 function createRecord() {
     return new Promise((resolve, reject) => {
+        let inputValue = recordInput.value.toUpperCase();
+        inputValue = inputValue.match(/(inc)\d{7}/g);
+        inputValue = [...new Set(inputValue)];
         const record = {
             username: localStorage.user,
             state: localStorage.currentState,
             time: getCurrentDateTime(),
-            value: recordInput.value,
+            value: inputValue,
             recipient: isRecipient,
         };
         const error = false;
@@ -132,7 +135,6 @@ const sendRecord = async () => {
 
 recordSendButton.addEventListener('click', (e) => {
     e.preventDefault();
-
     sendRecord();
 });
 
