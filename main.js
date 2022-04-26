@@ -1,6 +1,6 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
 const fs = require('fs');
-// const fsPromises = require('fs').promises;
+const fsPromises = require('fs').promises;
 const path = require('path');
 const current = new Date();
 const currentYear = current.getFullYear();
@@ -24,7 +24,7 @@ initDirs.forEach((initDir) => {
 // make initial files
 initDirs.forEach((initDir) => {
   initDir.files.forEach((file) => {
-    fs.closeSync(fs.openSync(path.join(dataDir, initDir.dir, file), 'a' ))
+    fs.closeSync(fs.openSync(path.join(dataDir, initDir.dir, file), 'a'))
   });
 });
 
@@ -96,7 +96,12 @@ ipcMain.on("adminLoginAttempt", (event, adminLog) => {
 });
 
 ipcMain.handle("send-record", async (event, record) => {
-  console.log(record)
-
+  // console.log(record)
+  // const validRecord = JSON.stringify(record);
+  let archiveData = await fsPromises.readFile(path.join(dataDir, "archive", archiveFilename), 'utf8');
+  archiveData = JSON.parse(archiveData);
+  // archiveData = JSON.parse(archiveData);
+  console.log(archiveData);
+  // await fsPromises.appendFile(path.join(dataDir, "archive", archiveFilename), validRecord);
   return "return from main process!!!"
 })
