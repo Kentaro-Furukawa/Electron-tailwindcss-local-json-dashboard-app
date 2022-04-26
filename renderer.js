@@ -108,7 +108,7 @@ themeToggleButton.addEventListener('click', (e) => {
 function createRecord() {
     return new Promise((resolve, reject) => {
         let inputValue = recordInput.value.toUpperCase();
-        inputValue = inputValue.match(/(inc)\d{7}/g);
+        inputValue = inputValue.match(/(INC)\d{7}/gi);
         inputValue = [...new Set(inputValue)];
         const record = {
             username: localStorage.user,
