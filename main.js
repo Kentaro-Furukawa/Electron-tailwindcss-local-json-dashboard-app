@@ -94,3 +94,9 @@ ipcMain.on("adminLoginAttempt", (event, adminLog) => {
   console.log(userList);
   createAdminWindow()
 });
+
+ipcMain.handle("send-record", async (event, record) => {
+  console.log(record)
+
+  return "return from main process!!!"
+})
