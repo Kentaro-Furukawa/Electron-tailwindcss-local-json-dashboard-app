@@ -13,6 +13,17 @@ const modalIconButton = document.querySelector('.modal-icon-button');
 const modalCloseButton = document.querySelector('.modal-close-button');
 let isRecipient = false;
 
+const getCurrentDateTime = () => {
+    let current = new Date();
+    const currentYear = current.getFullYear();
+    const currentMonth = ("0" + (current.getMonth() + 1)).slice(-2);
+    const currentDate = ("0" + current.getDate()).slice(-2);
+    const currentHours = ('0' + current.getHours()).slice(-2);
+    const currentMinutes = ('0' + current.getMinutes()).slice(-2);
+    const currentSeconds = ('0' + current.getSeconds()).slice(-2);
+    return current = `${currentYear}-${currentMonth}-${currentDate} ${currentHours}:${currentMinutes}:${currentSeconds}`;
+}
+
 const stateIcons = [
     { value: 'available', icon: 'user-check', caption: 'Available' },
     { value: 'nextUp', icon: 'phone-call', caption: 'Next up' },
@@ -52,8 +63,8 @@ recipientIconButton.addEventListener('click', (e) => {
     e.preventDefault();
     if (isRecipient === false) {
         const recipientStart = new Date();
-        currentHours = ('0' + recipientStart.getHours()).slice(-2);
-        currentMinutes = ('0' + recipientStart.getMinutes()).slice(-2);
+        const currentHours = ('0' + recipientStart.getHours()).slice(-2);
+        const currentMinutes = ('0' + recipientStart.getMinutes()).slice(-2);
         const recipientStartTime = `${currentHours}:${currentMinutes}`;
         recipientLabel.innerHTML = `💌 You are recipient since ${recipientStartTime} 💌`;
         recipientLabel.classList.add('recipient-label-on');
@@ -72,9 +83,9 @@ window.api.onUserList((userList) => {
         node.innerHTML = user;
         userSelecter.appendChild(node);
     });
-    if ( userList.includes(localStorage.user) ) {
+    if (userList.includes(localStorage.user)) {
         userSelecter.value = localStorage.user;
-    }    
+    }
 });
 
 userSelecter.addEventListener('change', (e) => {
@@ -96,15 +107,17 @@ themeToggleButton.addEventListener('click', (e) => {
 
 function createRecord() {
     return new Promise((resolve, reject) => {
-        const record = {
+        let record = {
             username: localStorage.user,
             state: localStorage.currentState,
-            time: Date(Date.now()),
+            time: getCurrentDateTime(),
             value: recordInput.value,
+            recipient: isRecipient,
         };
+        record = JSON.stringify(record)
         const error = false;
-        if(!error) {
-            resolve(record);            
+        if (!error) {
+            resolve(record);
         } else {
             reject('Error: failed to create record.');
         }
@@ -172,10 +185,11 @@ modalIconButton.addEventListener('click', (e) => {
                 document.querySelector('.admin-error-message').classList.remove("admin-error-message-On");
                 modalBackground.style.display = 'none';
 
-                const adminLog = {
+                let adminLog = {
                     username: localStorage.user,
-                    date: Date(Date.now()),
+                    date: getCurrentDateTime(),
                 };
+                adminLog = JSON.stringify(adminLog);
                 console.log(adminLog);
                 window.api.adminLogin(adminLog);
 

@@ -89,7 +89,7 @@ app.on('window-all-closed', () => {
 })
 
 ipcMain.on("adminLoginAttempt", (event, adminLog) => {
-  console.log('Admin login Success: ', adminLog.username, adminLog.date);
+  console.log('Admin login Success: ', adminLog);
   userList = getUserList();
   console.log(userList);
   createAdminWindow()
