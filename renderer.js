@@ -10,7 +10,6 @@ const modalInner = document.querySelector('.modal-inner');
 const modalIconButton = document.querySelector('.modal-icon-button');
 const modalCloseButton = document.querySelector('.modal-close-button');
 let isRecipient = false;
-let userList = null;
 
 const stateIcons = [
     { value: 'available', icon: 'user-check', caption: 'Available' },
