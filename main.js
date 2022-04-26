@@ -104,12 +104,13 @@ ipcMain.on("adminLoginAttempt", (event, adminLog) => {
 });
 
 ipcMain.handle("send-record", async (event, record) => {
-  // console.log(record)
-  // const validRecord = JSON.stringify(record);
+
+  // push to archive json file
   let archiveData = await fsPromises.readFile(path.join(dataDir, "archive", archiveFilename), 'utf8');
   archiveData = JSON.parse(archiveData);
-  // archiveData = JSON.parse(archiveData);
-  console.log(archiveData);
-  // await fsPromises.appendFile(path.join(dataDir, "archive", archiveFilename), validRecord);
+  archiveData.push(record);
+  archiveData = JSON.stringify(archiveData)
+  await fsPromises.writeFile(path.join(dataDir, "archive", archiveFilename), archiveData);
+
   return "return from main process!!!"
 })
