@@ -139,7 +139,7 @@
     @apply w-full h-10 px-7 bg-blue-400 dark:bg-blue-500 text-gray-100 dark:text-gray-200 rounded-md shadow-md;
   }
 
-  .record-check-wrap button {
+  .record-flash-wrap button {
     @apply w-full h-10 px-7 bg-yellow-400 dark:bg-yellow-500 text-gray-100 dark:text-gray-200 rounded-md shadow-md;
   }
 

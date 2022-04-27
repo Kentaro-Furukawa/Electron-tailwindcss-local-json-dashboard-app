@@ -7,6 +7,8 @@ const recipientLabel = document.querySelector('.recipient-label');
 const themeToggleButton = document.querySelector('.theme-toggle-button');
 const recordInput = document.querySelector('#record-input');
 const recordSendButton = document.querySelector('#record-send-button');
+const recordClearButton = document.querySelector('#record-clear-button');
+const recordFormMessage = document.querySelector('.record-form-message');
 const modalBackground = document.querySelector('.modal-background');
 const modalInner = document.querySelector('.modal-inner');
 const modalIconButton = document.querySelector('.modal-icon-button');
@@ -134,14 +136,28 @@ const sendRecord = async () => {
     console.log(invokeRecord);
 }
 
+recordInput.addEventListener('keyup', (e) => {
+    e.preventDefault();
+    recordFormMessage.innerHTML = '';
+})
+
 recordSendButton.addEventListener('click', (e) => {
     e.preventDefault();
-    const returnedData = sendRecord();
-    console.log(returnedData);
-    recordInput.value = '';
+    if (recordInput.value.trim().length === 0) {
+        recordFormMessage.innerHTML = 'Input field is empty, Please enter value.';
+        recordInput.value = '';
+    } else {
+        recordFormMessage.innerHTML = '';
+        const returnedData = sendRecord();
+        console.log(returnedData);
+        recordInput.value = '';
+    }
 });
 
-
+recordClearButton.addEventListener('click', (e) => {
+    e.preventDefault();
+    recordInput.value = '';
+})
 
 modalIconButton.addEventListener('click', (e) => {
     e.preventDefault();

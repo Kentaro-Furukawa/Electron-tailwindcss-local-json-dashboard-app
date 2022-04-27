@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+  <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self'; script-src 'self' 'unsafe-eval'"> -->
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
   <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'">
   <link rel="stylesheet" href="./dist/output.css">
@@ -51,7 +52,7 @@
                 </button>
               </div>
               <div class="record-clear-wrap">
-                <button>
+                <button id="record-clear-button">
                   <i data-feather="trash-2"></i>
                 </button>
               </div>
@@ -67,14 +68,15 @@
                   <i data-feather="external-link"></i>
                 </button>
               </div>
-              <div class="record-check-wrap">
+              <div class="record-flash-wrap">
                 <button>
-                  <i data-feather="check"></i>
+                  <i data-feather="zap"></i>
                 </button>
               </div>
             </div>
             <div class="record-form-section-message"></div>
           </form>
+          <div class="record-form-message"></div>
         </section>
         <section class="active-record-table-section">
           <table id="active-record-table">
