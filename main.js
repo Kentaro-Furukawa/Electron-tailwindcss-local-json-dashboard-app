@@ -107,11 +107,12 @@ ipcMain.handle("send-record", async (event, record) => {
   let returnMessage = null;
   let duplicateRecord = [];
   let filterActiveRecord = null;
+  const inputUsername = record.username;
   const inputIncNo = record.incNo;
   let activateRecordData = await fs.promises.readFile(path.join(dataDir, "active", "activeRecord.json"), 'utf8');
   activateRecordData = JSON.parse(activateRecordData);
   inputIncNo.forEach((incNo) => {
-    filterActiveRecord = activateRecordData.filter(record => record.incNo.includes(incNo));
+    filterActiveRecord = activateRecordData.filter(activeRecord => activeRecord.incNo.includes(incNo) && !(activeRecord.username === inputUsername));
     duplicateRecord = [...duplicateRecord, ...filterActiveRecord];
   })
 
@@ -121,6 +122,7 @@ ipcMain.handle("send-record", async (event, record) => {
 
   } else {
     returnMessage = "going to add to active record"
+
   }
 
   // push to archive json file
