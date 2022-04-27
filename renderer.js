@@ -138,7 +138,10 @@ recordSendButton.addEventListener('click', (e) => {
     e.preventDefault();
     const returnedData = sendRecord();
     console.log(returnedData);
+    recordInput.value = '';
 });
+
+
 
 modalIconButton.addEventListener('click', (e) => {
     e.preventDefault();

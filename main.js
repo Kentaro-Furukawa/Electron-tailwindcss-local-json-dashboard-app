@@ -106,6 +106,7 @@ ipcMain.on("adminLoginAttempt", (event, adminLog) => {
 ipcMain.handle("send-record", async (event, record) => {
   let returnMessage = null;
   let duplicateRecord = [];
+  let incTaken = false;
   let filterActiveRecord = null;
   const inputUsername = record.username;
   const inputIncNo = record.incNo;
@@ -118,10 +119,10 @@ ipcMain.handle("send-record", async (event, record) => {
 
   if (duplicateRecord.length > 0) {
     returnMessage = "it is taken."
-
+    incTaken = true;
   } else {
     returnMessage = "going to add to active record"
-
+    incTaken = false;
     // push to activeRecord json file
     activateRecordData = activateRecordData.filter((activeRecord => activeRecord.username !== inputUsername))
     activateRecordData.push(record);
@@ -141,6 +142,6 @@ ipcMain.handle("send-record", async (event, record) => {
   return {
     'activeRecord': returnActiveRecord,
     'duplicateRecord': duplicateRecord,
-    'returnMessage': returnMessage
+    'incTaken': incTaken
   };
 })
