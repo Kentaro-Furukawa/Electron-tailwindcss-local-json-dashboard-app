@@ -105,19 +105,19 @@ ipcMain.on("adminLoginAttempt", (event, adminLog) => {
 
 ipcMain.handle("send-record", async (event, record) => {
   let returnMessage = null;
-  let duplicateRecords = [];
+  let duplicateRecord = [];
   let filterActiveRecord = null;
   const inputIncNo = record.incNo;
   let activateRecordData = await fs.promises.readFile(path.join(dataDir, "active", "activeRecord.json"), 'utf8');
   activateRecordData = JSON.parse(activateRecordData);
   inputIncNo.forEach((incNo) => {
     filterActiveRecord = activateRecordData.filter(record => record.incNo.includes(incNo));
-    duplicateRecords = [...duplicateRecords, ...filterActiveRecord];
+    duplicateRecord = [...duplicateRecord, ...filterActiveRecord];
   })
 
-  if (duplicateRecords.length > 0) {
+  if (duplicateRecord.length > 0) {
     returnMessage = "it is taken."
-    console.log(duplicateRecords);
+    console.log(duplicateRecord);
 
   } else {
     returnMessage = "going to add to active record"
