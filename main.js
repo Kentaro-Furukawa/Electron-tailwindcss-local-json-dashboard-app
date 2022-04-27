@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain } = require('electron');
+const { app, BrowserWindow, ipcMain, clipboard} = require('electron');
 const fs = require('fs');
 const fsPromises = require('fs').promises;
 const path = require('path');
@@ -69,7 +69,7 @@ const createMainWindow = () => {
 
   userList = getUserList();
   mainWindow.webContents.on("did-finish-load", () => {
-    mainWindow.webContents.send("sendUserList", userList);
+    mainWindow.webContents.send("send-user-list", userList);
   })
 };
 
@@ -96,7 +96,7 @@ app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') app.quit()
 })
 
-ipcMain.on("adminLoginAttempt", (event, adminLog) => {
+ipcMain.on("admin-login-attempt", (event, adminLog) => {
   console.log('Admin login Success: ', adminLog);
   userList = getUserList();
   console.log(userList);
@@ -145,3 +145,9 @@ ipcMain.handle("send-record", async (event, record) => {
     'incTaken': incTaken
   };
 })
+
+ipcMain.handle("on-flash", async (event) => {
+  const copiedItem = clipboard.readText()
+  return copiedItem;
+})
+

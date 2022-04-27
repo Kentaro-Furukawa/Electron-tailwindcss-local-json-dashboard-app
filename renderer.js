@@ -1,4 +1,6 @@
 const adminPassword = 'admin';
+const incPattern = /(INC)\d{7}/gi;
+let copiedItem = '';
 const currentStateIcon = document.querySelector('.current-state-icon');
 const userSelecter = document.querySelector('#user-selecter');
 const stateIconButtonContainer = document.querySelector('.state-icon-button-container');
@@ -8,6 +10,7 @@ const themeToggleButton = document.querySelector('.theme-toggle-button');
 const recordInput = document.querySelector('#record-input');
 const recordSendButton = document.querySelector('#record-send-button');
 const recordClearButton = document.querySelector('#record-clear-button');
+const recordFlashButton = document.querySelector('#record-flash-button');
 const recordFormMessage = document.querySelector('.record-form-message');
 const modalBackground = document.querySelector('.modal-background');
 const modalInner = document.querySelector('.modal-inner');
@@ -110,7 +113,7 @@ themeToggleButton.addEventListener('click', (e) => {
 function createRecord() {
     return new Promise((resolve, reject) => {
         let incNo = recordInput.value.toUpperCase();
-        incNo = incNo.match(/(INC)\d{7}/gi);
+        incNo = incNo.match(incPattern);
         incNo = [...new Set(incNo)];
         const record = {
             username: localStorage.user,
@@ -134,6 +137,7 @@ const sendRecord = async () => {
     const invokeRecord = await window.api.sendRecord(record);
     console.log('Send : ', record);
     console.log(invokeRecord);
+    return invokeRecord;
 }
 
 recordInput.addEventListener('keyup', (e) => {
@@ -157,7 +161,27 @@ recordSendButton.addEventListener('click', (e) => {
 recordClearButton.addEventListener('click', (e) => {
     e.preventDefault();
     recordInput.value = '';
+    recordFormMessage.innerHTML = '';
 })
+
+async function getClipboard() {
+    const data = await window.api.onFlash();
+    copiedItem = data;
+}
+
+recordFlashButton.addEventListener('click', (e) => {
+    e.preventDefault();
+    getClipboard();
+    if (!(incPattern.test(copiedItem))) {
+        recordFormMessage.innerHTML = 'no inc';
+    } else {
+        recordInput.value = copiedItem;
+        sendRecord();
+        recordFormMessage.innerHTML = '';
+    }
+        recordInput.value = '';
+})
+
 
 modalIconButton.addEventListener('click', (e) => {
     e.preventDefault();
