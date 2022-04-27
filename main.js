@@ -135,6 +135,12 @@ ipcMain.handle("send-record", async (event, record) => {
     archiveData = JSON.stringify(archiveData, null, 2)
     await fsPromises.writeFile(path.join(dataDir, "archive", archiveFilename), archiveData);
   }
+  let returnActiveRecord = await fs.promises.readFile(path.join(dataDir, "active", "activeRecord.json"), 'utf8');
+  returnActiveRecord = JSON.parse(returnActiveRecord);
 
-  return returnMessage;
+  return {
+    'activeRecord': returnActiveRecord,
+    'duplicateRecord': duplicateRecord,
+    'returnMessage': returnMessage
+  };
 })

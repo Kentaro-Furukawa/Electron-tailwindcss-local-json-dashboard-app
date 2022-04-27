@@ -136,7 +136,8 @@ const sendRecord = async () => {
 
 recordSendButton.addEventListener('click', (e) => {
     e.preventDefault();
-    sendRecord();
+    const returnedData = sendRecord();
+    console.log(returnedData);
 });
 
 modalIconButton.addEventListener('click', (e) => {
