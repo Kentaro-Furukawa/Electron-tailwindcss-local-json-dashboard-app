@@ -167,21 +167,19 @@ recordClearButton.addEventListener('click', (e) => {
 async function getClipboard() {
     const data = await window.api.onFlash();
     copiedItem = data;
+    if (!(incPattern.test(copiedItem))) {
+        recordFormMessage.innerHTML = 'There is no incNo in your clipboard.';
+    } else {
+        recordInput.value = copiedItem;
+        await sendRecord();
+        recordFormMessage.innerHTML = '';
+        recordInput.value = '';
+    }
 }
-
 recordFlashButton.addEventListener('click', (e) => {
     e.preventDefault();
     getClipboard();
-    if (!(incPattern.test(copiedItem))) {
-        recordFormMessage.innerHTML = 'no inc';
-    } else {
-        recordInput.value = copiedItem;
-        sendRecord();
-        recordFormMessage.innerHTML = '';
-    }
-        recordInput.value = '';
 })
-
 
 modalIconButton.addEventListener('click', (e) => {
     e.preventDefault();
@@ -237,9 +235,8 @@ modalIconButton.addEventListener('click', (e) => {
                 };
                 console.log(adminLog);
                 window.api.adminLogin(adminLog);
-
             }
-        })
+        });
     }
 });
 
