@@ -104,6 +104,24 @@ ipcMain.on("adminLoginAttempt", (event, adminLog) => {
 });
 
 ipcMain.handle("send-record", async (event, record) => {
+  let returnMessage = null;
+  let duplicateRecords = [];
+  let filterActiveRecord = null;
+  const inputIncNo = record.incNo;
+  let activateRecordData = await fs.promises.readFile(path.join(dataDir, "active", "activeRecord.json"), 'utf8');
+  activateRecordData = JSON.parse(activateRecordData);
+  inputIncNo.forEach((incNo) => {
+    filterActiveRecord = activateRecordData.filter(record => record.incNo.includes(incNo));
+    duplicateRecords = [...duplicateRecords, ...filterActiveRecord];
+  })
+
+  if (duplicateRecords.length > 0) {
+    returnMessage = "it is taken."
+    console.log(duplicateRecords);
+
+  } else {
+    returnMessage = "going to add to active record"
+  }
 
   // push to archive json file
   let archiveData = await fsPromises.readFile(path.join(dataDir, "archive", archiveFilename), 'utf8');
@@ -112,5 +130,5 @@ ipcMain.handle("send-record", async (event, record) => {
   archiveData = JSON.stringify(archiveData)
   await fsPromises.writeFile(path.join(dataDir, "archive", archiveFilename), archiveData);
 
-  return "return from main process!!!"
+  return returnMessage;
 })
