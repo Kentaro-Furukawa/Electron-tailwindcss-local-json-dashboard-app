@@ -100,6 +100,10 @@ window.api.onUserList((userList) => {
     }
 });
 
+window.api.getActiveRecord((activeRecord) => {
+    console.log(activeRecord);
+});
+
 userSelecter.addEventListener('change', (e) => {
     localStorage.user = userSelecter.value;
     userSelecter.value = localStorage.user;
@@ -149,7 +153,7 @@ const sendRecord = async () => {
 recordInput.addEventListener('keyup', (e) => {
     e.preventDefault();
     recordFormMessage.innerText = '';
-})
+});
 
 recordSendButton.addEventListener('click', (e) => {
     e.preventDefault();
@@ -168,7 +172,7 @@ recordClearButton.addEventListener('click', (e) => {
     e.preventDefault();
     recordInput.value = '';
     recordFormMessage.innerText = '';
-})
+});
 
 async function getClipboard() {
     const data = await window.api.onFlash();
@@ -185,7 +189,15 @@ async function getClipboard() {
 recordFlashButton.addEventListener('click', (e) => {
     e.preventDefault();
     getClipboard();
-})
+});
+
+
+
+// render table here
+
+
+
+
 
 modalIconButton.addEventListener('click', (e) => {
     e.preventDefault();

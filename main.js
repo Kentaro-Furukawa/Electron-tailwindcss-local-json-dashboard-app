@@ -7,6 +7,7 @@ const currentYear = current.getFullYear();
 const currentMonth = ("0" + (current.getMonth() + 1)).slice(-2);
 const archiveFilename = `archive-${currentYear}-${currentMonth}.json`;
 let userList = Array;
+let activateRecordData = Object;
 
 const initDirs = [
   { dir: "active", files: ["activeRecord.json"] },
@@ -51,8 +52,17 @@ const getUserList = () => {
     if (err) throw err;
   })
   const userList = userTxtData.toString().trim().split("\n");
-  return userList
+  return userList;
 };
+
+const getActiveRecord = () => {
+  let activateRecordData = fs.readFileSync(path.join(dataDir, "active", "activeRecord.json"), 'utf8', (err) => {
+    if (err) throw err;
+  });
+  activateRecordData = JSON.parse(activateRecordData);
+  return activateRecordData;
+};
+
 
 // *************************************************
 
@@ -68,8 +78,10 @@ const createMainWindow = () => {
   mainWindow.webContents.openDevTools();
 
   userList = getUserList();
+  activateRecordData = getActiveRecord();
   mainWindow.webContents.on("did-finish-load", () => {
     mainWindow.webContents.send("send-user-list", userList);
+    mainWindow.webContents.send("send-active-record", activateRecordData);
   })
 };
 
@@ -110,7 +122,7 @@ ipcMain.handle("send-record", async (event, record) => {
   let filterActiveRecord = null;
   const inputUsername = record.username;
   const inputIncNo = record.incNo;
-  let activateRecordData = await fs.promises.readFile(path.join(dataDir, "active", "activeRecord.json"), 'utf8');
+  activateRecordData = await fs.promises.readFile(path.join(dataDir, "active", "activeRecord.json"), 'utf8');
   activateRecordData = JSON.parse(activateRecordData);
   inputIncNo.forEach((incNo) => {
     filterActiveRecord = activateRecordData.filter(activeRecord => activeRecord.incNo.includes(incNo) && !(activeRecord.username === inputUsername));
