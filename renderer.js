@@ -16,6 +16,7 @@ const modalBackground = document.querySelector('.modal-background');
 const modalInner = document.querySelector('.modal-inner');
 const modalIconButton = document.querySelector('.modal-icon-button');
 const modalCloseButton = document.querySelector('.modal-close-button');
+const adminErrorMessage = document.querySelector('.admin-error-message');
 let isRecipient = false;
 
 const getCurrentDateTime = () => {
@@ -43,7 +44,10 @@ if (!('currentState' in localStorage) || !(localStorage.currentState)) {
 }
 const initState = stateIcons.filter((stateIcon) => stateIcon.value === localStorage.currentState)
 const initStateIcon = initState[0].icon;
-currentStateIcon.innerHTML = `<i data-feather="${initStateIcon}"></i>`;
+let currentStateIconElement = document.createElement('i');
+currentStateIconElement.setAttribute('data-feather', initStateIcon);
+currentStateIcon.append(currentStateIconElement);
+
 
 stateIcons.forEach(iconItem => {
     const iconElement = document.createElement('button');
@@ -51,16 +55,19 @@ stateIcons.forEach(iconItem => {
     iconElement.addEventListener('click', (e) => {
         e.preventDefault();
         localStorage.currentState = iconItem.value;
-        currentStateIcon.innerHTML = `<i data-feather="${iconItem.icon}"></i>`;
+        let setCurrentStateIconElement = document.createElement('i');
+        setCurrentStateIconElement.setAttribute('data-feather', iconItem.icon);
+        currentStateIcon.removeChild(currentStateIcon.lastChild);
+        currentStateIcon.append(setCurrentStateIconElement);
         feather.replace();
     });
 
-    iconElement.innerHTML = `
-    <i data-feather="${iconItem.icon}"></i>
-    <span class="sidebar-caption group-hover:scale-100">
-    ${iconItem.caption}
-    </span>
-    `
+    let stateIconElement = document.createElement('i');
+    stateIconElement.setAttribute('data-feather', iconItem.icon);
+    let stateIconCaption = document.createElement('span');
+    stateIconCaption.classList.add("sidebar-caption", "group-hover:scale-100");
+    stateIconCaption.innerText = iconItem.caption;
+    iconElement.append(stateIconElement, stateIconCaption);
     stateIconButtonContainer.appendChild(iconElement);
 });
 
@@ -71,11 +78,11 @@ recipientIconButton.addEventListener('click', (e) => {
         const currentHours = ('0' + recipientStart.getHours()).slice(-2);
         const currentMinutes = ('0' + recipientStart.getMinutes()).slice(-2);
         const recipientStartTime = `${currentHours}:${currentMinutes}`;
-        recipientLabel.innerHTML = `💌 You are recipient since ${recipientStartTime} 💌`;
+        recipientLabel.innerText = `💌 You are recipient since ${recipientStartTime} 💌`;
         recipientLabel.classList.add('recipient-label-on');
         isRecipient = true;
     } else {
-        recipientLabel.innerHTML = '';
+        recipientLabel.innerText = '';
         recipientLabel.classList.remove('recipient-label-on');
         isRecipient = false;
     }
@@ -85,7 +92,7 @@ window.api.onUserList((userList) => {
     userList.forEach((user) => {
         let node = document.createElement("option");
         node.setAttribute("value", user);
-        node.innerHTML = user;
+        node.innerText = user;
         userSelecter.appendChild(node);
     });
     if (userList.includes(localStorage.user)) {
@@ -135,23 +142,22 @@ function createRecord() {
 const sendRecord = async () => {
     const record = await createRecord();
     const invokeRecord = await window.api.sendRecord(record);
-    console.log('Send : ', record);
     console.log(invokeRecord);
     return invokeRecord;
 }
 
 recordInput.addEventListener('keyup', (e) => {
     e.preventDefault();
-    recordFormMessage.innerHTML = '';
+    recordFormMessage.innerText = '';
 })
 
 recordSendButton.addEventListener('click', (e) => {
     e.preventDefault();
     if (recordInput.value.trim().length === 0) {
-        recordFormMessage.innerHTML = 'Input field is empty, Please enter value.';
+        recordFormMessage.innerText = 'Input field is empty, Please enter value.';
         recordInput.value = '';
     } else {
-        recordFormMessage.innerHTML = '';
+        recordFormMessage.innerText = '';
         const returnedData = sendRecord();
         console.log(returnedData);
         recordInput.value = '';
@@ -161,18 +167,18 @@ recordSendButton.addEventListener('click', (e) => {
 recordClearButton.addEventListener('click', (e) => {
     e.preventDefault();
     recordInput.value = '';
-    recordFormMessage.innerHTML = '';
+    recordFormMessage.innerText = '';
 })
 
 async function getClipboard() {
     const data = await window.api.onFlash();
     copiedItem = data;
     if (!(incPattern.test(copiedItem))) {
-        recordFormMessage.innerHTML = 'There is no incNo in your clipboard.';
+        recordFormMessage.innerText = 'There is no incNo in your clipboard.';
     } else {
         recordInput.value = copiedItem;
         await sendRecord();
-        recordFormMessage.innerHTML = '';
+        recordFormMessage.innerText = '';
         recordInput.value = '';
     }
 }
@@ -185,27 +191,19 @@ modalIconButton.addEventListener('click', (e) => {
     e.preventDefault();
     modalBackground.style.display = 'block';
     const modalOn = true;
-    modalInner.innerHTML = `
-<h1>Login to admin page</h1>
-<div class="admin-error-message"></div>
-<form>
-<input id="admin-pass-input" type="password" name="adminpass" minlength="5" required placeholder="Enter password...">
-<lable for="adminpass" class="admin-pass-hint">🔑 : ${adminPassword}</lable>
-<button id="admin-pass-submit" type="submit"><i data-feather="log-in"></i></button>
-</form>
-`;
+    document.querySelector('.admin-pass-hint').innerText = `🔑 : ${adminPassword}`;
     feather.replace();
 
     if (!('user' in localStorage) || !(localStorage.user)) {
         document.querySelector('#admin-pass-input').disabled = true;
         document.querySelector('#admin-pass-submit').disabled = true;
-        document.querySelector('.admin-error-message').innerHTML = "Please select username first."
-        document.querySelector('.admin-error-message').classList.add("admin-error-message-On");
+        adminErrorMessage.innerText = "Please select username first."
+        adminErrorMessage.classList.add("admin-error-message-On");
         userSelecter.focus();
     } else {
         document.querySelector('#admin-pass-input').disabled = false;
         document.querySelector('#admin-pass-submit').disabled = false;
-        document.querySelector('.admin-error-message').classList.remove("admin-error-message-On");
+        adminErrorMessage.classList.remove("admin-error-message-On");
         document.querySelector('#admin-pass-input').focus();
     }
 
@@ -213,20 +211,20 @@ modalIconButton.addEventListener('click', (e) => {
         document.querySelector('#admin-pass-submit').addEventListener('click', (e) => {
             e.preventDefault();
             const adminPassInput = document.querySelector('#admin-pass-input').value;
-            document.querySelector('.admin-error-message').classList.add("admin-error-message-On");
+            adminErrorMessage.classList.add("admin-error-message-On");
 
             if (adminPassInput.trim().length === 0) {
-                document.querySelector('.admin-error-message').innerHTML = "Please enter password."
-                document.querySelector('.admin-error-message').classList.add("admin-error-message-On");
+                adminErrorMessage.innerText = "Please enter password."
+                adminErrorMessage.classList.add("admin-error-message-On");
                 document.querySelector('#admin-pass-input').focus();
             } else if (adminPassInput !== adminPassword) {
-                document.querySelector('.admin-error-message').innerHTML = "Incorrect password."
-                document.querySelector('.admin-error-message').classList.add("admin-error-message-On");
+                adminErrorMessage.innerText = "Incorrect password."
+                adminErrorMessage.classList.add("admin-error-message-On");
                 document.querySelector('#admin-pass-input').focus();
             } else {
                 console.log('success')
-                document.querySelector('.admin-error-message').innerHTML = "";
-                document.querySelector('.admin-error-message').classList.remove("admin-error-message-On");
+                adminErrorMessage.innerText = "";
+                adminErrorMessage.classList.remove("admin-error-message-On");
                 modalBackground.style.display = 'none';
 
                 const adminLog = {

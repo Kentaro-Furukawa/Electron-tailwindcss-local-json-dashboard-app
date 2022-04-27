@@ -116,7 +116,17 @@
   <section class="modal-background">
     <div class="modal-content">
       <button class="modal-close-button"><i data-feather="x-circle"></i></button>
-        <div class="modal-inner"></div>
+        <div class="modal-inner">
+          <h1>Login to admin page</h1>
+          <div class="admin-error-message"></div>
+          <form>
+          <input id="admin-pass-input" type="password" name="adminpass" minlength="5" required placeholder="Enter password...">
+          <lable for="adminpass" class="admin-pass-hint">🔑 : ${adminPassword}</lable>
+          <button id="admin-pass-submit" type="submit"><i data-feather="log-in"></i></button>
+          </form>
+          
+
+        </div>
         </div>
   </section>
 

@@ -1,6 +1,6 @@
 console.log('this is renderer-admin.js')
 
-document.querySelector('#admin-username').innerHTML = `${localStorage.user}`
+document.querySelector('#admin-username').innerText = `${localStorage.user}`;
 
 
 
