@@ -118,19 +118,23 @@ ipcMain.handle("send-record", async (event, record) => {
 
   if (duplicateRecord.length > 0) {
     returnMessage = "it is taken."
-    console.log(duplicateRecord);
 
   } else {
     returnMessage = "going to add to active record"
 
-  }
+    // push to activeRecord json file
+    activateRecordData = activateRecordData.filter((activeRecord => activeRecord.username !== inputUsername))
+    activateRecordData.push(record);
+    activateRecordData = JSON.stringify(activateRecordData, null, 2)
+    await fsPromises.writeFile(path.join(dataDir, "active", "activeRecord.json"), activateRecordData);
 
-  // push to archive json file
-  let archiveData = await fsPromises.readFile(path.join(dataDir, "archive", archiveFilename), 'utf8');
-  archiveData = JSON.parse(archiveData);
-  archiveData.push(record);
-  archiveData = JSON.stringify(archiveData)
-  await fsPromises.writeFile(path.join(dataDir, "archive", archiveFilename), archiveData);
+    // push to archive json file
+    let archiveData = await fsPromises.readFile(path.join(dataDir, "archive", archiveFilename), 'utf8');
+    archiveData = JSON.parse(archiveData);
+    archiveData.push(record);
+    archiveData = JSON.stringify(archiveData, null, 2)
+    await fsPromises.writeFile(path.join(dataDir, "archive", archiveFilename), archiveData);
+  }
 
   return returnMessage;
 })
