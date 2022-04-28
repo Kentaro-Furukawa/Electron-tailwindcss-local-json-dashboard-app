@@ -209,8 +209,7 @@ recordSendButton.addEventListener('click', (e) => {
         recordInput.value = '';
     } else {
         recordFormMessage.innerText = '';
-        const returnedData = sendRecord();
-        console.log(returnedData);
+        sendRecord();
         recordInput.value = '';
     }
 });
@@ -267,7 +266,7 @@ modalIconButton.addEventListener('click', (e) => {
     }
 
     if (modalOn) {
-        document.querySelector('#admin-pass-submit').addEventListener('click', (e) => {
+    document.querySelector('#admin-pass-submit').addEventListener('click', (e) => {
             e.preventDefault();
             const adminPassInput = document.querySelector('#admin-pass-input').value;
             adminErrorMessage.classList.add("admin-error-message-On");
