@@ -111,14 +111,28 @@ function tableOperation(records) {
         let keyData = document.createElement('td');
         let timeData = document.createElement('td');
         let valueData = document.createElement('td');
+        let keyDataNameSpan = document.createElement('span');
+        keyDataNameSpan.innerText = record.username;
+
+        // if (!(record.tagOn)) {
+            let stateIconSpan = document.createElement('span');
+            let stateIcon = document.createElement('i');
+            let recordState = stateIcons.filter((stateIcon) => stateIcon.value === record.state)
+            let recordStateIcon = recordState[0].icon;
+            stateIcon.setAttribute('data-feather', recordStateIcon);
+            keyData.append(stateIconSpan);
+            stateIconSpan.append(stateIcon);
+        // }
+
         tableRow.classList.add("tr-record");
         activeRecordTable.append(tableRow);
         tableRow.append(keyData, timeData, valueData);
         keyData.classList.add("td-key");
-        keyData = keyData.innerText = record.username;
+        keyData.append(keyDataNameSpan);
         timeData.classList.add("td-time");
         timeData = timeData.innerText = record.time.slice(-8);
         valueData.classList.add("td-value")
+
         if (!(record.incNo.length > 0)) {
             valueData = valueData.innerText = record.inputValue;
         } else {
@@ -129,6 +143,7 @@ function tableOperation(records) {
             });
         }
     });
+feather.replace()
 }
 
 
@@ -272,30 +287,30 @@ modalIconButton.addEventListener('click', (e) => {
     }
 
     document.querySelector('#admin-pass-submit').addEventListener('click', (e) => {
-            e.preventDefault();
-            if (adminPassInput.value.trim().length === 0) {
-                adminErrorMessage.innerText = "Please enter password.";
-                adminErrorMessage.classList.add("admin-error-message-On");
-                document.querySelector('#admin-pass-input').focus();
-            } else if (adminPassInput.value !== adminPassword) {
-                adminErrorMessage.innerText = "Incorrect password.";
-                adminErrorMessage.classList.add("admin-error-message-On");
-                document.querySelector('#admin-pass-input').focus();
-            } else {
-                console.log('success')
-                adminErrorMessage.innerText = "";
-                adminErrorMessage.classList.remove("admin-error-message-On");
-                adminPassInput.value = "";
-                modalBackground.style.display = 'none';
+        e.preventDefault();
+        if (adminPassInput.value.trim().length === 0) {
+            adminErrorMessage.innerText = "Please enter password.";
+            adminErrorMessage.classList.add("admin-error-message-On");
+            document.querySelector('#admin-pass-input').focus();
+        } else if (adminPassInput.value !== adminPassword) {
+            adminErrorMessage.innerText = "Incorrect password.";
+            adminErrorMessage.classList.add("admin-error-message-On");
+            document.querySelector('#admin-pass-input').focus();
+        } else {
+            console.log('success')
+            adminErrorMessage.innerText = "";
+            adminErrorMessage.classList.remove("admin-error-message-On");
+            adminPassInput.value = "";
+            modalBackground.style.display = 'none';
 
-                const adminLog = {
-                    username: localStorage.user,
-                    date: getCurrentDateTime(),
-                };
-                console.log(adminLog);
-                window.api.adminLogin(adminLog);
-            }
-        });
+            const adminLog = {
+                username: localStorage.user,
+                date: getCurrentDateTime(),
+            };
+            console.log(adminLog);
+            window.api.adminLogin(adminLog);
+        }
+    });
 });
 
 modalCloseButton.addEventListener('click', (e) => {
