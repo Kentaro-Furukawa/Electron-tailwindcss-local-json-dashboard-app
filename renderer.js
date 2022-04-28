@@ -242,7 +242,6 @@ recordFlashButton.addEventListener('click', (e) => {
 modalIconButton.addEventListener('click', (e) => {
     e.preventDefault();
     modalBackground.style.display = 'block';
-    // const modalOn = true;
     document.querySelector('.admin-pass-hint').innerText = `🔑 : ${adminPassword}`;
     feather.replace();
 
@@ -251,7 +250,6 @@ modalIconButton.addEventListener('click', (e) => {
         document.querySelector('#admin-pass-submit').disabled = true;
         adminErrorMessage.innerText = "Please select username first."
         adminErrorMessage.classList.add("admin-error-message-On");
-        // userSelecter.focus();
     } else {
         document.querySelector('#admin-pass-input').disabled = false;
         document.querySelector('#admin-pass-submit').disabled = false;
@@ -261,7 +259,6 @@ modalIconButton.addEventListener('click', (e) => {
 
     document.querySelector('#admin-pass-submit').addEventListener('click', (e) => {
             e.preventDefault();
-            // adminErrorMessage.classList.add("admin-error-message-On");
             if (adminPassInput.value.trim().length === 0) {
                 adminErrorMessage.innerText = "Please enter password.";
                 adminErrorMessage.classList.add("admin-error-message-On");
