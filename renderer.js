@@ -13,7 +13,6 @@ const recordClearButton = document.querySelector('#record-clear-button');
 const recordFlashButton = document.querySelector('#record-flash-button');
 const recordFormMessage = document.querySelector('.record-form-message');
 const activeRecordTable = document.querySelector('#active-record-table');
-const activeRecordRows = document.querySelectorAll('.tr-record');
 const modalBackground = document.querySelector('.modal-background');
 const modalInner = document.querySelector('.modal-inner');
 const modalIconButton = document.querySelector('.modal-icon-button');
@@ -104,7 +103,7 @@ window.api.onUserList((userList) => {
 
 function tableOperation(records) {
     const sortedRecords = records.sort((a, b) => (a.time < b.time ? 1 : -1));
-        activeRecordRows.forEach(el => el.remove());
+    document.querySelectorAll('.tr-record').forEach(el => el.remove());
     sortedRecords.forEach((record) => {
         let tableRow = document.createElement('tr');
         let keyData = document.createElement('td');
