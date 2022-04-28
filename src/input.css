@@ -181,7 +181,7 @@
     @apply indent-3 text-left;
   }
 
-  .modal-icon-button {
+  #modal-icon-button {
     @apply hover:text-gray-200 hover:dark:text-gray-500 transition-all duration-200 ease-linear;
   }
 

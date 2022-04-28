@@ -15,8 +15,9 @@ const recordFormMessage = document.querySelector('.record-form-message');
 const activeRecordTable = document.querySelector('#active-record-table');
 const modalBackground = document.querySelector('.modal-background');
 const modalInner = document.querySelector('.modal-inner');
-const modalIconButton = document.querySelector('.modal-icon-button');
+const modalIconButton = document.querySelector('#modal-icon-button');
 const modalCloseButton = document.querySelector('.modal-close-button');
+const adminPassInput = document.querySelector('#admin-pass-input');
 const adminErrorMessage = document.querySelector('.admin-error-message');
 let isRecipient = false;
 
@@ -238,17 +239,10 @@ recordFlashButton.addEventListener('click', (e) => {
 });
 
 
-
-// render table here
-
-
-
-
-
 modalIconButton.addEventListener('click', (e) => {
     e.preventDefault();
     modalBackground.style.display = 'block';
-    const modalOn = true;
+    // const modalOn = true;
     document.querySelector('.admin-pass-hint').innerText = `🔑 : ${adminPassword}`;
     feather.replace();
 
@@ -257,7 +251,7 @@ modalIconButton.addEventListener('click', (e) => {
         document.querySelector('#admin-pass-submit').disabled = true;
         adminErrorMessage.innerText = "Please select username first."
         adminErrorMessage.classList.add("admin-error-message-On");
-        userSelecter.focus();
+        // userSelecter.focus();
     } else {
         document.querySelector('#admin-pass-input').disabled = false;
         document.querySelector('#admin-pass-submit').disabled = false;
@@ -265,24 +259,22 @@ modalIconButton.addEventListener('click', (e) => {
         document.querySelector('#admin-pass-input').focus();
     }
 
-    if (modalOn) {
     document.querySelector('#admin-pass-submit').addEventListener('click', (e) => {
             e.preventDefault();
-            const adminPassInput = document.querySelector('#admin-pass-input').value;
-            adminErrorMessage.classList.add("admin-error-message-On");
-
-            if (adminPassInput.trim().length === 0) {
-                adminErrorMessage.innerText = "Please enter password."
+            // adminErrorMessage.classList.add("admin-error-message-On");
+            if (adminPassInput.value.trim().length === 0) {
+                adminErrorMessage.innerText = "Please enter password.";
                 adminErrorMessage.classList.add("admin-error-message-On");
                 document.querySelector('#admin-pass-input').focus();
-            } else if (adminPassInput !== adminPassword) {
-                adminErrorMessage.innerText = "Incorrect password."
+            } else if (adminPassInput.value !== adminPassword) {
+                adminErrorMessage.innerText = "Incorrect password.";
                 adminErrorMessage.classList.add("admin-error-message-On");
                 document.querySelector('#admin-pass-input').focus();
             } else {
                 console.log('success')
                 adminErrorMessage.innerText = "";
                 adminErrorMessage.classList.remove("admin-error-message-On");
+                adminPassInput.value = "";
                 modalBackground.style.display = 'none';
 
                 const adminLog = {
@@ -293,7 +285,6 @@ modalIconButton.addEventListener('click', (e) => {
                 window.api.adminLogin(adminLog);
             }
         });
-    }
 });
 
 modalCloseButton.addEventListener('click', (e) => {
