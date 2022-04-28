@@ -2,9 +2,12 @@ const { app, BrowserWindow, ipcMain, clipboard} = require('electron');
 const fs = require('fs');
 const fsPromises = require('fs').promises;
 const path = require('path');
-const current = new Date();
-const currentYear = current.getFullYear();
-const currentMonth = ("0" + (current.getMonth() + 1)).slice(-2);
+
+const current = new Date().toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo'});
+const currentYear = current.slice(0, 4);
+const currentMonth = ("0" +current.slice(5, current.lastIndexOf("/"))).slice(-2);
+const currentDate = ("0" +current.slice(current.lastIndexOf("/")+1, current.indexOf(" "))).slice(-2);
+const todayInt = parseInt(currentYear + currentMonth + currentDate);
 const archiveFilename = `archive-${currentYear}-${currentMonth}.json`;
 let userList = Array;
 let activateRecordData = Object;
@@ -60,6 +63,11 @@ const getActiveRecord = () => {
     if (err) throw err;
   });
   activateRecordData = JSON.parse(activateRecordData);
+  activateRecordData = activateRecordData.filter((record) => parseInt(record.time.slice(0, 10).replaceAll("-", "")) === todayInt );
+  const jsonActiveRecordData = JSON.stringify(activateRecordData, null, 2)
+  fs.writeFile(path.join(dataDir, "active", "activeRecord.json"), jsonActiveRecordData, (err) => {
+    if (err) throw err;
+  });
   return activateRecordData;
 };
 
