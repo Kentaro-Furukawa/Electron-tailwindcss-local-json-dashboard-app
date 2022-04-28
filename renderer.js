@@ -50,7 +50,6 @@ let currentStateIconElement = document.createElement('i');
 currentStateIconElement.setAttribute('data-feather', initStateIcon);
 currentStateIcon.append(currentStateIconElement);
 
-
 stateIcons.forEach(iconItem => {
     const iconElement = document.createElement('button');
     iconElement.classList.add("state-icon-button", "sidebar-icon", "group")
@@ -150,7 +149,7 @@ function updateTable(obj) {
 
 
 window.api.getActiveRecord((activeRecord) => {
-    console.log(activeRecord);
+    tableOperation(activeRecord);
 });
 
 userSelecter.addEventListener('change', (e) => {
