@@ -54,11 +54,11 @@
     @apply flex py-3 pr-3 h-16 m-0;
   }
 
-  .refresh-button {
+  .refresh-button-wrap {
     @apply bg-gray-500 dark:bg-gray-800 rounded-md text-white;
   }
 
-  .refresh-button button {
+  #refresh-button {
     @apply h-10 w-full px-10;
   }
 

@@ -166,6 +166,12 @@ ipcMain.handle("send-record", async (event, record) => {
   };
 })
 
+ipcMain.handle("request-active-record", async (event) => {
+  let activateRecordData = await fs.promises.readFile(path.join(dataDir, "active", "activeRecord.json"), 'utf8');
+  activateRecordData = JSON.parse(activateRecordData);
+  return activateRecordData;
+})
+
 ipcMain.handle("on-flash", async (event) => {
   const copiedItem = clipboard.readText()
   return copiedItem;

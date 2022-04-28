@@ -1,5 +1,6 @@
 const adminPassword = 'admin';
 const incPattern = /(INC)\d{7}/gi;
+let requestedRecord = '';
 let copiedItem = '';
 const currentStateIcon = document.querySelector('.current-state-icon');
 const userSelecter = document.querySelector('#user-selecter');
@@ -7,6 +8,7 @@ const stateIconButtonContainer = document.querySelector('.state-icon-button-cont
 const recipientIconButton = document.querySelector('.recipient-icon-button');
 const recipientLabel = document.querySelector('.recipient-label');
 const themeToggleButton = document.querySelector('.theme-toggle-button');
+const refreshButton = document.querySelector('#refresh-button');
 const recordInput = document.querySelector('#record-input');
 const recordSendButton = document.querySelector('#record-send-button');
 const recordClearButton = document.querySelector('#record-clear-button');
@@ -147,7 +149,7 @@ function updateTable(obj) {
     });
 }
 
-
+// get active record at start.
 window.api.getActiveRecord((activeRecord) => {
     tableOperation(activeRecord);
 });
@@ -155,6 +157,16 @@ window.api.getActiveRecord((activeRecord) => {
 userSelecter.addEventListener('change', (e) => {
     localStorage.user = userSelecter.value;
     userSelecter.value = localStorage.user;
+});
+
+async function refreshRecord() {
+    const data = await window.api.requestActiveRecord();
+    tableOperation(data);
+}
+
+refreshButton.addEventListener('click', (e) => {
+    e.preventDefault();
+    refreshRecord();
 });
 
 themeToggleButton.addEventListener('click', (e) => {
