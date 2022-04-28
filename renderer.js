@@ -12,6 +12,8 @@ const recordSendButton = document.querySelector('#record-send-button');
 const recordClearButton = document.querySelector('#record-clear-button');
 const recordFlashButton = document.querySelector('#record-flash-button');
 const recordFormMessage = document.querySelector('.record-form-message');
+const activeRecordTable = document.querySelector('#active-record-table');
+const activeRecordRows = document.querySelectorAll('.tr-record');
 const modalBackground = document.querySelector('.modal-background');
 const modalInner = document.querySelector('.modal-inner');
 const modalIconButton = document.querySelector('.modal-icon-button');
@@ -100,6 +102,53 @@ window.api.onUserList((userList) => {
     }
 });
 
+function tableOperation(records) {
+    const sortedRecords = records.sort((a, b) => (a.time < b.time ? 1 : -1));
+        activeRecordRows.forEach(el => el.remove());
+    sortedRecords.forEach((record) => {
+        let tableRow = document.createElement('tr');
+        let keyData = document.createElement('td');
+        let timeData = document.createElement('td');
+        let valueData = document.createElement('td');
+        tableRow.classList.add("tr-record");
+        activeRecordTable.append(tableRow);
+        tableRow.append(keyData, timeData, valueData);
+        keyData.classList.add("td-key");
+        keyData = keyData.innerText = record.username;
+        timeData.classList.add("td-time");
+        timeData = timeData.innerText = record.time.slice(-8);
+        valueData.classList.add("td-value")
+        if (!(record.incNo.length > 0)) {
+            valueData = valueData.innerText = record.inputValue;
+        } else {
+            record.incNo.forEach((inc) => {
+                let incItem = document.createElement('span');
+                incItem = incItem.innerText = inc;
+                valueData.append(incItem);
+            });
+        }
+    });
+}
+
+
+function updateTable(obj) {
+    return new Promise((resolve, reject) => {
+        if (obj.incTaken === true || obj.duplicateRecord.length > 0) {
+            console.log('is taken!!!!');
+        } else {
+            let activeRecord = obj.activeRecord;
+            tableOperation(activeRecord);
+        }
+        const error = false;
+        if (!error) {
+            resolve();
+        } else {
+            reject('Error: failed to update table.');
+        }
+    });
+}
+
+
 window.api.getActiveRecord((activeRecord) => {
     console.log(activeRecord);
 });
@@ -146,8 +195,7 @@ function createRecord() {
 const sendRecord = async () => {
     const record = await createRecord();
     const invokeRecord = await window.api.sendRecord(record);
-    console.log(invokeRecord);
-    return invokeRecord;
+    await updateTable(invokeRecord);
 }
 
 recordInput.addEventListener('keyup', (e) => {
