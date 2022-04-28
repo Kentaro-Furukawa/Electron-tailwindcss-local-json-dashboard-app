@@ -1,5 +1,5 @@
 const adminPassword = 'admin';
-const incPattern = /(INC)\d{7}/gi;
+const incPattern = /(INC)\d{7}(?!\d)/gi;
 let requestedRecord = '';
 let copiedItem = '';
 const currentStateIcon = document.querySelector('.current-state-icon');
