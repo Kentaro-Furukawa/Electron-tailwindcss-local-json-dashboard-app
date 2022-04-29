@@ -188,10 +188,6 @@
     @apply h-6 p-1 bg-red-200 rounded-md;
   }
 
-  /* .td-value-inner {
-    @apply pl-0;
-  } */
-
   .td-value-inc {
     @apply inline-grid my-0.5 mr-1 py-0.5 px-2 bg-gray-200 dark:bg-gray-500 rounded-md;
   }
