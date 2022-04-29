@@ -189,7 +189,7 @@
   }
 
   .td-value-inc {
-    @apply inline-grid my-0.5 mr-1 py-0.5 px-2 bg-gray-200 dark:bg-gray-500 rounded-md;
+    @apply inline-grid my-0.5 mr-1 py-0.5 px-2 tracking-wider bg-gray-200 dark:bg-gray-500 rounded-md;
   }
 
 
