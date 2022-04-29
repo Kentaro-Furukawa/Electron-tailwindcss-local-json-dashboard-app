@@ -76,8 +76,10 @@ const getActiveRecord = () => {
 
 const createMainWindow = () => {
   const mainWindow = new BrowserWindow({
-    width: 600,
+    width: 550,
     height: 630,
+    minWidth: 500,
+    minHeight: 590,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js')
     }
@@ -97,6 +99,8 @@ const createAdminWindow = () => {
   const adminWindow = new BrowserWindow({
     width: 950,
     height: 680,
+    minWidth: 700,
+    minHeight: 630,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js')
     }
