@@ -164,13 +164,12 @@
     @apply w-2/5;
   }
 
-
   .active-record-table-section table td {
     @apply border border-gray-400 py-1 rounded-md;
   }
 
   .td-key {
-    @apply indent-3 text-left;
+    @apply pl-1 text-left;
   }
 
   .td-time {
@@ -180,6 +179,15 @@
   .td-value {
     @apply indent-3 text-left;
   }
+
+  .td-key-inner {
+    @apply flex space-x-1;
+  }
+
+  .td-key-state-icon {
+    @apply h-6 p-1 bg-red-200 rounded-md;
+  }
+
 
   #modal-icon-button {
     @apply hover:text-gray-200 hover:dark:text-gray-500 transition-all duration-200 ease-linear;

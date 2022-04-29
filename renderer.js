@@ -109,6 +109,7 @@ function tableOperation(records) {
     sortedRecords.forEach((record) => {
         let tableRow = document.createElement('tr');
         let keyData = document.createElement('td');
+        let keyDataInner = document.createElement('div');
         let timeData = document.createElement('td');
         let valueData = document.createElement('td');
         let keyDataNameSpan = document.createElement('span');
@@ -120,15 +121,18 @@ function tableOperation(records) {
             let recordState = stateIcons.filter((stateIcon) => stateIcon.value === record.state)
             let recordStateIcon = recordState[0].icon;
             stateIcon.setAttribute('data-feather', recordStateIcon);
-            keyData.append(stateIconSpan);
+            keyDataInner.append(stateIconSpan);
             stateIconSpan.append(stateIcon);
+            stateIcon.classList.add('td-key-state-icon')
         // }
 
         tableRow.classList.add("tr-record");
         activeRecordTable.append(tableRow);
         tableRow.append(keyData, timeData, valueData);
         keyData.classList.add("td-key");
-        keyData.append(keyDataNameSpan);
+        keyData.append(keyDataInner);
+        keyDataInner.append(keyDataNameSpan);
+        keyDataInner.classList.add('td-key-inner')
         timeData.classList.add("td-time");
         timeData = timeData.innerText = record.time.slice(-8);
         valueData.classList.add("td-value")
