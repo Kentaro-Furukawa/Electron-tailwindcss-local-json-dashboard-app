@@ -146,7 +146,6 @@ function tableOperation(records) {
 feather.replace()
 }
 
-
 function updateTable(obj) {
     return new Promise((resolve, reject) => {
         if (obj.incTaken === true || obj.duplicateRecord.length > 0) {
@@ -264,7 +263,6 @@ recordFlashButton.addEventListener('click', (e) => {
     getClipboard();
 });
 
-
 modalIconButton.addEventListener('click', (e) => {
     e.preventDefault();
     modalBackground.style.display = 'block';
@@ -283,7 +281,6 @@ modalIconButton.addEventListener('click', (e) => {
         document.querySelector('#admin-pass-input').focus();
         adminPassInput.value = "";
         adminErrorMessage.innerText = "";
-
     }
 
     document.querySelector('#admin-pass-submit').addEventListener('click', (e) => {
@@ -292,10 +289,12 @@ modalIconButton.addEventListener('click', (e) => {
             adminErrorMessage.innerText = "Please enter password.";
             adminErrorMessage.classList.add("admin-error-message-On");
             document.querySelector('#admin-pass-input').focus();
+            adminPassInput.value = "";
         } else if (adminPassInput.value !== adminPassword) {
             adminErrorMessage.innerText = "Incorrect password.";
             adminErrorMessage.classList.add("admin-error-message-On");
             document.querySelector('#admin-pass-input').focus();
+            adminPassInput.value = "";
         } else {
             console.log('success')
             adminErrorMessage.innerText = "";
@@ -316,11 +315,13 @@ modalIconButton.addEventListener('click', (e) => {
 modalCloseButton.addEventListener('click', (e) => {
     e.preventDefault();
     modalBackground.style.display = 'none';
+    adminErrorMessage.innerText = "";
 });
 
 window.addEventListener('click', (e) => {
     if (e.target === modalBackground) {
         modalBackground.style.display = 'none';
+        adminErrorMessage.innerText = "";
     }
 });
 
