@@ -15,6 +15,7 @@ const recordClearButton = document.querySelector('#record-clear-button');
 const recordFlashButton = document.querySelector('#record-flash-button');
 const recordFormMessage = document.querySelector('.record-form-message');
 const activeRecordTable = document.querySelector('#active-record-table');
+const activeRecordTableBody = document.querySelector('#active-record-table-body');
 const modalBackground = document.querySelector('.modal-background');
 const modalInner = document.querySelector('.modal-inner');
 const modalIconButton = document.querySelector('#modal-icon-button');
@@ -127,7 +128,7 @@ function tableOperation(records) {
         // }
 
         tableRow.classList.add("tr-record");
-        activeRecordTable.append(tableRow);
+        activeRecordTableBody.appendChild(tableRow);
         tableRow.append(keyData, timeData, valueData);
         keyData.classList.add("td-key");
         keyData.append(keyDataInner);
@@ -140,10 +141,14 @@ function tableOperation(records) {
         if (!(record.incNo.length > 0)) {
             valueData = valueData.innerText = record.inputValue;
         } else {
+            let valueDataInner = document.createElement('div');
+            valueDataInner.classList.add('td-value-inner')
+            valueData.append(valueDataInner);
             record.incNo.forEach((inc) => {
                 let incItem = document.createElement('span');
-                incItem = incItem.innerText = inc;
-                valueData.append(incItem);
+                incItem.classList.add('td-value-inc')
+                incItem.innerText = inc;
+                valueDataInner.append(incItem);
             });
         }
     });

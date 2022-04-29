@@ -145,7 +145,7 @@
   }
 
   .active-record-table-section table {
-    @apply w-full border-collapse border border-gray-400 bg-gray-50 dark:bg-gray-600;
+    @apply w-full max-w-full border-collapse border border-gray-400 bg-gray-50 dark:bg-gray-600;
   }
 
   .active-record-table-section table th {
@@ -165,7 +165,7 @@
   }
 
   .active-record-table-section table td {
-    @apply border border-gray-400 py-1;
+    @apply border border-gray-400 py-1 overflow-x-auto;
   }
 
   .td-key {
@@ -177,7 +177,7 @@
   }
 
   .td-value {
-    @apply indent-3 text-left;
+    @apply text-left;
   }
 
   .td-key-inner {
@@ -186,6 +186,14 @@
 
   .td-key-state-icon {
     @apply h-6 p-1 bg-red-200 rounded-md;
+  }
+
+  .td-value-inner {
+    @apply flex space-x-1;
+  }
+
+  .td-value-inc {
+    @apply py-0.5 px-2 bg-gray-200 rounded-md;
   }
 
 
