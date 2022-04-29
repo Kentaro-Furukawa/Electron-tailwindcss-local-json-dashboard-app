@@ -4,8 +4,36 @@
 
 @layer components {
 
+  .body-content .available-icon {
+    @apply text-green-600 hover:bg-green-600;
+  }
+
+  .body-content .nextUp-icon {
+    @apply text-blue-600 hover:bg-blue-600;
+  }
+
+  .body-content .onCall-icon {
+    @apply text-yellow-600 hover:bg-yellow-600;
+  }
+
+  .body-content .issuing-icon {
+    @apply text-orange-600 hover:bg-orange-600;
+  }
+
+  .body-content .announce-icon {
+    @apply text-violet-600 hover:bg-violet-600;
+  }
+
+  .body-content .away-icon {
+    @apply text-rose-600 hover:bg-rose-600;
+  }
+
+  .body-content .recipient-icon {
+    @apply text-sky-600 hover:bg-sky-600;
+  }
+
   .sidebar-section {
-    @apply fixed top-0 left-0 h-screen w-16 m-0 flex flex-col bg-white dark:bg-gray-900 text-white shadow-lg;
+    @apply fixed top-0 left-0 h-screen w-16 m-0 flex flex-col bg-white dark:bg-gray-900 shadow-lg;
   }
   
   .state-icon-button-container {
@@ -13,11 +41,12 @@
   }
 
   .sidebar-icon {
-    @apply relative flex items-center justify-center h-12 w-12 my-2 mx-auto shadow-lg bg-gray-200 dark:bg-gray-700 text-green-600 dark:text-green-300 hover:bg-green-600 hover:text-white rounded-3xl hover:rounded-xl transition-all duration-100 ease-linear;
+    /* @apply relative flex items-center justify-center h-12 w-12 my-2 mx-auto shadow-lg bg-gray-200 dark:bg-gray-700 text-green-600 dark:text-green-300 hover:bg-green-600 hover:text-white rounded-3xl hover:rounded-xl transition-all duration-100 ease-linear; */
+    @apply relative flex items-center justify-center h-12 w-12 my-2 mx-auto hover:text-white bg-gray-200 dark:bg-gray-800 shadow-lg rounded-3xl hover:rounded-xl transition-all duration-100 ease-linear;
   }
 
   .current-state-icon {
-    @apply relative flex items-center justify-center h-10 w-10 my-3 mx-auto shadow-lg bg-green-600 text-white rounded-xl;
+    @apply relative flex items-center justify-center h-10 w-10 my-3 mx-auto shadow-lg bg-gray-200 dark:bg-gray-800 rounded-xl pointer-events-none;
   }
 
   .sidebar-caption {
@@ -191,7 +220,6 @@
   .td-value-inc {
     @apply inline-grid my-0.5 mr-1 py-0.5 px-2 tracking-wider bg-gray-200 dark:bg-gray-500 rounded-md;
   }
-
 
   #modal-icon-button {
     @apply hover:text-gray-200 hover:dark:text-gray-500 transition-all duration-200 ease-linear;

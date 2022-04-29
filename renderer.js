@@ -52,14 +52,16 @@ const initStateIcon = initState[0].icon;
 let currentStateIconElement = document.createElement('i');
 currentStateIconElement.setAttribute('data-feather', initStateIcon);
 currentStateIcon.append(currentStateIconElement);
+currentStateIcon.classList.add(`${initState[0].value}-icon`)
 
 stateIcons.forEach(iconItem => {
     const iconElement = document.createElement('button');
-    iconElement.classList.add("state-icon-button", "sidebar-icon", "group")
+    iconElement.classList.add("state-icon-button", "sidebar-icon", "group", `${iconItem.value}-icon`)
     iconElement.addEventListener('click', (e) => {
         e.preventDefault();
         localStorage.currentState = iconItem.value;
         let setCurrentStateIconElement = document.createElement('i');
+        setCurrentStateIconElement.classList.add(`${iconItem.value}-icon`)
         setCurrentStateIconElement.setAttribute('data-feather', iconItem.icon);
         currentStateIcon.removeChild(currentStateIcon.lastChild);
         currentStateIcon.append(setCurrentStateIconElement);
