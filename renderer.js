@@ -24,14 +24,14 @@ const adminErrorMessage = document.querySelector('.admin-error-message');
 let isRecipient = false;
 
 const getCurrentDateTime = () => {
-    let current = new Date();
+    const current = new Date();
     const currentYear = current.getFullYear();
     const currentMonth = ("0" + (current.getMonth() + 1)).slice(-2);
     const currentDate = ("0" + current.getDate()).slice(-2);
     const currentHours = ('0' + current.getHours()).slice(-2);
     const currentMinutes = ('0' + current.getMinutes()).slice(-2);
     const currentSeconds = ('0' + current.getSeconds()).slice(-2);
-    return current = `${currentYear}-${currentMonth}-${currentDate} ${currentHours}:${currentMinutes}:${currentSeconds}`;
+    return `${currentYear}-${currentMonth}-${currentDate} ${currentHours}:${currentMinutes}:${currentSeconds}`;
 }
 
 const stateIcons = [
