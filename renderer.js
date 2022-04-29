@@ -141,14 +141,11 @@ function tableOperation(records) {
         if (!(record.incNo.length > 0)) {
             valueData = valueData.innerText = record.inputValue;
         } else {
-            let valueDataInner = document.createElement('div');
-            valueDataInner.classList.add('td-value-inner')
-            valueData.append(valueDataInner);
             record.incNo.forEach((inc) => {
                 let incItem = document.createElement('span');
                 incItem.classList.add('td-value-inc')
                 incItem.innerText = inc;
-                valueDataInner.append(incItem);
+                valueData.append(incItem);
             });
         }
     });
