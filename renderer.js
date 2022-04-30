@@ -49,10 +49,12 @@ if (!('currentState' in localStorage) || !(localStorage.currentState)) {
 }
 const initState = stateIcons.filter((stateIcon) => stateIcon.value === localStorage.currentState)
 const initStateIcon = initState[0].icon;
+let currentStateIconInner = document.createElement('div');
+currentStateIconInner.classList.add("current-state-icon-inner", `${initState[0].value}-icon`)
 let currentStateIconElement = document.createElement('i');
 currentStateIconElement.setAttribute('data-feather', initStateIcon);
-currentStateIcon.append(currentStateIconElement);
-currentStateIcon.classList.add(`${initState[0].value}-icon`)
+currentStateIconInner.append(currentStateIconElement);
+currentStateIcon.append(currentStateIconInner);
 
 stateIcons.forEach(iconItem => {
     const iconElement = document.createElement('button');
@@ -60,11 +62,13 @@ stateIcons.forEach(iconItem => {
     iconElement.addEventListener('click', (e) => {
         e.preventDefault();
         localStorage.currentState = iconItem.value;
+        let currentStateIconInner = document.createElement('div');
+        currentStateIconInner.classList.add("current-state-icon-inner", `${iconItem.value}-icon`)
         let setCurrentStateIconElement = document.createElement('i');
-        setCurrentStateIconElement.classList.add(`${iconItem.value}-icon`)
         setCurrentStateIconElement.setAttribute('data-feather', iconItem.icon);
+        currentStateIconInner.append(setCurrentStateIconElement);
         currentStateIcon.removeChild(currentStateIcon.lastChild);
-        currentStateIcon.append(setCurrentStateIconElement);
+        currentStateIcon.append(currentStateIconInner);
         feather.replace();
     });
 
@@ -119,14 +123,14 @@ function tableOperation(records) {
         keyDataNameSpan.innerText = record.username;
 
         // if (!(record.tagOn)) {
-            let stateIconSpan = document.createElement('span');
-            let stateIcon = document.createElement('i');
-            let recordState = stateIcons.filter((stateIcon) => stateIcon.value === record.state)
-            let recordStateIcon = recordState[0].icon;
-            stateIcon.setAttribute('data-feather', recordStateIcon);
-            keyDataInner.append(stateIconSpan);
-            stateIconSpan.append(stateIcon);
-            stateIcon.classList.add('td-key-state-icon')
+        let stateIconSpan = document.createElement('span');
+        let stateIcon = document.createElement('i');
+        let recordState = stateIcons.filter((stateIcon) => stateIcon.value === record.state)
+        let recordStateIcon = recordState[0].icon;
+        stateIcon.setAttribute('data-feather', recordStateIcon);
+        keyDataInner.append(stateIconSpan);
+        stateIconSpan.append(stateIcon);
+        stateIcon.classList.add('td-key-state-icon')
         // }
 
         tableRow.classList.add("tr-record");
@@ -151,7 +155,7 @@ function tableOperation(records) {
             });
         }
     });
-feather.replace()
+    feather.replace()
 }
 
 function updateTable(obj) {
