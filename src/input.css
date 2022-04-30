@@ -4,31 +4,58 @@
 
 @layer components {
 
-  .body-content .available-icon {
+
+  .state-icon-button-container .available-icon {
     @apply text-green-600 hover:bg-green-600;
   }
+  .current-state-icon-inner.available-icon {
+    @apply bg-green-600;
+  }
 
-  .body-content .nextUp-icon {
+  .state-icon-button-container .nextUp-icon {
     @apply text-blue-600 hover:bg-blue-600;
   }
 
-  .body-content .onCall-icon {
+  .current-state-icon-inner.nextUp-icon {
+    @apply bg-blue-600;
+  }
+
+
+  .state-icon-button-container .onCall-icon {
     @apply text-yellow-600 hover:bg-yellow-600;
   }
 
-  .body-content .issuing-icon {
+  .current-state-icon-inner.onCall-icon {
+    @apply bg-yellow-600;
+  }
+
+  .state-icon-button-container .issuing-icon {
     @apply text-orange-600 hover:bg-orange-600;
   }
 
-  .body-content .announce-icon {
+  .current-state-icon-inner.issuing-icon {
+    @apply bg-orange-600;
+  }
+
+  .state-icon-button-container .announce-icon {
     @apply text-violet-600 hover:bg-violet-600;
   }
 
-  .body-content .away-icon {
+  .current-state-icon-inner.announce-icon {
+    @apply bg-violet-600;
+  }
+
+
+  .state-icon-button-container .away-icon {
     @apply text-rose-600 hover:bg-rose-600;
   }
 
-  .body-content .recipient-icon {
+  .current-state-icon-inner.away-icon {
+    @apply bg-rose-600;
+  }
+
+
+  .state-icon-button-container .recipient-icon {
     @apply text-sky-600 hover:bg-sky-600;
   }
 
@@ -45,8 +72,8 @@
     @apply relative flex items-center justify-center h-12 w-12 my-2 mx-auto hover:text-white bg-gray-200 dark:bg-gray-800 shadow-lg rounded-3xl hover:rounded-xl transition-all duration-100 ease-linear;
   }
 
-  .current-state-icon {
-    @apply relative flex items-center justify-center h-10 w-10 my-3 mx-auto shadow-lg bg-gray-200 dark:bg-gray-800 rounded-xl pointer-events-none;
+  .current-state-icon-inner {
+    @apply relative flex items-center justify-center h-10 w-10 my-3 mx-auto text-white shadow-lg rounded-xl;
   }
 
   .sidebar-caption {
@@ -203,7 +230,7 @@
 
   .td-time {
     @apply py-1 text-center;
-  }
+  } 
 
   .td-value {
     @apply pl-2 text-left;
