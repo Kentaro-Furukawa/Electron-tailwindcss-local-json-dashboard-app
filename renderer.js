@@ -12,6 +12,7 @@ const refreshButton = document.querySelector('#refresh-button');
 const recordInput = document.querySelector('#record-input');
 const recordSendButton = document.querySelector('#record-send-button');
 const recordClearButton = document.querySelector('#record-clear-button');
+const recordTagButton = document.querySelector('#record-tag-button');
 const recordFlashButton = document.querySelector('#record-flash-button');
 const recordFormMessage = document.querySelector('.record-form-message');
 const activeRecordTable = document.querySelector('#active-record-table');
@@ -22,6 +23,10 @@ const modalIconButton = document.querySelector('#modal-icon-button');
 const modalCloseButton = document.querySelector('.modal-close-button');
 const adminPassInput = document.querySelector('#admin-pass-input');
 const adminErrorMessage = document.querySelector('.admin-error-message');
+const tagModalBg = document.querySelector('#tag-modal-bg');
+const tagModalCloseBtn = document.querySelector('#tag-modal-close-btn');
+const tagValueInput = document.querySelector('#tag-value-input');
+const tagIconsContainer = document.querySelector('#tag-icons-container');
 let isRecipient = false;
 
 const getCurrentDateTime = () => {
@@ -42,6 +47,12 @@ const stateIcons = [
     { value: 'issuing', icon: 'pen-tool', caption: 'Issuing' },
     { value: 'announce', icon: 'radio', caption: 'Announce' },
     { value: 'away', icon: 'user-x', caption: 'Away' }
+];
+
+const tagIcons = [
+    { value: 'help', icon: 'help-circle' },
+    { value: 'alert', icon: 'alert-triangle' },
+    { value: 'clip', icon: 'paperclip' }
 ];
 
 if (!('currentState' in localStorage) || !(localStorage.currentState)) {
@@ -337,6 +348,53 @@ window.addEventListener('click', (e) => {
         adminErrorMessage.innerText = "";
     }
 });
+
+
+tagIcons.forEach((tagIcon) => {
+    let button = document.createElement('button');
+    button.classList.add(`tag-${tagIcon.value}-btn`);
+    let iElm = document.createElement('i');
+    iElm.setAttribute('data-feather', tagIcon.icon);
+    button.append(iElm);
+    tagIconsContainer.append(button);
+
+    button.addEventListener('click', (e) => {
+        e.preventDefault();
+        button.classList.toggle(`tag-${tagIcon.value}-btn-on`);
+    });
+});
+
+recordTagButton.addEventListener('click', (e) => {
+    e.preventDefault();
+    let preInput = recordInput.value;
+    if (preInput.trim().length > 0) {
+        tagValueInput.value = preInput;
+    }
+    tagModalBg.style.display = 'flex';
+    tagValueInput.focus();
+});
+
+const tagModalClose = () => {
+    tagModalBg.style.display = 'none';
+    tagValueInput.value = "";
+    document.querySelector('.tag-help-btn').classList.remove('tag-help-btn-on');
+    document.querySelector('.tag-alert-btn').classList.remove('tag-alert-btn-on');
+    document.querySelector('.tag-clip-btn').classList.remove('tag-clip-btn-on');
+};
+
+tagModalCloseBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    tagModalClose();
+});
+
+window.addEventListener('click', (e) => {
+    if (e.target === tagModalBg) {
+        tagModalClose();
+    }
+});
+
+
+
 
 // ****************************************
 

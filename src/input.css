@@ -290,7 +290,7 @@
 
 
   #tag-modal-bg {
-    @apply bg-black bg-opacity-50 absolute inset-0 flex justify-center items-center;
+    @apply hidden bg-black bg-opacity-50 absolute inset-0 justify-center items-center;
   }
 
   #tag-modal-content {
@@ -306,12 +306,41 @@
   }
 
   #tag-icons-container {
-    @apply my-4;
+    @apply mt-4 mb-8;
   }
 
   #tag-icons-container > button {
-    @apply ml-2 p-2 text-gray-400 bg-gray-200 rounded-md shadow-md;
+    @apply ml-4 p-2 text-gray-400 hover:text-gray-100 bg-gray-200 rounded-md shadow-md  transition-all duration-100 ease-linear;
   }
+
+  #tag-icons-container > button:first-child {
+    @apply ml-0;
+  }
+
+  #tag-icons-container > button.tag-help-btn {
+    @apply hover:text-blue-400;
+  }
+  
+   #tag-icons-container > button.tag-help-btn-on {
+    @apply text-gray-100 bg-blue-500 ;
+  }
+
+  #tag-icons-container > button.tag-alert-btn {
+    @apply hover:text-amber-400;
+  }
+  
+   #tag-icons-container > button.tag-alert-btn-on {
+    @apply text-gray-100 bg-amber-500 ;
+  }
+
+  #tag-icons-container > button.tag-clip-btn {
+    @apply hover:text-lime-400;
+  }
+  
+   #tag-icons-container > button.tag-clip-btn-on {
+    @apply text-gray-100 bg-lime-500 ;
+  }
+
 
   #tag-comment-input {
     @apply w-60 h-10 mt-8 border bg-gray-200 focus:bg-gray-50 indent-2 rounded-md shadow-sm;
