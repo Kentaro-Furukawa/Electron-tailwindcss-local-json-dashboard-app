@@ -120,11 +120,47 @@
             <lable for="adminpass" class="admin-pass-hint"></lable>
             <button id="admin-pass-submit" type="submit"><i data-feather="log-in"></i></button>
           </form>
-
-
         </div>
       </div>
     </section>
+
+
+
+
+    <div id="tag-modal-bg">
+      <div id="tag-modal-content">
+        <button id="tag-modal-close-btn"><i data-feather="x-circle"></i></button>
+        <form>
+          <!-- <label for="tagValue">Value :</label> -->
+          <input id="tag-value-input" type="text" name="tagValue" placeholder="Value...">
+          <div id="tag-icons-container">
+            <button id="tag-help-btn">
+              <i data-feather="help-circle"></i>
+            </button>
+            <button id="tag-alert-btn">
+              <i data-feather="alert-triangle"></i>
+            </button>
+            <button id="tag-alert-btn">
+              <i data-feather="paperclip"></i>
+            </button>
+          </div>
+          <!-- <label for="tagComment">Comment :</label> -->
+          <div id="tag-submit-container">
+            <button id="tag-submit-btn" type="submit">
+              <i data-feather="send"></i>
+            </button>
+          </div>
+          <input id="tag-comment-input" type="text" name="tagComment" placeholder="(Optional) Comment...">
+        </form>
+      </div>
+    </div>
+
+
+
+
+
+
+
   </div>
   <script src="./renderer.js"></script>
 </body>
