@@ -8,7 +8,7 @@
   .state-icon-button-container .available-icon {
     @apply text-green-600 hover:bg-green-600;
   }
-  .current-state-icon-inner.available-icon {
+  .current-state-icon-inner.available-icon, .td-key-state-icon-span.available-icon {
     @apply bg-green-600;
   }
 
@@ -16,16 +16,15 @@
     @apply text-blue-600 hover:bg-blue-600;
   }
 
-  .current-state-icon-inner.nextUp-icon {
+  .current-state-icon-inner.nextUp-icon, .td-key-state-icon-span.nextUp-icon {
     @apply bg-blue-600;
   }
-
 
   .state-icon-button-container .onCall-icon {
     @apply text-yellow-600 hover:bg-yellow-600;
   }
 
-  .current-state-icon-inner.onCall-icon {
+  .current-state-icon-inner.onCall-icon, .td-key-state-icon-span.onCall-icon {
     @apply bg-yellow-600;
   }
 
@@ -33,7 +32,7 @@
     @apply text-orange-600 hover:bg-orange-600;
   }
 
-  .current-state-icon-inner.issuing-icon {
+  .current-state-icon-inner.issuing-icon, .td-key-state-icon-span.issuing-icon {
     @apply bg-orange-600;
   }
 
@@ -41,19 +40,17 @@
     @apply text-violet-600 hover:bg-violet-600;
   }
 
-  .current-state-icon-inner.announce-icon {
+  .current-state-icon-inner.announce-icon, .td-key-state-icon-span.announce-icon {
     @apply bg-violet-600;
   }
-
 
   .state-icon-button-container .away-icon {
     @apply text-rose-600 hover:bg-rose-600;
   }
 
-  .current-state-icon-inner.away-icon {
+  .current-state-icon-inner.away-icon, .td-key-state-icon-span.away-icon {
     @apply bg-rose-600;
   }
-
 
   .state-icon-button-container .recipient-icon {
     @apply text-sky-600 hover:bg-sky-600;
@@ -73,7 +70,7 @@
   }
 
   .current-state-icon-inner {
-    @apply relative flex items-center justify-center h-10 w-10 my-3 mx-auto text-white shadow-lg rounded-xl;
+    @apply relative flex items-center justify-center h-10 w-10 my-3 mx-auto text-gray-200 shadow-lg rounded-xl;
   }
 
   .sidebar-caption {
@@ -240,8 +237,12 @@
     @apply flex space-x-1;
   }
 
+  .td-key-state-icon-span {
+    @apply text-gray-200 rounded-md;
+  }
+
   .td-key-state-icon {
-    @apply h-6 p-1 bg-red-200 rounded-md;
+    @apply h-6 p-1 text-gray-50 rounded-md;
   }
 
   .td-value-inc {

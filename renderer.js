@@ -127,6 +127,7 @@ function tableOperation(records) {
         let stateIcon = document.createElement('i');
         let recordState = stateIcons.filter((stateIcon) => stateIcon.value === record.state)
         let recordStateIcon = recordState[0].icon;
+        stateIconSpan.classList.add('td-key-state-icon-span', `${recordState[0].value}-icon`);
         stateIcon.setAttribute('data-feather', recordStateIcon);
         keyDataInner.append(stateIconSpan);
         stateIconSpan.append(stateIcon);
