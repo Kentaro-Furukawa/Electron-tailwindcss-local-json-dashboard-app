@@ -59,24 +59,22 @@ const tagIcons = [
 
 window.addEventListener('load', (event) => {
     console.log('page is fully loaded');
-
-    window.api.onUserList((userList) => {
-        userList.forEach((user) => {
-            let node = document.createElement("option");
-            node.setAttribute("value", user);
-            node.innerText = user;
-            userSelecter.appendChild(node);
-        });
-        if (userList.includes(localStorage.user)) {
-            userSelecter.value = localStorage.user;
-        }
-    });
-
-
-
+    refreshUserList();
     refreshRecord();
 });
 
+const refreshUserList = async () => {
+    const userList = await window.api.requestUserList();
+    userList.forEach((user) => {
+       let node = document.createElement("option");
+       node.setAttribute("value", user);
+       node.innerText = user;
+       userSelecter.appendChild(node);
+   });
+   if (userList.includes(localStorage.user)) {
+       userSelecter.value = localStorage.user;
+   }
+};
 
 if (!('currentState' in localStorage) || !(localStorage.currentState)) {
     localStorage.currentState = stateIcons[0].value;

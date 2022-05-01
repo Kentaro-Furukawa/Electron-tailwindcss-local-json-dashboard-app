@@ -91,7 +91,7 @@ const createMainWindow = () => {
   activateRecordData = getActiveRecord();
   mainWindow.webContents.on("did-finish-load", () => {
     mainWindow.webContents.send("send-user-list", userList);
-    mainWindow.webContents.send("send-active-record", activateRecordData);
+    // mainWindow.webContents.send("send-active-record", activateRecordData);
   })
 };
 
@@ -126,6 +126,11 @@ ipcMain.on("admin-login-attempt", (event, adminLog) => {
   console.log(userList);
   createAdminWindow()
 });
+
+ipcMain.handle("send-user-list", async (event) => {
+  const userList = getUserList();
+  return userList;
+})
 
 ipcMain.handle("send-record", async (event, record) => {
   let returnMessage = null;
