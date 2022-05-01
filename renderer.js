@@ -197,6 +197,12 @@ function tableOperation(records) {
             tagDelBtn.append(tagDelIcon);
             valueData.append(tagDelBtn);
             valueData.classList.add('pr-8')
+            tagDelBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                console.log('here you go::::', record);
+                tableRow.classList.add('bg-gray-200', 'text-gray-400');
+                delTr(record);
+            })
         }
 
 
@@ -303,6 +309,11 @@ recordClearButton.addEventListener('click', (e) => {
     recordInput.value = '';
     recordFormMessage.innerText = '';
 });
+
+const delTr = async (record) => {
+    const updatedRecord = await window.api.delTagRecord(record);
+    await updateTable(updatedRecord);
+}
 
 async function getClipboard() {
     const data = await window.api.onFlash();

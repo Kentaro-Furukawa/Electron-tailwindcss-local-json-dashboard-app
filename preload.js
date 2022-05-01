@@ -6,6 +6,7 @@ const API = {
   getActiveRecord: (callback) => ipcRenderer.on("send-active-record", (event, args) => callback(args)),
   sendRecord: (record) => ipcRenderer.invoke("send-record", record),
   requestActiveRecord: () => ipcRenderer.invoke("request-active-record"),
+  delTagRecord: (record) => ipcRenderer.invoke("delete-tag-record", record),
   onFlash: () => ipcRenderer.invoke("on-flash")
 }
 
