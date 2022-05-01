@@ -408,9 +408,7 @@ const sendTagRecord = async () => {
     const record = await createTagRecord();
     const invokeRecord = await window.api.sendRecord(record);
     await updateTable(invokeRecord);
-    console.log(invokeRecord);
 }
-
 
 tagIcons.forEach((tagIcon) => {
     let button = document.createElement('button');
