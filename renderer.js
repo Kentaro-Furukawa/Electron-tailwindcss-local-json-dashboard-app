@@ -206,7 +206,9 @@ function tableOperation(records) {
             valueData.classList.add('pr-8')
             tagDelBtn.addEventListener('click', (e) => {
                 tableRow.classList.add('bg-gray-200', 'text-gray-400');
-                delTr(record);
+                setTimeout(() => {
+                        delTr(record);
+                }, 300);
             })
         }
 
