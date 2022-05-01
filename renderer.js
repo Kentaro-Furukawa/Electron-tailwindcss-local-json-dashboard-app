@@ -176,10 +176,11 @@ function tableOperation(records) {
             keyDataInner.append(tagCommentSpan);
         }
 
-
         if (!(record.incNo.length > 0)) {
-            valueData = valueData.innerText = record.inputValue;
-        } else {
+            let valueInputSpan = document.createElement('span');
+            valueInputSpan.innerHTML = record.inputValue;
+            valueData.append(valueInputSpan);
+                } else {
             record.incNo.forEach((inc) => {
                 let incItem = document.createElement('span');
                 incItem.classList.add('td-value-inc')
@@ -187,6 +188,18 @@ function tableOperation(records) {
                 valueData.append(incItem);
             });
         }
+
+        if (record.tagOn) {
+            let tagDelBtn = document.createElement('button');
+            let tagDelIcon = document.createElement('i');
+            tagDelBtn.classList.add('tag-del-Btn');
+            tagDelIcon.setAttribute('data-feather', 'x-circle');
+            tagDelBtn.append(tagDelIcon);
+            valueData.append(tagDelBtn);
+            valueData.classList.add('pr-8')
+        }
+
+
     });
     feather.replace()
 }

@@ -229,7 +229,7 @@
   } 
 
   .td-value {
-    @apply pl-2 text-left;
+    @apply relative pl-2 text-left;
   }
 
   .td-key-inner {
@@ -310,7 +310,7 @@
   }
 
   #tag-icons-container > button {
-    @apply ml-4 p-2 text-gray-400 hover:text-gray-100 bg-gray-200 rounded-md shadow-md  transition-all duration-100 ease-linear;
+    @apply ml-4 p-2 text-gray-400 hover:text-gray-100 bg-gray-200 rounded-md shadow-md transition-all duration-100 ease-linear;
   }
 
   #tag-icons-container > button:first-child {
@@ -361,7 +361,9 @@
     @apply py-2 px-10 text-gray-100 bg-orange-500 rounded-md shadow-md;
   }
 
-
+  .tag-del-Btn {
+    @apply absolute right-1 top-0.5 p-0.5  text-gray-300 hover:text-red-700 active:text-gray-600 active:rounded-full transition-all duration-100 ease-linear;
+  }
 
 
 
