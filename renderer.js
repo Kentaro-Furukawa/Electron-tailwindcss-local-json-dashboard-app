@@ -312,7 +312,7 @@ recordClearButton.addEventListener('click', (e) => {
 
 const delTr = async (record) => {
     const updatedRecord = await window.api.delTagRecord(record);
-    await updateTable(updatedRecord);
+    tableOperation(updatedRecord);
 }
 
 async function getClipboard() {

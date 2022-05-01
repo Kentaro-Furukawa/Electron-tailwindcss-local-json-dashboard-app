@@ -181,11 +181,10 @@ ipcMain.handle("request-active-record", async (event) => {
 ipcMain.handle("delete-tag-record", async (event, delRcd) => {
   let activateRecordData = await fs.promises.readFile(path.join(dataDir, "active", "activeRecord.json"), 'utf8');
   activateRecordData = JSON.parse(activateRecordData);
-  filteredActivateRecord = activateRecordData.filter((ard) => 
+  const filteredActivateRecord = activateRecordData.filter((ard) => 
   !(ard.username === delRcd.username && ard.time === delRcd.time && ard.inputValue === delRcd.inputValue))
-  
-  filteredActivateRecord = JSON.stringify(filteredActivateRecord, null, 2)
-    await fsPromises.writeFile(path.join(dataDir, "active", "activeRecord.json"), filteredActivateRecord);
+  const faJson = JSON.stringify(filteredActivateRecord, null, 2)
+    await fsPromises.writeFile(path.join(dataDir, "active", "activeRecord.json"), faJson);
     return filteredActivateRecord;
 })
 
