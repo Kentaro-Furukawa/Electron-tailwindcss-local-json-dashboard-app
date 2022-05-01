@@ -57,6 +57,27 @@ const tagIcons = [
     { value: 'clip', icon: 'paperclip', tcolor: 'text-lime-500' }
 ];
 
+window.addEventListener('load', (event) => {
+    console.log('page is fully loaded');
+
+    window.api.onUserList((userList) => {
+        userList.forEach((user) => {
+            let node = document.createElement("option");
+            node.setAttribute("value", user);
+            node.innerText = user;
+            userSelecter.appendChild(node);
+        });
+        if (userList.includes(localStorage.user)) {
+            userSelecter.value = localStorage.user;
+        }
+    });
+
+
+
+    refreshRecord();
+});
+
+
 if (!('currentState' in localStorage) || !(localStorage.currentState)) {
     localStorage.currentState = stateIcons[0].value;
 }
@@ -108,18 +129,6 @@ recipientIconButton.addEventListener('click', (e) => {
         recipientLabel.innerText = '';
         recipientLabel.classList.remove('recipient-label-on');
         isRecipient = false;
-    }
-});
-
-window.api.onUserList((userList) => {
-    userList.forEach((user) => {
-        let node = document.createElement("option");
-        node.setAttribute("value", user);
-        node.innerText = user;
-        userSelecter.appendChild(node);
-    });
-    if (userList.includes(localStorage.user)) {
-        userSelecter.value = localStorage.user;
     }
 });
 
@@ -180,7 +189,7 @@ function tableOperation(records) {
             let valueInputSpan = document.createElement('span');
             valueInputSpan.innerHTML = record.inputValue;
             valueData.append(valueInputSpan);
-                } else {
+        } else {
             record.incNo.forEach((inc) => {
                 let incItem = document.createElement('span');
                 incItem.classList.add('td-value-inc')
@@ -198,8 +207,6 @@ function tableOperation(records) {
             valueData.append(tagDelBtn);
             valueData.classList.add('pr-8')
             tagDelBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                console.log('here you go::::', record);
                 tableRow.classList.add('bg-gray-200', 'text-gray-400');
                 delTr(record);
             })
@@ -226,11 +233,6 @@ function updateTable(obj) {
         }
     });
 }
-
-// get active record at start.
-window.api.getActiveRecord((activeRecord) => {
-    tableOperation(activeRecord);
-});
 
 userSelecter.addEventListener('change', (e) => {
     localStorage.user = userSelecter.value;
