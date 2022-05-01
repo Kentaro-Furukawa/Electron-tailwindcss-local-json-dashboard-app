@@ -141,7 +141,7 @@ ipcMain.handle("send-record", async (event, record) => {
     duplicateRecord = [...duplicateRecord, ...filterActiveRecord];
   })
 
-  if (duplicateRecord.length > 0) {
+  if (duplicateRecord.length > 0 && record.tagOn === false) {
     returnMessage = "it is taken."
     incTaken = true;
   } else {

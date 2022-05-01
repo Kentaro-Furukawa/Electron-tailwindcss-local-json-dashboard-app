@@ -28,6 +28,7 @@ const tagModalCloseBtn = document.querySelector('#tag-modal-close-btn');
 const tagValueInput = document.querySelector('#tag-value-input');
 const tagIconsContainer = document.querySelector('#tag-icons-container');
 const tagSubmitBtn = document.querySelector('#tag-submit-btn');
+const tagCommentInput = document.querySelector('#tag-comment-input');
 let isRecipient = false;
 
 const getCurrentDateTime = () => {
@@ -368,10 +369,11 @@ function createTagRecord() {
             helpTag: document.querySelector('.tag-help-btn').classList.contains('tag-help-btn-on'),
             alertTag: document.querySelector('.tag-alert-btn').classList.contains('tag-alert-btn-on'),
             clipTag: document.querySelector('.tag-clip-btn').classList.contains('tag-clip-btn-on'),
+            tagComment: tagCommentInput.value,
         };
         const error = false;
         if (!error) {
-            console.log(tagRecord);
+            // console.log(tagRecord);
             resolve(tagRecord);
         } else {
             reject('Error: failed to create a tag record.');
@@ -379,7 +381,12 @@ function createTagRecord() {
     });
 }
 
-
+const sendTagRecord = async () => {
+    const record = await createTagRecord();
+    const invokeRecord = await window.api.sendRecord(record);
+    await updateTable(invokeRecord);
+    console.log(invokeRecord);
+}
 
 
 tagIcons.forEach((tagIcon) => {
@@ -412,6 +419,7 @@ const tagModalClose = () => {
     document.querySelector('.tag-help-btn').classList.remove('tag-help-btn-on');
     document.querySelector('.tag-alert-btn').classList.remove('tag-alert-btn-on');
     document.querySelector('.tag-clip-btn').classList.remove('tag-clip-btn-on');
+    tagCommentInput.value = "";
 };
 
 tagModalCloseBtn.addEventListener('click', (e) => {
@@ -427,7 +435,7 @@ window.addEventListener('click', (e) => {
 
 tagSubmitBtn.addEventListener('click', (e) => {
     e.preventDefault();
-    createTagRecord();
+    sendTagRecord();
 })
 
 
