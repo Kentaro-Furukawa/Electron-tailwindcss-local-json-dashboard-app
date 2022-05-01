@@ -147,8 +147,10 @@ ipcMain.handle("send-record", async (event, record) => {
   } else {
     returnMessage = "going to add to active record"
     incTaken = false;
-    // push to activeRecord json file
-    activateRecordData = activateRecordData.filter((activeRecord => activeRecord.username !== inputUsername))
+    // push to activeRecord json file if tagOn is false
+    if (!(record.tagOn)) {
+    activateRecordData = activateRecordData.filter((activeRecord => activeRecord.username !== inputUsername || activeRecord.tagOn === true))
+    }
     activateRecordData.push(record);
     activateRecordData = JSON.stringify(activateRecordData, null, 2)
     await fsPromises.writeFile(path.join(dataDir, "active", "activeRecord.json"), activateRecordData);

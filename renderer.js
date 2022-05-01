@@ -135,17 +135,17 @@ function tableOperation(records) {
         let keyDataNameSpan = document.createElement('span');
         keyDataNameSpan.innerText = record.username;
 
-        // if (!(record.tagOn)) {
-        let stateIconSpan = document.createElement('span');
-        let stateIcon = document.createElement('i');
-        let recordState = stateIcons.filter((stateIcon) => stateIcon.value === record.state)
-        let recordStateIcon = recordState[0].icon;
-        stateIconSpan.classList.add('td-key-state-icon-span', `${recordState[0].value}-icon`);
-        stateIcon.setAttribute('data-feather', recordStateIcon);
-        keyDataInner.append(stateIconSpan);
-        stateIconSpan.append(stateIcon);
-        stateIcon.classList.add('td-key-state-icon')
-        // }
+        if (!(record.tagOn)) {
+            let stateIconSpan = document.createElement('span');
+            let stateIcon = document.createElement('i');
+            let recordState = stateIcons.filter((stateIcon) => stateIcon.value === record.state)
+            let recordStateIcon = recordState[0].icon;
+            stateIconSpan.classList.add('td-key-state-icon-span', `${recordState[0].value}-icon`);
+            stateIcon.setAttribute('data-feather', recordStateIcon);
+            keyDataInner.append(stateIconSpan);
+            stateIconSpan.append(stateIcon);
+            stateIcon.classList.add('td-key-state-icon')
+        }
 
         tableRow.classList.add("tr-record");
         activeRecordTableBody.appendChild(tableRow);
