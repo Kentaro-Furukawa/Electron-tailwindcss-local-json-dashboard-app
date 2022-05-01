@@ -325,9 +325,9 @@
     @apply text-gray-100 bg-blue-500 ;
   }
 
-  .td-key-help-tag-icon {
+  /* .td-key-help-tag-icon {
     @apply text-blue-500;
-  }
+  } */
 
   #tag-icons-container > button.tag-alert-btn {
     @apply hover:text-amber-400;
@@ -337,9 +337,9 @@
     @apply text-gray-100 bg-amber-500 ;
   }
 
-  .td-key-alert-tag-icon {
+  /* .td-key-alert-tag-icon {
     @apply text-amber-500;
-  }
+  } */
 
   #tag-icons-container > button.tag-clip-btn {
     @apply hover:text-lime-400;
@@ -349,9 +349,9 @@
     @apply text-gray-100 bg-lime-500 ;
   }
 
-  .td-key-clip-tag-icon {
+  /* .td-key-clip-tag-icon {
     @apply text-lime-500;
-  }
+  } */
 
   #tag-comment-input {
     @apply w-60 h-10 mt-8 border bg-gray-200 focus:bg-gray-50 indent-2 rounded-md shadow-sm;

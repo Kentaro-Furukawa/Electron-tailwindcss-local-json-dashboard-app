@@ -52,9 +52,9 @@ const stateIcons = [
 ];
 
 const tagIcons = [
-    { value: 'help', icon: 'help-circle' },
-    { value: 'alert', icon: 'alert-triangle' },
-    { value: 'clip', icon: 'paperclip' }
+    { value: 'help', icon: 'help-circle', tcolor: 'text-blue-500' },
+    { value: 'alert', icon: 'alert-triangle', tcolor: 'text-amber-500' },
+    { value: 'clip', icon: 'paperclip', tcolor: 'text-lime-500' }
 ];
 
 if (!('currentState' in localStorage) || !(localStorage.currentState)) {
@@ -160,10 +160,10 @@ function tableOperation(records) {
         if (record.tagOn) {
             record.tags.forEach((tag) => {
                 let tagIconSpan = document.createElement('span');
-                tagIconSpan.classList.add('td-key-tag-icon-span', `td-key-${tag}-tag-icon`)
                 let tagIcon = document.createElement('i');
                 let TargetTagIconFilter = tagIcons.filter((tItem) => tItem.value === tag);
                 let targetTagIcon = TargetTagIconFilter[0].icon;
+                tagIconSpan.classList.add('td-key-tag-icon-span', `td-key-${tag}-tag-icon`, TargetTagIconFilter[0].tcolor)
                 tagIcon.setAttribute('data-feather', targetTagIcon);
                 tagIconSpan.append(tagIcon);
                 keyDataInner.append(tagIconSpan);
