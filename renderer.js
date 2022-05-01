@@ -146,7 +146,6 @@ function tableOperation(records) {
             stateIconSpan.append(stateIcon);
             stateIcon.classList.add('td-key-state-icon')
         }
-
         tableRow.classList.add("tr-record");
         activeRecordTableBody.appendChild(tableRow);
         tableRow.append(keyData, timeData, valueData);
@@ -157,6 +156,26 @@ function tableOperation(records) {
         timeData.classList.add("td-time");
         timeData = timeData.innerText = record.time.slice(-8);
         valueData.classList.add("td-value")
+
+        if (record.tagOn) {
+            record.tags.forEach((tag) => {
+                let tagIconSpan = document.createElement('span');
+                tagIconSpan.classList.add('td-key-tag-icon-span', `td-key-${tag}-tag-icon`)
+                let tagIcon = document.createElement('i');
+                let TargetTagIconFilter = tagIcons.filter((tItem) => tItem.value === tag);
+                let targetTagIcon = TargetTagIconFilter[0].icon;
+                tagIcon.setAttribute('data-feather', targetTagIcon);
+                tagIconSpan.append(tagIcon);
+                keyDataInner.append(tagIconSpan);
+            });
+        }
+
+        if (record.tagComment) {
+            let tagCommentSpan = document.createElement('span');
+            tagCommentSpan.innerText = record.tagComment;
+            keyDataInner.append(tagCommentSpan);
+        }
+
 
         if (!(record.incNo.length > 0)) {
             valueData = valueData.innerText = record.inputValue;
