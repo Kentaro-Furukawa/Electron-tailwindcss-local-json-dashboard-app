@@ -358,6 +358,13 @@ function createTagRecord() {
         let incNo = tagValueInput.value.toUpperCase();
         incNo = incNo.match(incPattern);
         incNo = [...new Set(incNo)];
+        const tags = [];
+        tagIcons.forEach((tagIcon) => {
+            if (document.querySelector(`.tag-${tagIcon.value}-btn`).classList.contains(`tag-${tagIcon.value}-btn-on`)) {
+                tags.push(tagIcon.value);
+            }
+        });
+
         const tagRecord = {
             username: localStorage.user,
             state: localStorage.currentState,
@@ -366,14 +373,11 @@ function createTagRecord() {
             incNo: incNo,
             recipient: isRecipient,
             tagOn: true,
-            helpTag: document.querySelector('.tag-help-btn').classList.contains('tag-help-btn-on'),
-            alertTag: document.querySelector('.tag-alert-btn').classList.contains('tag-alert-btn-on'),
-            clipTag: document.querySelector('.tag-clip-btn').classList.contains('tag-clip-btn-on'),
+            tags: tags,
             tagComment: tagCommentInput.value,
         };
         const error = false;
         if (!error) {
-            // console.log(tagRecord);
             resolve(tagRecord);
         } else {
             reject('Error: failed to create a tag record.');
@@ -416,7 +420,7 @@ recordTagButton.addEventListener('click', (e) => {
 const tagModalClose = () => {
     tagModalBg.style.display = 'none';
     tagValueInput.value = "";
-    document.querySelector('.tag-help-btn').classList.remove('tag-help-btn-on');
+    document.querySelector('.tag-help-btn').classList.remove('tag-help-btn-on');   // forEach these three lines.
     document.querySelector('.tag-alert-btn').classList.remove('tag-alert-btn-on');
     document.querySelector('.tag-clip-btn').classList.remove('tag-clip-btn-on');
     tagCommentInput.value = "";
