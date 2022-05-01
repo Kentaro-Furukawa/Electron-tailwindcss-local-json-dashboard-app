@@ -43,12 +43,12 @@ const getCurrentDateTime = () => {
 }
 
 const stateIcons = [
-    { value: 'available', icon: 'user-check', caption: 'Available' },
+    { value: 'available', icon: 'check', caption: 'Available' },
     { value: 'nextUp', icon: 'phone-call', caption: 'Next up' },
     { value: 'onCall', icon: 'headphones', caption: 'On call' },
     { value: 'issuing', icon: 'pen-tool', caption: 'Issuing' },
     { value: 'announce', icon: 'radio', caption: 'Announce' },
-    { value: 'away', icon: 'user-x', caption: 'Away' }
+    { value: 'away', icon: 'slash', caption: 'Away' }
 ];
 
 const tagIcons = [

@@ -362,7 +362,7 @@
   }
 
   .tag-del-Btn {
-    @apply absolute right-1 top-0.5 p-0.5  text-gray-300 hover:text-red-700 active:text-gray-600 active:rounded-full transition-all duration-100 ease-linear;
+    @apply absolute right-1 top-0.5 p-0.5  text-gray-300 hover:text-red-600 active:text-gray-600 active:rounded-full transition-all duration-100 ease-linear;
   }
 
 
