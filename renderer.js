@@ -27,6 +27,7 @@ const tagModalBg = document.querySelector('#tag-modal-bg');
 const tagModalCloseBtn = document.querySelector('#tag-modal-close-btn');
 const tagValueInput = document.querySelector('#tag-value-input');
 const tagIconsContainer = document.querySelector('#tag-icons-container');
+const tagSubmitBtn = document.querySelector('#tag-submit-btn');
 let isRecipient = false;
 
 const getCurrentDateTime = () => {
@@ -350,6 +351,37 @@ window.addEventListener('click', (e) => {
 });
 
 
+
+function createTagRecord() {
+    return new Promise((resolve, reject) => {
+        let incNo = tagValueInput.value.toUpperCase();
+        incNo = incNo.match(incPattern);
+        incNo = [...new Set(incNo)];
+        const tagRecord = {
+            username: localStorage.user,
+            state: localStorage.currentState,
+            time: getCurrentDateTime(),
+            inputValue: tagValueInput.value,
+            incNo: incNo,
+            recipient: isRecipient,
+            tagOn: true,
+            helpTag: document.querySelector('.tag-help-btn').classList.contains('tag-help-btn-on'),
+            alertTag: document.querySelector('.tag-alert-btn').classList.contains('tag-alert-btn-on'),
+            clipTag: document.querySelector('.tag-clip-btn').classList.contains('tag-clip-btn-on'),
+        };
+        const error = false;
+        if (!error) {
+            console.log(tagRecord);
+            resolve(tagRecord);
+        } else {
+            reject('Error: failed to create a tag record.');
+        }
+    });
+}
+
+
+
+
 tagIcons.forEach((tagIcon) => {
     let button = document.createElement('button');
     button.classList.add(`tag-${tagIcon.value}-btn`);
@@ -392,6 +424,12 @@ window.addEventListener('click', (e) => {
         tagModalClose();
     }
 });
+
+tagSubmitBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    createTagRecord();
+})
+
 
 
 
