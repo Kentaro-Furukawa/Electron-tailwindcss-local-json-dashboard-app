@@ -174,7 +174,7 @@ function tableOperation(records) {
 
 function updateTable(obj) {
     return new Promise((resolve, reject) => {
-        if (obj.incTaken === true || obj.duplicateRecord.length > 0) {
+        if (obj.incTaken === true) {
             console.log('is taken!!!!');
         } else {
             let activeRecord = obj.activeRecord;
