@@ -102,13 +102,14 @@
           Recipient
         </span>
       </button>
-      <div class="modal-icon">
-        <button id="modal-icon-button">
+      <div id="al-modal-icon-btn-wrap">
+        <button id="al-modal-icon-btn">
           <i data-feather="more-horizontal"></i>
         </button>
       </div>
     </section>
-    <section class="modal-background">
+
+    <!-- <section class="modal-background">
       <div class="modal-content">
         <button class="modal-close-button"><i data-feather="x-circle"></i></button>
         <div class="modal-inner">
@@ -122,8 +123,26 @@
           </form>
         </div>
       </div>
-    </section>
+    </section> -->
 
+
+    <div id="al-modal-bg">
+      <div id="al-modal-content">
+        <h2 id="al-modal-h">Login to admin page</h2>
+        <button id="al-modal-close-btn"><i data-feather="x-circle"></i></button>
+        <p id="al-msg"></p>
+        <form>
+          <input id="al-pass-input" type="password" name="al-pass" placeholder="Password...">
+          <label id="al-pass-label" for="al-pass"></label>
+          <!-- <p id="al-msg">Please provide valid password.</p> -->
+          <div>
+            <button id="al-submit" type="submit">
+              <i data-feather="log-in"></i>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
 
     <div id="tag-modal-bg">
       <div id="tag-modal-content">
@@ -132,7 +151,7 @@
           <input id="tag-value-input" type="text" name="tagValue" placeholder="Value...">
           <div id="tag-icons-container">
           </div>
-          <div id="tag-submit-container">
+          <div>
             <button id="tag-submit-btn" type="submit">
               <i data-feather="send"></i>
             </button>

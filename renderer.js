@@ -17,12 +17,20 @@ const recordFlashButton = document.querySelector('#record-flash-button');
 const recordFormMessage = document.querySelector('.record-form-message');
 const activeRecordTable = document.querySelector('#active-record-table');
 const activeRecordTableBody = document.querySelector('#active-record-table-body');
-const modalBackground = document.querySelector('.modal-background');
-const modalInner = document.querySelector('.modal-inner');
-const modalIconButton = document.querySelector('#modal-icon-button');
-const modalCloseButton = document.querySelector('.modal-close-button');
-const adminPassInput = document.querySelector('#admin-pass-input');
-const adminErrorMessage = document.querySelector('.admin-error-message');
+
+const alModalBtn = document.querySelector('#al-modal-icon-btn');
+const alModalBg = document.querySelector('#al-modal-bg');
+const alModalCloseBtn = document.querySelector('#al-modal-close-btn');
+const alPassInput = document.querySelector('#al-pass-input');
+const alPassLabel = document.querySelector('#al-pass-label');
+const alSubmit = document.querySelector('#al-submit');
+const alMsg = document.querySelector('#al-msg');
+
+// const modalBackground = document.querySelector('.modal-background');
+// const modalInner = document.querySelector('.modal-inner');
+// const modalCloseButton = document.querySelector('.modal-close-button');
+// const adminPassInput = document.querySelector('#admin-pass-input');
+// const adminErrorMessage = document.querySelector('.admin-error-message');
 const tagModalBg = document.querySelector('#tag-modal-bg');
 const tagModalCloseBtn = document.querySelector('#tag-modal-close-btn');
 const tagValueInput = document.querySelector('#tag-value-input');
@@ -334,67 +342,104 @@ recordFlashButton.addEventListener('click', (e) => {
     getClipboard();
 });
 
-modalIconButton.addEventListener('click', (e) => {
-    e.preventDefault();
-    modalBackground.style.display = 'block';
-    document.querySelector('.admin-pass-hint').innerText = `🔑 : ${adminPassword}`;
-    feather.replace();
+alModalBtn.addEventListener('click', (e) => {
+    alModalBg.style.display = 'flex';
 
     if (!('user' in localStorage) || !(localStorage.user)) {
-        document.querySelector('#admin-pass-input').disabled = true;
-        document.querySelector('#admin-pass-submit').disabled = true;
-        adminErrorMessage.innerText = "Please select username first."
-        adminErrorMessage.classList.add("admin-error-message-On");
+        alPassInput.disabled = true;
+        alSubmit.disabled = true;
+        alMsg.classList.add('al-msg-on');
+        alMsg.innerHTML = "Please select user.";
     } else {
-        document.querySelector('#admin-pass-input').disabled = false;
-        document.querySelector('#admin-pass-submit').disabled = false;
-        adminErrorMessage.classList.remove("admin-error-message-On");
-        document.querySelector('#admin-pass-input').focus();
-        adminPassInput.value = "";
-        adminErrorMessage.innerText = "";
+            alPassLabel.innerHTML = `🔑 : ${adminPassword}`;
     }
-
-    document.querySelector('#admin-pass-submit').addEventListener('click', (e) => {
-        e.preventDefault();
-        if (adminPassInput.value.trim().length === 0) {
-            adminErrorMessage.innerText = "Please enter password.";
-            adminErrorMessage.classList.add("admin-error-message-On");
-            document.querySelector('#admin-pass-input').focus();
-            adminPassInput.value = "";
-        } else if (adminPassInput.value !== adminPassword) {
-            adminErrorMessage.innerText = "Incorrect password.";
-            adminErrorMessage.classList.add("admin-error-message-On");
-            document.querySelector('#admin-pass-input').focus();
-            adminPassInput.value = "";
-        } else {
-            console.log('success')
-            adminErrorMessage.innerText = "";
-            adminErrorMessage.classList.remove("admin-error-message-On");
-            adminPassInput.value = "";
-            modalBackground.style.display = 'none';
-
-            const adminLog = {
-                username: localStorage.user,
-                date: getCurrentDateTime(),
-            };
-            console.log(adminLog);
-            window.api.adminLogin(adminLog);
-        }
-    });
 });
 
-modalCloseButton.addEventListener('click', (e) => {
+
+const alModalClose = () => {
+    alModalBg.style.display = 'none';
+    alMsg.classList.remove('al-msg-on');
+    alMsg.innerHTML = "";
+    alPassInput.disabled = false;
+    alSubmit.disabled = false;
+
+};
+
+alModalCloseBtn.addEventListener('click', (e) => {
     e.preventDefault();
-    modalBackground.style.display = 'none';
-    adminErrorMessage.innerText = "";
+    alModalClose();
 });
 
 window.addEventListener('click', (e) => {
-    if (e.target === modalBackground) {
-        modalBackground.style.display = 'none';
-        adminErrorMessage.innerText = "";
+    if (e.target === alModalBg) {
+        alModalClose();
     }
 });
+
+
+
+
+// alModalBtn.addEventListener('click', (e) => {
+//     e.preventDefault();
+//     modalBackground.style.display = 'block';
+//     document.querySelector('.admin-pass-hint').innerText = `🔑 : ${adminPassword}`;
+//     feather.replace();
+
+//     if (!('user' in localStorage) || !(localStorage.user)) {
+//         document.querySelector('#admin-pass-input').disabled = true;
+//         document.querySelector('#admin-pass-submit').disabled = true;
+//         adminErrorMessage.innerText = "Please select username first."
+//         adminErrorMessage.classList.add("admin-error-message-On");
+//     } else {
+//         document.querySelector('#admin-pass-input').disabled = false;
+//         document.querySelector('#admin-pass-submit').disabled = false;
+//         adminErrorMessage.classList.remove("admin-error-message-On");
+//         document.querySelector('#admin-pass-input').focus();
+//         adminPassInput.value = "";
+//         adminErrorMessage.innerText = "";
+//     }
+
+//     document.querySelector('#admin-pass-submit').addEventListener('click', (e) => {
+//         e.preventDefault();
+//         if (adminPassInput.value.trim().length === 0) {
+//             adminErrorMessage.innerText = "Please enter password.";
+//             adminErrorMessage.classList.add("admin-error-message-On");
+//             document.querySelector('#admin-pass-input').focus();
+//             adminPassInput.value = "";
+//         } else if (adminPassInput.value !== adminPassword) {
+//             adminErrorMessage.innerText = "Incorrect password.";
+//             adminErrorMessage.classList.add("admin-error-message-On");
+//             document.querySelector('#admin-pass-input').focus();
+//             adminPassInput.value = "";
+//         } else {
+//             console.log('success')
+//             adminErrorMessage.innerText = "";
+//             adminErrorMessage.classList.remove("admin-error-message-On");
+//             adminPassInput.value = "";
+//             modalBackground.style.display = 'none';
+
+//             const adminLog = {
+//                 username: localStorage.user,
+//                 date: getCurrentDateTime(),
+//             };
+//             console.log(adminLog);
+//             window.api.adminLogin(adminLog);
+//         }
+//     });
+// });
+
+// modalCloseButton.addEventListener('click', (e) => {
+//     e.preventDefault();
+//     modalBackground.style.display = 'none';
+//     adminErrorMessage.innerText = "";
+// });
+
+// window.addEventListener('click', (e) => {
+//     if (e.target === modalBackground) {
+//         modalBackground.style.display = 'none';
+//         adminErrorMessage.innerText = "";
+//     }
+// });
 
 
 

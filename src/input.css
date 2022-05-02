@@ -80,10 +80,9 @@
     @apply bg-gray-400 border border-gray-100 dark:border-gray-800 rounded-full mx-2 my-3;
   }
   
-  .modal-icon {
+  #al-modal-icon-btn-wrap {
     @apply flex mt-auto mx-auto mb-3 text-gray-400 dark:text-gray-300;
   }
-
 
   .content-container {
     @apply flex flex-col bg-gray-200 dark:bg-gray-700 ml-16 mr-0 my-0 w-full h-screen;
@@ -245,14 +244,14 @@
   }
 
   .td-value-inc {
-    @apply inline-grid my-0.5 mr-1 py-0.5 px-2 tracking-wider bg-gray-200 dark:bg-gray-500 rounded-md;
+    @apply font-mono inline-grid my-0.5 mr-1 py-0.5 px-2 tracking-wider bg-gray-200 dark:bg-gray-500 rounded-md;
   }
 
-  #modal-icon-button {
+  #al-modal-icon-btn {
     @apply hover:text-gray-200 hover:dark:text-gray-500 transition-all duration-200 ease-linear;
   }
 
-  .modal-background {
+  /* .modal-background {
     @apply hidden fixed z-10 left-0 top-0 w-full h-full overflow-auto bg-black bg-opacity-50;
   }
 
@@ -286,11 +285,51 @@
 
   .admin-error-message-On {
     @apply w-full mb-4 py-2 text-gray-50 bg-red-500;
-  }
+  } */
+
+
+#al-modal-bg {
+  @apply hidden fixed left-0 top-0 w-full h-full justify-center items-center bg-black bg-opacity-50;
+}
+
+#al-modal-content {
+  @apply relative w-10/12 py-12 max-w-md text-center bg-gray-300 rounded-lg shadow-sm;
+}
+
+#al-modal-close-btn {
+  @apply absolute right-2 top-2 p-0.5 text-gray-700 hover:text-gray-400 transition-all duration-100 ease-linear;
+}
+
+#al-modal-h {
+  @apply mb-4 text-lg;
+}
+
+#al-pass-input {
+  @apply w-48 h-10 mb-1 border disabled:bg-gray-400 indent-2 rounded-md shadow-sm;
+}
+
+#al-pass-label {
+  @apply block text-gray-400;
+}
+
+/* #al-msg {
+  @apply invisible text-pink-600;
+} */
+
+#al-submit {
+  @apply mt-4 py-2 px-10 text-gray-100 bg-green-500 disabled:bg-gray-400 rounded-md shadow-md;
+}
+
+.al-msg-on {
+  @apply mb-4 py-2 font-bold text-gray-800 bg-red-500;
+}
+
+
 
 
   #tag-modal-bg {
-    @apply hidden bg-black bg-opacity-50 absolute inset-0 justify-center items-center;
+    /* @apply hidden bg-black bg-opacity-50 fixed z-10 left-0 top-0 w-full h-full overflow-auto justify-center items-center; */
+    @apply hidden fixed left-0 top-0 w-full h-full justify-center items-center  bg-black bg-opacity-50;
   }
 
   #tag-modal-content {
@@ -310,12 +349,12 @@
   }
 
   #tag-icons-container > button {
-    @apply ml-4 p-2 text-gray-400 hover:text-gray-100 bg-gray-200 rounded-md shadow-md transition-all duration-100 ease-linear;
+    @apply ml-4 first:ml-0 p-2 text-gray-400 hover:text-gray-100 bg-gray-200 rounded-md shadow-md transition-all duration-100 ease-linear;
   }
 
-  #tag-icons-container > button:first-child {
+  /* #tag-icons-container > button:first-child {
     @apply ml-0;
-  }
+  } */
 
   #tag-icons-container > button.tag-help-btn {
     @apply hover:text-blue-400;
