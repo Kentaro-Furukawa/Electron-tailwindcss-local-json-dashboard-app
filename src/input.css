@@ -154,15 +154,6 @@
     @apply mb-3 py-1;
   }
 
-
-  /* .record-form-section-message {
-    @apply text-center bg-red-400;
-  }
-
-  .record-form-section-message-on {
-    @apply my-3 py-3;
-  }
- */
   .record-form-first {
     @apply flex flex-row justify-center mb-3;
   }
@@ -195,34 +186,13 @@
     @apply w-full h-10 px-7 bg-orange-400 dark:bg-orange-500 hover:bg-orange-500 active:ring-1 active:ring-orange-500 text-gray-100 dark:text-gray-200 rounded-md shadow-md transition-all duration-100 ease-linear;
   }
 
-  /* .record-external-link-wrap {
-    @apply mr-2;
-  } */
-
   .record-flash-wrap button {
     @apply w-full h-10 px-12 bg-yellow-400 dark:bg-yellow-500 hover:bg-yellow-500 active:ring-1 active:ring-yellow-500 text-gray-100 dark:text-gray-200 rounded-md shadow-md transition-all duration-100 ease-linear;
   }
 
-  /* .record-form-message {
-    @apply bg-red-400;
-  }
- */
   .record-form-message-on {
-    @apply my-2 py-1  text-center font-bold text-gray-100 bg-red-500;
+    @apply my-2 py-1  text-center font-bold text-gray-100 bg-red-500 shadow-md;
   }
-
-
-
-  /* .record-form-section-message {
-    @apply text-center bg-red-400;
-  }
-
-  .record-form-section-message-on {
-    @apply my-3 py-3;
-  }
- */
-
-
 
   .active-record-table-section {
     @apply pt-4 pb-10 px-4 bg-gray-100 dark:bg-gray-700;
@@ -315,7 +285,7 @@
   }
 
   .al-msg-on {
-    @apply mb-4 py-2 font-bold text-gray-100 bg-red-500;
+    @apply mb-4 py-1 font-bold text-gray-100 bg-red-500 shadow-md;
   }
 
 
@@ -380,7 +350,7 @@
   }
 
   .t-msg-on {
-    @apply my-4 py-2 font-bold text-gray-100 bg-red-500;
+    @apply my-4 py-1 font-bold text-gray-100 bg-red-500 shadow-md;
   }
 
 

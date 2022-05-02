@@ -341,7 +341,7 @@ async function getClipboard() {
     const data = await window.api.onFlash();
     copiedItem = data;
     if (!(incPattern.test(copiedItem))) {
-        recordFormMessage.innerText = 'There is no incNo in your clipboard.';
+        recordFormMessage.innerText = 'No valid incNo copied.';
         recordFormMessage.classList.add('record-form-message-on');
         setTimeout(() => {
             recordFormMessage.innerText = '';
