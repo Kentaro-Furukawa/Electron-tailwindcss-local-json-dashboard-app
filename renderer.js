@@ -66,7 +66,6 @@ const tagIcons = [
 ];
 
 window.addEventListener('load', (event) => {
-    console.log('page is fully loaded');
     refreshUserList();
     refreshRecord();
 });
@@ -74,14 +73,14 @@ window.addEventListener('load', (event) => {
 const refreshUserList = async () => {
     const userList = await window.api.requestUserList();
     userList.forEach((user) => {
-       let node = document.createElement("option");
-       node.setAttribute("value", user);
-       node.innerText = user;
-       userSelecter.appendChild(node);
-   });
-   if (userList.includes(localStorage.user)) {
-       userSelecter.value = localStorage.user;
-   }
+        let node = document.createElement("option");
+        node.setAttribute("value", user);
+        node.innerText = user;
+        userSelecter.appendChild(node);
+    });
+    if (userList.includes(localStorage.user)) {
+        userSelecter.value = localStorage.user;
+    }
 };
 
 if (!('currentState' in localStorage) || !(localStorage.currentState)) {
@@ -215,7 +214,7 @@ function tableOperation(records) {
             tagDelBtn.addEventListener('click', (e) => {
                 tableRow.classList.add('bg-gray-200', 'text-gray-400');
                 setTimeout(() => {
-                        delTr(record);
+                    delTr(record);
                 }, 300);
             })
         }
@@ -351,18 +350,36 @@ alModalBtn.addEventListener('click', (e) => {
         alMsg.classList.add('al-msg-on');
         alMsg.innerHTML = "Please select user.";
     } else {
-            alPassLabel.innerHTML = `🔑 : ${adminPassword}`;
+        alPassLabel.innerHTML = `🔑 : ${adminPassword}`;
+        alPassInput.focus();
     }
 });
 
+alSubmit.addEventListener('click', (e) => {
+    e.preventDefault();
+    const inputPass = alPassInput.value;
+
+    if (!(inputPass === adminPassword)) {
+        alMsg.classList.add('al-msg-on');
+        alMsg.innerHTML = "Incorrect password.";
+        alPassInput.focus();
+    } else {
+        const log = {
+            username: localStorage.user,
+            date: getCurrentDateTime(),
+        };
+        window.api.adminLogin(log);
+        alModalClose();
+    }
+});
 
 const alModalClose = () => {
     alModalBg.style.display = 'none';
     alMsg.classList.remove('al-msg-on');
     alMsg.innerHTML = "";
+    alPassInput.value = "";
     alPassInput.disabled = false;
     alSubmit.disabled = false;
-
 };
 
 alModalCloseBtn.addEventListener('click', (e) => {
@@ -375,73 +392,6 @@ window.addEventListener('click', (e) => {
         alModalClose();
     }
 });
-
-
-
-
-// alModalBtn.addEventListener('click', (e) => {
-//     e.preventDefault();
-//     modalBackground.style.display = 'block';
-//     document.querySelector('.admin-pass-hint').innerText = `🔑 : ${adminPassword}`;
-//     feather.replace();
-
-//     if (!('user' in localStorage) || !(localStorage.user)) {
-//         document.querySelector('#admin-pass-input').disabled = true;
-//         document.querySelector('#admin-pass-submit').disabled = true;
-//         adminErrorMessage.innerText = "Please select username first."
-//         adminErrorMessage.classList.add("admin-error-message-On");
-//     } else {
-//         document.querySelector('#admin-pass-input').disabled = false;
-//         document.querySelector('#admin-pass-submit').disabled = false;
-//         adminErrorMessage.classList.remove("admin-error-message-On");
-//         document.querySelector('#admin-pass-input').focus();
-//         adminPassInput.value = "";
-//         adminErrorMessage.innerText = "";
-//     }
-
-//     document.querySelector('#admin-pass-submit').addEventListener('click', (e) => {
-//         e.preventDefault();
-//         if (adminPassInput.value.trim().length === 0) {
-//             adminErrorMessage.innerText = "Please enter password.";
-//             adminErrorMessage.classList.add("admin-error-message-On");
-//             document.querySelector('#admin-pass-input').focus();
-//             adminPassInput.value = "";
-//         } else if (adminPassInput.value !== adminPassword) {
-//             adminErrorMessage.innerText = "Incorrect password.";
-//             adminErrorMessage.classList.add("admin-error-message-On");
-//             document.querySelector('#admin-pass-input').focus();
-//             adminPassInput.value = "";
-//         } else {
-//             console.log('success')
-//             adminErrorMessage.innerText = "";
-//             adminErrorMessage.classList.remove("admin-error-message-On");
-//             adminPassInput.value = "";
-//             modalBackground.style.display = 'none';
-
-//             const adminLog = {
-//                 username: localStorage.user,
-//                 date: getCurrentDateTime(),
-//             };
-//             console.log(adminLog);
-//             window.api.adminLogin(adminLog);
-//         }
-//     });
-// });
-
-// modalCloseButton.addEventListener('click', (e) => {
-//     e.preventDefault();
-//     modalBackground.style.display = 'none';
-//     adminErrorMessage.innerText = "";
-// });
-
-// window.addEventListener('click', (e) => {
-//     if (e.target === modalBackground) {
-//         modalBackground.style.display = 'none';
-//         adminErrorMessage.innerText = "";
-//     }
-// });
-
-
 
 function createTagRecord() {
     return new Promise((resolve, reject) => {
