@@ -315,8 +315,10 @@ recordInput.addEventListener('keyup', (e) => {
 recordSendButton.addEventListener('click', (e) => {
     e.preventDefault();
     if (recordInput.value.trim().length === 0) {
-        recordFormMessage.innerText = 'Input field is empty, Please enter value.';
-        recordInput.value = '';
+        // recordFormMessage.innerText = 'Input field is empty, Please enter value.';
+        // recordFormMessage.classList.add('record-form-message-on');
+        // recordInput.value = '';
+        recordInput.focus();
     } else {
         recordFormMessage.innerText = '';
         sendRecord();
@@ -340,6 +342,11 @@ async function getClipboard() {
     copiedItem = data;
     if (!(incPattern.test(copiedItem))) {
         recordFormMessage.innerText = 'There is no incNo in your clipboard.';
+        recordFormMessage.classList.add('record-form-message-on');
+        setTimeout(() => {
+            recordFormMessage.innerText = '';
+            recordFormMessage.classList.remove('record-form-message-on');    
+        },2000);
     } else {
         recordInput.value = copiedItem;
         await sendRecord();
