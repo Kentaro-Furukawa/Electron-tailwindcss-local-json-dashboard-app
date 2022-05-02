@@ -160,7 +160,13 @@ function tableOperation(records) {
         }
 
         if(recipient && !(tagOn)) {
-            console.log('yes it is true. tag false')
+            let recpIconSpan = document.createElement('span');
+            let recpIcon = document.createElement('i');
+            recpIconSpan.classList.add('td-key-recp-icon-span');
+            recpIcon.setAttribute('data-feather', 'inbox');
+            recpIcon.classList.add('td-key-recp-icon')
+            recpIconSpan.append(recpIcon);
+            keyDataInner.append(recpIconSpan);
         }
         
 
@@ -467,6 +473,7 @@ const tagModalClose = () => {
     tagCommentInput.value = "";
     tMsg.classList.remove('al-msg-on');
     tMsg.innerHTML = "";
+    tMsg.style.display = 'none';
     document.querySelector('.tag-help-btn').classList.remove('tag-help-btn-on');   // forEach these three lines.
     document.querySelector('.tag-alert-btn').classList.remove('tag-alert-btn-on');
     document.querySelector('.tag-clip-btn').classList.remove('tag-clip-btn-on');
@@ -488,6 +495,7 @@ tagSubmitBtn.addEventListener('click', (e) => {
     if (tagValueInput.value.trim().length === 0) {
         tMsg.classList.add('t-msg-on');
         tMsg.innerHTML = "Value is requred.";
+        tMsg.style.display = 'block';
         tagValueInput.focus();
 
     } else {
