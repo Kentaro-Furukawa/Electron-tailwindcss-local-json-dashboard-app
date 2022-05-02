@@ -121,7 +121,7 @@ recipientIconButton.addEventListener('click', (e) => {
         const currentHours = ('0' + recipientStart.getHours()).slice(-2);
         const currentMinutes = ('0' + recipientStart.getMinutes()).slice(-2);
         const recipientStartTime = `${currentHours}:${currentMinutes}`;
-        recipientLabel.innerText = `You are recipient since ${recipientStartTime}`;
+        recipientLabel.innerText = `Recipient start at ${recipientStartTime}`;
         recipientLabel.classList.add('recipient-label-on');
         recipientIconButton.classList.add('recipient-icon-on');
         isRecipient = true;
