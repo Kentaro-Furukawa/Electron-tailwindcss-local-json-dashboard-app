@@ -10,6 +10,7 @@ const recipientIconButton = document.querySelector('.recipient-icon-button');
 const recipientLabel = document.querySelector('.recipient-label');
 const themeToggleButton = document.querySelector('.theme-toggle-button');
 const refreshButton = document.querySelector('#refresh-button');
+const recordFormSection = document.querySelector('#record-form-section');
 const recordInput = document.querySelector('#record-input');
 const recordSendButton = document.querySelector('#record-send-button');
 const recordClearButton = document.querySelector('#record-clear-button');
@@ -137,7 +138,7 @@ function tableOperation(records) {
     const sortedRecords = records.sort((a, b) => (a.time < b.time ? 1 : -1));
     document.querySelectorAll('.tr-record').forEach(el => el.remove());
     sortedRecords.forEach((record) => {
-        const { username, state, time, inputValue, incNo, recipient,  tagOn, tags, tagComment } = record;
+        const { username, state, time, inputValue, incNo, recipient, tagOn, tags, tagComment } = record;
         let tableRow = document.createElement('tr');
         let keyData = document.createElement('td');
         let keyDataInner = document.createElement('div');
@@ -158,7 +159,7 @@ function tableOperation(records) {
             stateIcon.classList.add('td-key-state-icon')
         }
 
-        if(recipient && !(tagOn)) {
+        if (recipient && !(tagOn)) {
             let recpIconSpan = document.createElement('span');
             let recpIcon = document.createElement('i');
             recpIconSpan.classList.add('td-key-recp-icon-span');
@@ -167,7 +168,7 @@ function tableOperation(records) {
             recpIconSpan.append(recpIcon);
             keyDataInner.append(recpIconSpan);
         }
-        
+
 
 
 
@@ -236,12 +237,21 @@ function tableOperation(records) {
 }
 
 function updateTable(obj) {
+    const { activeRecord: ar } = obj
     return new Promise((resolve, reject) => {
         if (obj.incTaken === true) {
-            console.log('is taken!!!!');
+            const { incNo: dplIncs, username: dplUser } = obj.duplicateRecord[0]; // shold be looped over?
+            tableOperation(ar);
+            recordFormMessage.innerText = `${dplIncs} : taken by ${dplUser}`;
+            recordFormMessage.classList.add('record-form-message-dpl');
+            recordFormSection.classList.add('record-form-section-dpl');
+            setTimeout(() => {
+                recordFormMessage.innerText = '';
+                recordFormMessage.classList.remove('record-form-message-dpl');
+                recordFormSection.classList.remove('record-form-section-dpl');
+            }, 2000);
         } else {
-            let activeRecord = obj.activeRecord;
-            tableOperation(activeRecord);
+            tableOperation(ar);
         }
         const error = false;
         if (!error) {
@@ -315,9 +325,6 @@ recordInput.addEventListener('keyup', (e) => {
 recordSendButton.addEventListener('click', (e) => {
     e.preventDefault();
     if (recordInput.value.trim().length === 0) {
-        // recordFormMessage.innerText = 'Input field is empty, Please enter value.';
-        // recordFormMessage.classList.add('record-form-message-on');
-        // recordInput.value = '';
         recordInput.focus();
     } else {
         recordFormMessage.innerText = '';
@@ -345,12 +352,12 @@ async function getClipboard() {
         recordFormMessage.classList.add('record-form-message-on');
         setTimeout(() => {
             recordFormMessage.innerText = '';
-            recordFormMessage.classList.remove('record-form-message-on');    
-        },2000);
+            recordFormMessage.classList.remove('record-form-message-on');
+        }, 2000);
     } else {
         recordInput.value = copiedItem;
         await sendRecord();
-        recordFormMessage.innerText = '';
+        // recordFormMessage.innerText = '';
         recordInput.value = '';
     }
 }

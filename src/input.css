@@ -142,8 +142,8 @@
     @apply bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-100;
   }
 
-  .record-form-section {
-    @apply my-3;
+  #record-form-section {
+    @apply py-3;
   }
 
   .recipient-label {
@@ -151,7 +151,7 @@
   }
 
   .recipient-label-on {
-    @apply mb-3 py-1;
+    @apply py-1;
   }
 
   .record-form-first {
@@ -192,6 +192,14 @@
 
   .record-form-message-on {
     @apply my-2 py-1  text-center font-bold text-gray-100 bg-red-500 shadow-md;
+  }
+
+  .record-form-message-dpl {
+    @apply my-2 py-1  text-center font-bold text-gray-600 bg-amber-400 shadow-md;
+  }
+
+  .record-form-section-dpl {
+    @apply bg-amber-100;
   }
 
   .active-record-table-section {
