@@ -121,12 +121,15 @@ recipientIconButton.addEventListener('click', (e) => {
         const currentHours = ('0' + recipientStart.getHours()).slice(-2);
         const currentMinutes = ('0' + recipientStart.getMinutes()).slice(-2);
         const recipientStartTime = `${currentHours}:${currentMinutes}`;
-        recipientLabel.innerText = `💌 You are recipient since ${recipientStartTime} 💌`;
+        recipientLabel.innerText = `You are recipient since ${recipientStartTime}`;
         recipientLabel.classList.add('recipient-label-on');
+        recipientIconButton.classList.add('recipient-icon-on');
+        console.log(recipientIconButton);
         isRecipient = true;
     } else {
         recipientLabel.innerText = '';
         recipientLabel.classList.remove('recipient-label-on');
+        recipientIconButton.classList.remove('recipient-icon-on');
         isRecipient = false;
     }
 });
@@ -135,18 +138,19 @@ function tableOperation(records) {
     const sortedRecords = records.sort((a, b) => (a.time < b.time ? 1 : -1));
     document.querySelectorAll('.tr-record').forEach(el => el.remove());
     sortedRecords.forEach((record) => {
+        const { username, state, time, inputValue, incNo, recipient,  tagOn, tags, tagComment } = record;
         let tableRow = document.createElement('tr');
         let keyData = document.createElement('td');
         let keyDataInner = document.createElement('div');
         let timeData = document.createElement('td');
         let valueData = document.createElement('td');
         let keyDataNameSpan = document.createElement('span');
-        keyDataNameSpan.innerText = record.username;
+        keyDataNameSpan.innerText = username;
 
-        if (!(record.tagOn)) {
+        if (!(tagOn)) {
             let stateIconSpan = document.createElement('span');
             let stateIcon = document.createElement('i');
-            let recordState = stateIcons.filter((stateIcon) => stateIcon.value === record.state)
+            let recordState = stateIcons.filter((stateIcon) => stateIcon.value === state)
             let recordStateIcon = recordState[0].icon;
             stateIconSpan.classList.add('td-key-state-icon-span', `${recordState[0].value}-icon`);
             stateIcon.setAttribute('data-feather', recordStateIcon);
@@ -154,6 +158,14 @@ function tableOperation(records) {
             stateIconSpan.append(stateIcon);
             stateIcon.classList.add('td-key-state-icon')
         }
+
+        if(recipient && !(tagOn)) {
+            console.log('yes it is true. tag false')
+        }
+        
+
+
+
         tableRow.classList.add("tr-record");
         activeRecordTableBody.appendChild(tableRow);
         tableRow.append(keyData, timeData, valueData);
@@ -162,11 +174,11 @@ function tableOperation(records) {
         keyDataInner.append(keyDataNameSpan);
         keyDataInner.classList.add('td-key-inner')
         timeData.classList.add("td-time");
-        timeData = timeData.innerText = record.time.slice(-8);
+        timeData = timeData.innerText = time.slice(-8);
         valueData.classList.add("td-value")
 
-        if (record.tagOn) {
-            record.tags.forEach((tag) => {
+        if (tagOn) {
+            tags.forEach((tag) => {
                 let tagIconSpan = document.createElement('span');
                 let tagIcon = document.createElement('i');
                 let TargetTagIconFilter = tagIcons.filter((tItem) => tItem.value === tag);
@@ -178,18 +190,18 @@ function tableOperation(records) {
             });
         }
 
-        if (record.tagComment) {
+        if (tagComment) {
             let tagCommentSpan = document.createElement('span');
-            tagCommentSpan.innerText = record.tagComment;
+            tagCommentSpan.innerText = tagComment;
             keyDataInner.append(tagCommentSpan);
         }
 
-        if (!(record.incNo.length > 0)) {
+        if (!(incNo.length > 0)) {
             let valueInputSpan = document.createElement('span');
-            valueInputSpan.innerHTML = record.inputValue;
+            valueInputSpan.innerHTML = inputValue;
             valueData.append(valueInputSpan);
         } else {
-            record.incNo.forEach((inc) => {
+            incNo.forEach((inc) => {
                 let incItem = document.createElement('span');
                 incItem.classList.add('td-value-inc')
                 incItem.innerText = inc;
@@ -197,7 +209,7 @@ function tableOperation(records) {
             });
         }
 
-        if (record.tagOn) {
+        if (tagOn) {
             let tagDelBtn = document.createElement('button');
             let tagDelIcon = document.createElement('i');
             tagDelBtn.classList.add('tag-del-Btn');
