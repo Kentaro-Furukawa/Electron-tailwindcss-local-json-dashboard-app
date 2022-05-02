@@ -124,7 +124,6 @@ recipientIconButton.addEventListener('click', (e) => {
         recipientLabel.innerText = `You are recipient since ${recipientStartTime}`;
         recipientLabel.classList.add('recipient-label-on');
         recipientIconButton.classList.add('recipient-icon-on');
-        console.log(recipientIconButton);
         isRecipient = true;
     } else {
         recipientLabel.innerText = '';
