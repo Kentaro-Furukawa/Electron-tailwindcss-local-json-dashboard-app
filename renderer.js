@@ -2,6 +2,7 @@ const adminPassword = 'admin';
 const incPattern = /(INC)\d{7}(?!\d)|(TASK)\d{7}(?!\d)/gi;
 let requestedRecord = '';
 let copiedItem = '';
+let isRecipient = false;
 const currentStateIcon = document.querySelector('.current-state-icon');
 const userSelecter = document.querySelector('#user-selecter');
 const stateIconButtonContainer = document.querySelector('.state-icon-button-container');
@@ -17,7 +18,6 @@ const recordFlashButton = document.querySelector('#record-flash-button');
 const recordFormMessage = document.querySelector('.record-form-message');
 const activeRecordTable = document.querySelector('#active-record-table');
 const activeRecordTableBody = document.querySelector('#active-record-table-body');
-
 const alModalBtn = document.querySelector('#al-modal-icon-btn');
 const alModalBg = document.querySelector('#al-modal-bg');
 const alModalCloseBtn = document.querySelector('#al-modal-close-btn');
@@ -25,19 +25,13 @@ const alPassInput = document.querySelector('#al-pass-input');
 const alPassLabel = document.querySelector('#al-pass-label');
 const alSubmit = document.querySelector('#al-submit');
 const alMsg = document.querySelector('#al-msg');
-
-// const modalBackground = document.querySelector('.modal-background');
-// const modalInner = document.querySelector('.modal-inner');
-// const modalCloseButton = document.querySelector('.modal-close-button');
-// const adminPassInput = document.querySelector('#admin-pass-input');
-// const adminErrorMessage = document.querySelector('.admin-error-message');
 const tagModalBg = document.querySelector('#tag-modal-bg');
 const tagModalCloseBtn = document.querySelector('#tag-modal-close-btn');
 const tagValueInput = document.querySelector('#tag-value-input');
 const tagIconsContainer = document.querySelector('#tag-icons-container');
 const tagSubmitBtn = document.querySelector('#tag-submit-btn');
 const tagCommentInput = document.querySelector('#tag-comment-input');
-let isRecipient = false;
+const tMsg = document.querySelector('#t-msg');
 
 const getCurrentDateTime = () => {
     const current = new Date();
@@ -458,10 +452,12 @@ recordTagButton.addEventListener('click', (e) => {
 const tagModalClose = () => {
     tagModalBg.style.display = 'none';
     tagValueInput.value = "";
+    tagCommentInput.value = "";
+    tMsg.classList.remove('al-msg-on');
+    tMsg.innerHTML = "";
     document.querySelector('.tag-help-btn').classList.remove('tag-help-btn-on');   // forEach these three lines.
     document.querySelector('.tag-alert-btn').classList.remove('tag-alert-btn-on');
     document.querySelector('.tag-clip-btn').classList.remove('tag-clip-btn-on');
-    tagCommentInput.value = "";
 };
 
 tagModalCloseBtn.addEventListener('click', (e) => {
@@ -477,7 +473,17 @@ window.addEventListener('click', (e) => {
 
 tagSubmitBtn.addEventListener('click', (e) => {
     e.preventDefault();
-    sendTagRecord();
+    if (tagValueInput.value.trim().length === 0) {
+        tMsg.classList.add('t-msg-on');
+        tMsg.innerHTML = "Value is requred.";
+        tagValueInput.focus();
+
+    } else {
+        sendTagRecord();
+        recordInput.value = "";
+        tagModalClose();
+    }
+
 })
 
 

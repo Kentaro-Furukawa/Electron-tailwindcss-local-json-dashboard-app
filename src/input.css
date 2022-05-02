@@ -251,43 +251,6 @@
     @apply hover:text-gray-200 hover:dark:text-gray-500 transition-all duration-200 ease-linear;
   }
 
-  /* .modal-background {
-    @apply hidden fixed z-10 left-0 top-0 w-full h-full overflow-auto bg-black bg-opacity-50;
-  }
-
-  .modal-content {
-    @apply mt-16 pt-4 mx-auto w-3/4 rounded-lg bg-slate-100 dark:bg-slate-600 text-gray-800 dark:text-gray-200 shadow-md;
-  }
-
-  .modal-close-button {
-    @apply float-right mr-4 text-gray-700 dark:text-gray-300 hover:text-gray-400 hover:dark:text-gray-500;
-  }
- 
-  .modal-inner {
-    @apply pt-10 pb-28 text-center;
-  }
-  
-  .modal-inner h1 {
-    @apply mt-4 mb-8 text-3xl;
-  }
-  
-  #admin-pass-input {
-    @apply w-48 h-10 mb-2 indent-2 border-2  rounded-md border-gray-600 dark:border-gray-300 bg-gray-200 dark:bg-gray-600 text-gray-700 dark:text-gray-50;
-  }
-
-  .admin-pass-hint {
-    @apply block text-gray-400 dark:text-gray-500;
-  }
-
-  #admin-pass-submit {
-    @apply h-10 mt-4 px-16 bg-green-600 text-gray-100 dark:text-gray-200 rounded-md shadow-md;
-  }
-
-  .admin-error-message-On {
-    @apply w-full mb-4 py-2 text-gray-50 bg-red-500;
-  } */
-
-
 #al-modal-bg {
   @apply hidden fixed left-0 top-0 w-full h-full justify-center items-center bg-black bg-opacity-50;
 }
@@ -338,16 +301,12 @@
   }
 
   #tag-icons-container {
-    @apply mt-4 mb-8;
+    @apply my-4;
   }
 
   #tag-icons-container > button {
     @apply ml-4 first:ml-0 p-2 text-gray-400 hover:text-gray-100 bg-gray-200 rounded-md shadow-md transition-all duration-100 ease-linear;
   }
-
-  /* #tag-icons-container > button:first-child {
-    @apply ml-0;
-  } */
 
   #tag-icons-container > button.tag-help-btn {
     @apply hover:text-blue-400;
@@ -357,10 +316,6 @@
     @apply text-gray-100 bg-blue-500 ;
   }
 
-  /* .td-key-help-tag-icon {
-    @apply text-blue-500;
-  } */
-
   #tag-icons-container > button.tag-alert-btn {
     @apply hover:text-amber-400;
   }
@@ -368,10 +323,6 @@
    #tag-icons-container > button.tag-alert-btn-on {
     @apply text-gray-100 bg-amber-500 ;
   }
-
-  /* .td-key-alert-tag-icon {
-    @apply text-amber-500;
-  } */
 
   #tag-icons-container > button.tag-clip-btn {
     @apply hover:text-lime-400;
@@ -381,24 +332,22 @@
     @apply text-gray-100 bg-lime-500 ;
   }
 
-  /* .td-key-clip-tag-icon {
-    @apply text-lime-500;
-  } */
-
   #tag-comment-input {
     @apply w-60 h-10 mt-8 border bg-gray-200 focus:bg-gray-50 indent-2 rounded-md shadow-sm;
   }
 
   #tag-submit-btn {
-    @apply py-2 px-10 text-gray-100 bg-orange-500 rounded-md shadow-md;
+    @apply py-2 px-10 text-gray-100 bg-orange-500 hover:bg-orange-400 active:bg-orange-600 active:ring active:ring-orange-300 rounded-md shadow-md;
   }
 
   .tag-del-Btn {
     @apply absolute right-1 top-0.5 p-0.5  text-gray-300 hover:text-red-600 active:text-gray-600 active:rounded-full transition-all duration-100 ease-linear;
   }
 
-
-
+  .t-msg-on {
+    @apply my-4 py-2 font-bold text-gray-800 bg-red-500;
+  }
+  
 
 
 
