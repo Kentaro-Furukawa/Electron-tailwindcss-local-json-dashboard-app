@@ -79,7 +79,9 @@
   }
 
   .sidebar-icon {
-    @apply relative flex items-center justify-center h-12 w-12 my-2 mx-auto hover:text-gray-200 bg-gray-200 dark:bg-gray-800 shadow-lg rounded-3xl hover:rounded-xl active:ring-2 active:ring-gray-300 transition-all duration-100 ease-linear;
+    @apply relative flex items-center justify-center h-12 w-12 my-2 mx-auto
+     hover:text-gray-200 bg-gray-200 dark:bg-gray-800 hover:rounded-xl active:ring-1 active:ring-gray-400 
+     shadow-lg rounded-3xl transition-all duration-100 ease-linear;
   }
 
   .current-state-icon-inner {
@@ -87,7 +89,8 @@
   }
 
   .sidebar-caption {
-    @apply absolute w-auto p-2 m-2 min-w-max -top-0.5 left-14 rounded-md shadow-md text-white bg-gray-900 text-xs font-bold transition-all duration-100 scale-0 origin-left;
+    @apply absolute w-auto p-2 m-2 min-w-max -top-0.5 left-14 rounded-md shadow-md text-gray-50 dark:text-gray-700 bg-gray-700 dark:bg-gray-100
+     text-xs font-bold transition-all duration-100 scale-0 origin-left;
   }
 
   .sidebar-hr {
@@ -103,11 +106,10 @@
   }
 
   #top-navigation {
-    @apply flex flex-row items-center justify-between bg-gray-300 dark:bg-gray-700 bg-opacity-90 w-full h-16 m-0 shadow-lg;
+    @apply flex flex-row items-center justify-between bg-gray-300 dark:bg-gray-800 w-full h-16 m-0 shadow-lg;
   }
 
   .user-select {
-    /* @apply dark:bg-gray-700 bg-opacity-90 w-56 h-16 py-3 pl-3 m-0; */
     @apply  w-56 h-16 py-3 pl-3 m-0;
   }
 
@@ -120,7 +122,7 @@
   }
 
   .refresh-button-wrap {
-    @apply bg-gray-500 hover:bg-gray-600 dark:bg-gray-800 active:ring-1 active:ring-gray-500 text-gray-50 rounded-md  transition-all duration-100 ease-linear;
+    @apply bg-gray-500 hover:bg-gray-600 dark:bg-gray-600 active:ring-1 active:ring-gray-500 text-gray-50 rounded-md  transition-all duration-100 ease-linear;
   }
 
   #refresh-button {
@@ -128,7 +130,7 @@
   }
 
   .theme-toggle-button {
-    @apply bg-gray-400 dark:bg-gray-600 hover:bg-gray-500 active:ring-1 active:ring-gray-500 text-yellow-200 dark:text-yellow-100 rounded-md transition-all duration-100 ease-linear;
+    @apply bg-gray-400 dark:bg-gray-500 hover:bg-gray-500 active:ring-1 active:ring-gray-500 text-yellow-200 dark:text-yellow-100 rounded-md transition-all duration-100 ease-linear;
   }
 
   .theme-toggle-button button {
@@ -136,15 +138,15 @@
   }
 
   .topbar-divider {
-    @apply block w-[1.5px] h-10 mx-3 bg-gray-400 dark:bg-gray-800 rounded-full;
+    @apply block w-[1.5px] h-10 mx-3 bg-gray-400 dark:bg-gray-600 rounded-full;
   }
 
   .main-content {
-    @apply bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-100;
+    @apply bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100;
   }
 
   #record-form-section {
-    @apply py-3;
+    @apply pt-3;
   }
 
   .recipient-label {
@@ -192,20 +194,8 @@
   }
 
   .record-form-message-on {
-    @apply my-2 py-1  text-center font-bold text-gray-100 bg-red-500 shadow-md;
+    @apply mt-4 py-1 text-center font-bold text-gray-100 bg-red-500 shadow-md;
   }
-
-  /* .record-form-message-dpl {
-    @apply my-2 py-1  text-center font-bold text-gray-600 bg-amber-400 shadow-md;
-  } */
-
-  /* .record-form-section-scc {
-    @apply bg-green-600;
-  }
-
-  .record-form-section-dpl {
-    @apply bg-amber-400;
-  } */
 
   #top-navigation.top-nav-scc {
     @apply bg-green-600;
@@ -220,7 +210,7 @@
   }
 
   .active-record-table-section {
-    @apply pt-4 pb-10 px-4 bg-gray-100 dark:bg-gray-700;
+    @apply pt-4 pb-10 px-4;
   }
 
   .active-record-table-section table {
@@ -228,7 +218,7 @@
   }
 
   .active-record-table-section table th {
-    @apply  py-1 font-normal text-center border border-gray-400 bg-gray-200 text-gray-600 dark:bg-gray-700;
+    @apply  py-1 font-normal text-center border border-gray-400 bg-gray-200 text-gray-600 dark:text-gray-300 dark:bg-gray-700;
   }
 
   .th-key {
@@ -244,7 +234,6 @@
   }
 
   .active-record-table-section table td {
-    /* @apply border border-gray-400 bg-gray-50; */
     @apply border border-gray-400 ;
   }
 
@@ -283,19 +272,19 @@
   }
 
   #al-modal-bg {
-    @apply hidden fixed left-0 top-0 w-full h-full justify-center items-center bg-black bg-opacity-70;
+    @apply hidden fixed left-0 top-0 w-full h-full justify-center items-center bg-black bg-opacity-75;
   }
 
   #al-modal-content {
-    @apply relative w-10/12 py-12 max-w-md text-center bg-gray-50 rounded-lg shadow-sm;
+    @apply relative w-10/12 py-12 max-w-md text-center bg-gray-50 dark:bg-gray-600 rounded-lg shadow-sm;
   }
 
   #al-modal-close-btn {
-    @apply absolute right-2 top-2 p-0.5 text-gray-700 hover:text-gray-400 transition-all duration-100 ease-linear;
+    @apply absolute right-2 top-2 p-0.5 text-gray-700 dark:text-gray-300 hover:text-gray-400 transition-all duration-100 ease-linear;
   }
 
   #al-modal-h {
-    @apply mb-4 text-lg text-gray-700;
+    @apply mb-4 text-lg text-gray-700 dark:text-gray-100;
   }
 
   #al-pass-input {
@@ -316,19 +305,19 @@
 
 
   #tag-modal-bg {
-    @apply hidden fixed left-0 top-0 w-full h-full justify-center items-center bg-black bg-opacity-50;
+    @apply hidden fixed left-0 top-0 w-full h-full justify-center items-center bg-black bg-opacity-75;
   }
 
   #tag-modal-content {
-    @apply relative w-10/12 py-12 max-w-md text-center bg-gray-50 rounded-lg shadow-sm;
+    @apply relative w-10/12 py-12 max-w-md text-center bg-gray-50 dark:bg-gray-600 rounded-lg shadow-sm;
   }
 
   #tag-modal-close-btn {
-    @apply absolute right-2 top-2 p-0.5 text-gray-700 hover:text-gray-400 transition-all duration-100 ease-linear;
+    @apply absolute right-2 top-2 p-0.5 text-gray-700 dark:text-gray-300 hover:text-gray-400 transition-all duration-100 ease-linear;
   }
 
   #tag-value-input {
-    @apply w-48 h-10 border bg-gray-100 focus:bg-gray-50 indent-2 rounded-md shadow-sm;
+    @apply w-48 h-10 border dark:text-gray-50 bg-gray-100 dark:bg-gray-500 focus:bg-gray-50  indent-2 rounded-md shadow-sm;
   }
 
   #tag-icons-container {
@@ -364,7 +353,7 @@
   }
 
   #tag-comment-input {
-    @apply w-60 h-10 mt-8 border bg-gray-200 focus:bg-gray-50 indent-2 rounded-md shadow-sm;
+    @apply w-60 h-10 mt-8 border dark:text-gray-50 bg-gray-200 dark:bg-gray-600 focus:bg-gray-50 indent-2 rounded-md shadow-sm;
   }
 
   #tag-submit-btn {
@@ -372,15 +361,12 @@
   }
 
   .tag-del-Btn {
-    @apply absolute right-1 top-0.5 p-0.5 text-gray-300 hover:text-red-600 active:text-gray-600 active:rounded-full transition-all duration-100 ease-linear;
+    @apply absolute right-1 top-0.5 p-0.5 text-gray-300 hover:text-red-400 active:text-gray-600 active:rounded-full transition-all duration-100 ease-linear;
   }
 
   .t-msg-on {
     @apply my-4 py-1 font-bold text-gray-100 bg-red-500 shadow-md;
   }
-
-
-
 
 
 

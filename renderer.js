@@ -11,7 +11,6 @@ const recipientLabel = document.querySelector('.recipient-label');
 const topNavigation = document.querySelector('#top-navigation');
 const themeToggleButton = document.querySelector('.theme-toggle-button');
 const refreshButton = document.querySelector('#refresh-button');
-// const recordFormSection = document.querySelector('#record-form-section');
 const recordInput = document.querySelector('#record-input');
 const recordSendButton = document.querySelector('#record-send-button');
 const recordClearButton = document.querySelector('#record-clear-button');
@@ -208,7 +207,7 @@ function tableOperation(records) {
             valueInputSpan.innerHTML = inputValue;
             valueData.append(valueInputSpan);
         } else {
-            tableRow.setAttribute('inc-value' , incNo.join('-'));
+            tableRow.setAttribute('inc-value', incNo.join('-'));
             incNo.forEach((inc) => {
                 let incItem = document.createElement('span');
                 incItem.classList.add('td-value-inc')
@@ -243,17 +242,10 @@ function updateTable(obj) {
         if (obj.incTaken === true) {
             const { incNo: dplIncs, username: dplUser } = obj.duplicateRecord[0]; // shold be looped over?
             tableOperation(ar);
-            // recordFormMessage.innerText = `${dplIncs.join(', ')} : taken by ${dplUser}`;
-            // recordFormMessage.classList.add('record-form-message-dpl');
-            // recordInput.value = `${dplIncs.join(', ')} : taken by ${dplUser}`;
-            // recordFormSection.classList.add('record-form-section-dpl');
             topNavigation.classList.add('top-nav-dpl');
             const dplTr = document.querySelector(`tr[inc-value*= ${dplIncs.join('-')}]`);
             dplTr.classList.add('dpl-tr-on');
             setTimeout(() => {
-                // recordFormMessage.innerText = '';
-                // recordFormMessage.classList.remove('record-form-message-dpl');
-                // recordFormSection.classList.remove('record-form-section-dpl');
                 topNavigation.classList.remove('top-nav-dpl');
 
                 dplTr.classList.remove('dpl-tr-on');
@@ -261,12 +253,10 @@ function updateTable(obj) {
             }, 2000);
         } else {
             tableOperation(ar);
-            // recordFormSection.classList.add('record-form-section-scc');
             topNavigation.classList.add('top-nav-scc');
             setTimeout(() => {
-                // recordFormSection.classList.remove('record-form-section-scc');
                 topNavigation.classList.remove('top-nav-scc');
-            },2000);
+            }, 2000);
         }
         const error = false;
         if (!error) {
@@ -335,6 +325,7 @@ const sendRecord = async () => {
 recordInput.addEventListener('keyup', (e) => {
     e.preventDefault();
     recordFormMessage.innerText = '';
+    recordFormMessage.classList.remove('record-form-message-on');
 });
 
 recordSendButton.addEventListener('click', (e) => {
@@ -372,7 +363,6 @@ async function getClipboard() {
     } else {
         recordInput.value = copiedItem;
         await sendRecord();
-        // recordFormMessage.innerText = '';
         recordInput.value = '';
     }
 }
@@ -533,9 +523,6 @@ tagSubmitBtn.addEventListener('click', (e) => {
     }
 
 })
-
-
-
 
 
 // ****************************************
