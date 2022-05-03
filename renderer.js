@@ -207,11 +207,13 @@ function tableOperation(records) {
             valueInputSpan.innerHTML = inputValue;
             valueData.append(valueInputSpan);
         } else {
+            tableRow.setAttribute('inc-value' , incNo.join('-'));
             incNo.forEach((inc) => {
                 let incItem = document.createElement('span');
                 incItem.classList.add('td-value-inc')
                 incItem.innerText = inc;
                 valueData.append(incItem);
+
             });
         }
 
@@ -230,8 +232,6 @@ function tableOperation(records) {
                 }, 300);
             })
         }
-
-
     });
     feather.replace()
 }
@@ -242,13 +242,19 @@ function updateTable(obj) {
         if (obj.incTaken === true) {
             const { incNo: dplIncs, username: dplUser } = obj.duplicateRecord[0]; // shold be looped over?
             tableOperation(ar);
-            recordFormMessage.innerText = `${dplIncs} : taken by ${dplUser}`;
-            recordFormMessage.classList.add('record-form-message-dpl');
+            // recordFormMessage.innerText = `${dplIncs.join(', ')} : taken by ${dplUser}`;
+            // recordFormMessage.classList.add('record-form-message-dpl');
+            recordInput.value = `${dplIncs.join(', ')} : taken by ${dplUser}`;
             recordFormSection.classList.add('record-form-section-dpl');
+            const dplTr = document.querySelector(`tr[inc-value*= ${dplIncs.join('-')}]`);
+            dplTr.classList.add('dpl-tr-on');
+
             setTimeout(() => {
-                recordFormMessage.innerText = '';
-                recordFormMessage.classList.remove('record-form-message-dpl');
+                // recordFormMessage.innerText = '';
+                // recordFormMessage.classList.remove('record-form-message-dpl');
                 recordFormSection.classList.remove('record-form-section-dpl');
+                dplTr.classList.remove('dpl-tr-on');
+
             }, 2000);
         } else {
             tableOperation(ar);

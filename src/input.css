@@ -194,12 +194,16 @@
     @apply my-2 py-1  text-center font-bold text-gray-100 bg-red-500 shadow-md;
   }
 
-  .record-form-message-dpl {
+  /* .record-form-message-dpl {
     @apply my-2 py-1  text-center font-bold text-gray-600 bg-amber-400 shadow-md;
-  }
+  } */
 
   .record-form-section-dpl {
-    @apply bg-amber-100;
+    @apply bg-amber-300;
+  }
+
+  .dpl-tr-on {
+    @apply bg-amber-400;
   }
 
   .active-record-table-section {
@@ -227,7 +231,8 @@
   }
 
   .active-record-table-section table td {
-    @apply border border-gray-400 bg-gray-50;
+    /* @apply border border-gray-400 bg-gray-50; */
+    @apply border border-gray-400 ;
   }
 
   .td-key {
