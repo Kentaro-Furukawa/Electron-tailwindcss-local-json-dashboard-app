@@ -8,9 +8,10 @@ const userSelecter = document.querySelector('#user-selecter');
 const stateIconButtonContainer = document.querySelector('.state-icon-button-container');
 const recipientIconButton = document.querySelector('.recipient-icon-button');
 const recipientLabel = document.querySelector('.recipient-label');
+const topNavigation = document.querySelector('#top-navigation');
 const themeToggleButton = document.querySelector('.theme-toggle-button');
 const refreshButton = document.querySelector('#refresh-button');
-const recordFormSection = document.querySelector('#record-form-section');
+// const recordFormSection = document.querySelector('#record-form-section');
 const recordInput = document.querySelector('#record-input');
 const recordSendButton = document.querySelector('#record-send-button');
 const recordClearButton = document.querySelector('#record-clear-button');
@@ -244,20 +245,28 @@ function updateTable(obj) {
             tableOperation(ar);
             // recordFormMessage.innerText = `${dplIncs.join(', ')} : taken by ${dplUser}`;
             // recordFormMessage.classList.add('record-form-message-dpl');
-            recordInput.value = `${dplIncs.join(', ')} : taken by ${dplUser}`;
-            recordFormSection.classList.add('record-form-section-dpl');
+            // recordInput.value = `${dplIncs.join(', ')} : taken by ${dplUser}`;
+            // recordFormSection.classList.add('record-form-section-dpl');
+            topNavigation.classList.add('top-nav-dpl');
             const dplTr = document.querySelector(`tr[inc-value*= ${dplIncs.join('-')}]`);
             dplTr.classList.add('dpl-tr-on');
-
             setTimeout(() => {
                 // recordFormMessage.innerText = '';
                 // recordFormMessage.classList.remove('record-form-message-dpl');
-                recordFormSection.classList.remove('record-form-section-dpl');
+                // recordFormSection.classList.remove('record-form-section-dpl');
+                topNavigation.classList.remove('top-nav-dpl');
+
                 dplTr.classList.remove('dpl-tr-on');
 
             }, 2000);
         } else {
             tableOperation(ar);
+            // recordFormSection.classList.add('record-form-section-scc');
+            topNavigation.classList.add('top-nav-scc');
+            setTimeout(() => {
+                // recordFormSection.classList.remove('record-form-section-scc');
+                topNavigation.classList.remove('top-nav-scc');
+            },2000);
         }
         const error = false;
         if (!error) {

@@ -102,12 +102,13 @@
     @apply flex flex-col bg-gray-100 dark:bg-gray-700 ml-16 mr-0 my-0 w-full h-screen;
   }
 
-  .top-navigation {
+  #top-navigation {
     @apply flex flex-row items-center justify-between bg-gray-300 dark:bg-gray-700 bg-opacity-90 w-full h-16 m-0 shadow-lg;
   }
 
   .user-select {
-    @apply dark:bg-gray-700 bg-opacity-90 w-56 h-16 py-3 pl-3 m-0;
+    /* @apply dark:bg-gray-700 bg-opacity-90 w-56 h-16 py-3 pl-3 m-0; */
+    @apply  w-56 h-16 py-3 pl-3 m-0;
   }
 
   .user-select select {
@@ -198,8 +199,20 @@
     @apply my-2 py-1  text-center font-bold text-gray-600 bg-amber-400 shadow-md;
   } */
 
+  /* .record-form-section-scc {
+    @apply bg-green-600;
+  }
+
   .record-form-section-dpl {
-    @apply bg-amber-300;
+    @apply bg-amber-400;
+  } */
+
+  #top-navigation.top-nav-scc {
+    @apply bg-green-600;
+  }
+
+  #top-navigation.top-nav-dpl {
+    @apply bg-amber-400;
   }
 
   .dpl-tr-on {
