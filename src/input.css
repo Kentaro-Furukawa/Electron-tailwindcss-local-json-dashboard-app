@@ -5,7 +5,7 @@
 @layer components {
 
   .state-icon-button-container .available-icon {
-    @apply text-green-600 hover:bg-green-600;
+    @apply text-green-400 hover:bg-green-600;
   }
 
   .current-state-icon-inner.available-icon,
@@ -14,7 +14,7 @@
   }
 
   .state-icon-button-container .nextUp-icon {
-    @apply text-blue-600 hover:bg-blue-600;
+    @apply text-blue-400 hover:bg-blue-600;
   }
 
   .current-state-icon-inner.nextUp-icon,
@@ -23,7 +23,7 @@
   }
 
   .state-icon-button-container .onCall-icon {
-    @apply text-yellow-600 hover:bg-yellow-600;
+    @apply text-yellow-400 hover:bg-yellow-600;
   }
 
   .current-state-icon-inner.onCall-icon,
@@ -32,7 +32,7 @@
   }
 
   .state-icon-button-container .issuing-icon {
-    @apply text-orange-600 hover:bg-orange-600;
+    @apply text-orange-400 hover:bg-orange-600;
   }
 
   .current-state-icon-inner.issuing-icon,
@@ -41,7 +41,7 @@
   }
 
   .state-icon-button-container .announce-icon {
-    @apply text-violet-600 hover:bg-violet-600;
+    @apply text-violet-400 hover:bg-violet-600;
   }
 
   .current-state-icon-inner.announce-icon,
@@ -50,7 +50,7 @@
   }
 
   .state-icon-button-container .away-icon {
-    @apply text-rose-600 hover:bg-rose-600;
+    @apply text-rose-400 hover:bg-rose-600;
   }
 
   .current-state-icon-inner.away-icon,
@@ -198,7 +198,7 @@
   }
 
   #top-navigation.top-nav-scc {
-    @apply bg-green-600;
+    @apply bg-green-500;
   }
 
   #top-navigation.top-nav-dpl {
