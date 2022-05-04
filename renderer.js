@@ -159,11 +159,15 @@ function createOncallRecord() {
 const fireOnCall = async () => {
     const data = await window.api.requestActiveRecord();
     const priorRecord = data.filter((ar) => ar.username === localStorage.user && ar.incNo.length > 0 && !(ar.tagOn === true));
-    const onCalltagRecord = await createOncallTagRecord(priorRecord[0]);
-    await window.api.sendRecord(onCalltagRecord);
+    if (priorRecord.length > 0) {
+        const onCalltagRecord = await createOncallTagRecord(priorRecord[0]);
+        await window.api.sendRecord(onCalltagRecord);
+    }
+
     const onCallRecord = await createOncallRecord();
     const updateData = await window.api.sendRecord(onCallRecord);
     updateTable(updateData);
+
 }
 
 
@@ -227,9 +231,6 @@ function tableOperation(records) {
             recpIconSpan.append(recpIcon);
             keyDataInner.append(recpIconSpan);
         }
-
-
-
 
         tableRow.classList.add("tr-record");
         activeRecordTableBody.appendChild(tableRow);
