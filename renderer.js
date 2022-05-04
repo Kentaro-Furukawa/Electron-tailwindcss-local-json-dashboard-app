@@ -115,6 +115,64 @@ stateIcons.forEach(iconItem => {
     stateIconButtonContainer.appendChild(iconElement);
 });
 
+function createOncallTagRecord(priorRecord) {
+    return new Promise((resolve, reject) => {
+        const onCalltagRecord = {
+            username: localStorage.user,
+            state: localStorage.currentState,
+            time: getCurrentDateTime(),
+            inputValue: priorRecord.inputValue,
+            incNo: priorRecord.incNo,
+            recipient: isRecipient,
+            tagOn: true,
+            tags: [tagIcons[2].value],
+            tagComment: 'On call',
+        };
+        const error = false;
+        if (!error) {
+            resolve(onCalltagRecord);
+        } else {
+            reject('Error: failed to create a on call tag record.');
+        }
+    });
+}
+
+function createOncallRecord() {
+    return new Promise((resolve, reject) => {
+        const record = {
+            username: localStorage.user,
+            state: localStorage.currentState,
+            time: getCurrentDateTime(),
+            inputValue: 'On call',
+            incNo: [],
+            recipient: isRecipient,
+        };
+        const error = false;
+        if (!error) {
+            resolve(record);
+        } else {
+            reject('Error: failed to create on call record.');
+        }
+    });
+}
+
+const fireOnCall = async () => {
+    const data = await window.api.requestActiveRecord();
+    const priorRecord = data.filter((ar) => ar.username === localStorage.user && ar.incNo.length > 0 && !(ar.tagOn === true));
+    const onCalltagRecord = await createOncallTagRecord(priorRecord[0]);
+    await window.api.sendRecord(onCalltagRecord);
+    const onCallRecord = await createOncallRecord();
+    const updateData = await window.api.sendRecord(onCallRecord);
+    updateTable(updateData);
+}
+
+
+document.querySelector('button.onCall-icon').addEventListener('click', (e) => {
+    console.log('on call btn click');
+    fireOnCall();
+})
+
+
 recipientIconButton.addEventListener('click', (e) => {
     e.preventDefault();
     if (isRecipient === false) {
@@ -135,6 +193,7 @@ recipientIconButton.addEventListener('click', (e) => {
 });
 
 function tableOperation(records) {
+    console.log(records);
     const sortedRecords = records.sort((a, b) => (a.time < b.time ? 1 : -1));
     document.querySelectorAll('.tr-record').forEach(el => el.remove());
     sortedRecords.forEach((record) => {
@@ -247,9 +306,7 @@ function updateTable(obj) {
             dplTr.classList.add('dpl-tr-on');
             setTimeout(() => {
                 topNavigation.classList.remove('top-nav-dpl');
-
                 dplTr.classList.remove('dpl-tr-on');
-
             }, 2000);
         } else {
             tableOperation(ar);
@@ -274,6 +331,7 @@ userSelecter.addEventListener('change', (e) => {
 
 async function refreshRecord() {
     const data = await window.api.requestActiveRecord();
+    console.table(data);
     tableOperation(data);
 }
 
