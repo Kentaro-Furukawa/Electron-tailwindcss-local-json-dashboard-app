@@ -172,7 +172,6 @@ const fireOnCall = async () => {
 
 
 document.querySelector('button.onCall-icon').addEventListener('click', (e) => {
-    console.log('on call btn click');
     fireOnCall();
 })
 
@@ -197,7 +196,6 @@ recipientIconButton.addEventListener('click', (e) => {
 });
 
 function tableOperation(records) {
-    console.log(records);
     const sortedRecords = records.sort((a, b) => (a.time < b.time ? 1 : -1));
     document.querySelectorAll('.tr-record').forEach(el => el.remove());
     sortedRecords.forEach((record) => {
@@ -332,7 +330,6 @@ userSelecter.addEventListener('change', (e) => {
 
 async function refreshRecord() {
     const data = await window.api.requestActiveRecord();
-    console.table(data);
     tableOperation(data);
 }
 
