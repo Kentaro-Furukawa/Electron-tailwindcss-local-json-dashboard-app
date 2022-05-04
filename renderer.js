@@ -454,6 +454,7 @@ alSubmit.addEventListener('click', (e) => {
             username: localStorage.user,
             date: getCurrentDateTime(),
         };
+        console.log(log);
         window.api.adminLogin(log);
         alModalClose();
     }
