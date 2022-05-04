@@ -97,6 +97,8 @@ const createAdminWindow = () => {
     }
   })
   adminWindow.loadFile('admin.html')
+  adminWindow.webContents.openDevTools();
+
 }
 
 app.whenReady().then(() => {
