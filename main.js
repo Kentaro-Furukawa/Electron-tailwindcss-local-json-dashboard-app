@@ -2,6 +2,7 @@ const { app, BrowserWindow, ipcMain, clipboard} = require('electron');
 const fs = require('fs');
 const fsPromises = require('fs').promises;
 const path = require('path');
+const { stringify } = require('querystring');
 
 const current = new Date().toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo'});
 const currentYear = current.slice(0, 4);
@@ -16,7 +17,7 @@ const initDirs = [
   { dir: "active", files: ["activeRecord.json"] },
   { dir: "archive", files: [archiveFilename] },
   { dir: "log", files: ["activeLog.json", "adminLog.json", "errorLog.json"] },
-  { dir: "user", files: ["user.txt"] }
+  { dir: "user", files: ["user.json"] }
 ];
 
 const dataDir = path.join(__dirname, '.app-data');
@@ -31,31 +32,21 @@ initDirs.forEach((initDir) => {
     const targetFilePath = path.join(dataDir, initDir.dir, file);
     const targetFile = fs.openSync(targetFilePath, 'a');
     const targetFileData = fs.readFileSync(targetFilePath, 'utf-8');
-    if (file.endsWith("json") && targetFileData.trim().length === 0) {
+    if (file === "user.json" && targetFileData.trim().length === 0) {
+      fs.writeFileSync(targetFile, '["admin"]');
+    } else if (targetFileData.trim().length === 0) {
       fs.writeFileSync(targetFile, '[]');
-    } else if (file === "user.txt" && targetFileData.trim().length === 0) {
-      fs.writeFileSync(targetFile, 'admin');
     }
     fs.closeSync(targetFile);
   });
 });
-
 const getUserList = () => {
-  // if user.txt is empty add "admin"
-  let userData = fs.readFileSync(path.join(dataDir, "user", "user.txt"), 'utf-8', (err) => {
-    if (err) throw err;
-  })
-  if (userData.trim().length === 0) {
-    fs.writeFileSync(path.join(dataDir, "user", "user.txt"), "admin", (err) => {
-      if (err) throw err;
-    })
-  }
-  //create user array
-  userTxtData = fs.readFileSync(path.join(dataDir, "user", "user.txt"), 'utf-8', (err) => {
-    if (err) throw err;
-  })
-  const userList = userTxtData.toString().trim().split("\n");
-  return userList;
+  let userData = fs.readFileSync(path.join(dataDir, "user", "user.json"), 'utf-8', (err) => { if (err) throw err; });
+  userData = JSON.parse(userData)
+  if (userData.length === 0) { userData.push('admin') };
+  const userJsonData = JSON.stringify(userData, null, 2)
+    fs.writeFileSync(path.join(dataDir, "user", "user.json"), userJsonData);
+  return userData;
 };
 
 const getActiveRecord = () => {
