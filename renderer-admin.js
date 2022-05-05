@@ -8,7 +8,6 @@ window.addEventListener('load', (event) => {
     getUserList();
 });
 
-
 const getUserList = async () => {
     orgUserList = await window.api.requestUserList();
     userListInputArea.value = orgUserList.join('\n');
@@ -26,7 +25,7 @@ userlistSubmit.addEventListener('click' ,(e) => {
     let inputData = userListInputArea.value
     inputDataArray = inputData.split('\n');
     if (!(arrayEquals(orgUserList, inputDataArray))){
-        console.log('some change')
+        window.api.updateUserList(inputDataArray);
     }
   
 });

@@ -125,6 +125,11 @@ ipcMain.handle("send-user-list", async (event) => {
   return userList;
 })
 
+ipcMain.on("update-user-list", (event, newList) => {
+  const newListJson = JSON.stringify(newList, null, 2);
+  fs.writeFileSync(path.join(dataDir, "user", "user.json"), newListJson);
+});
+
 ipcMain.handle("send-record", async (event, record) => {
   let returnMessage = null;
   let duplicateRecord = [];
