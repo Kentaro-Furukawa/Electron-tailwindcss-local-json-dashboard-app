@@ -432,15 +432,15 @@
     @apply py-1 font-bold text-gray-50 bg-indigo-600 rounded-md shadow-md;
   }
 
-  .export-text-file-container {
+  .export-json-file-container {
     @apply pb-12 border-b-2 border-gray-500;
   }
 
-  .export-text-file-container p {
+  .export-json-file-container p {
     @apply mb-8;
   }
 
-  .export-text-file-form {
+  .export-json-file-form {
     @apply text-center;
   }
 
@@ -454,7 +454,7 @@
     @apply w-48 h-10 py-2 pl-4 pr-2 text-lg tracking-widest text-gray-900 rounded-md;
   }
 
-  #export-text-file-submit {
+  #export-json-file-submit {
     @apply mt-2 px-20 h-10 text-gray-50 bg-orange-500 rounded-md shadow-md;
   }
 }
