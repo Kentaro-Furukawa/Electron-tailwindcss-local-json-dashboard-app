@@ -21,12 +21,12 @@ const getUserList = async () => {
 
 const arrayEquals = (a, b) => {
     return Array.isArray(a) &&
-      Array.isArray(b) &&
-      a.length === b.length &&
-      a.every((val, index) => val.trim() === b[index].trim());
-  }
-  
-userListEditToggle.addEventListener('click', (e)=> {
+        Array.isArray(b) &&
+        a.length === b.length &&
+        a.every((val, index) => val.trim() === b[index].trim());
+}
+
+userListEditToggle.addEventListener('click', (e) => {
     if (userListInputArea.disabled === true) {
         userListEditToggle.classList.remove('edit-on');
         userListInputArea.disabled = false;
@@ -40,18 +40,18 @@ userListEditToggle.addEventListener('click', (e)=> {
     }
 })
 
-userlistSubmit.addEventListener('click' ,(e) => {
+userlistSubmit.addEventListener('click', (e) => {
     e.preventDefault();
     let inputData = userListInputArea.value.trim()
     inputDataArray = inputData.split('\n');
-    if (!(arrayEquals(orgUserList, inputDataArray))){
+    if (!(arrayEquals(orgUserList, inputDataArray))) {
         window.api.updateUserList(inputDataArray);
         getUserList();
         userlistMsg.innerText = 'User list updated. *Reload required'
         userlistMsg.classList.add('user-list-msg-on');
         userListEditToggle.classList.add('edit-on');
         userListInputArea.disabled = true;
-        setTimeout(()=> {
+        setTimeout(() => {
             userlistMsg.innerText = '';
             userlistMsg.classList.remove('user-list-msg-on');
             userlistSubmit.disabled = true;
@@ -64,6 +64,33 @@ userlistReset.addEventListener('click', (e) => {
     e.preventDefault();
     getUserList();
 })
+
+// const exportJsonStartDate = document.querySelector('#export-json-start-date');
+// const exportJsonEndDate = document.querySelector('#export-json-end-date');
+// const exportJsonFileSubmit = document.querySelector('#export-json-file-submit');
+
+exportJsonFileSubmit.addEventListener('click', (e) => {
+    e.preventDefault();
+    const startDateInt = parseInt(exportJsonStartDate.value.replaceAll('-', ''))
+    const endDateInt = parseInt(exportJsonEndDate.value.replaceAll('-', ''))
+
+    if (!(exportJsonStartDate.value) || !(exportJsonEndDate.value) || endDateInt - startDateInt < 0) {
+        console.log('%cInvalid date range.', 'color: yellow; font-weight: bold; font-size: 1rem')
+
+    } else {
+        const dateRange = {
+            startDate: exportJsonStartDate.value,
+            startDateInt: startDateInt,
+            endDate: exportJsonEndDate.value,
+            endDateInt: endDateInt
+        }
+        console.log(dateRange);
+        window.api.exportJson(dateRange);
+        console.log('%cdata range sent', 'color:green; font-weight: bold; font-size: 1rem')
+    }
+
+
+});
 
 
 

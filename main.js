@@ -199,3 +199,7 @@ ipcMain.handle("on-flash", async (event) => {
   return copiedItem;
 })
 
+ipcMain.on("export-json", (event, dateRange) => {
+  console.log(dateRange)
+
+});
