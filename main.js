@@ -1,13 +1,13 @@
-const { app, BrowserWindow, ipcMain, clipboard} = require('electron');
+const { app, BrowserWindow, ipcMain, clipboard } = require('electron');
 const fs = require('fs');
 const fsPromises = require('fs').promises;
 const path = require('path');
 const { stringify } = require('querystring');
 
-const current = new Date().toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo'});
+const current = new Date().toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo' });
 const currentYear = current.slice(0, 4);
-const currentMonth = ("0" +current.slice(5, current.lastIndexOf("/"))).slice(-2);
-const currentDate = ("0" +current.slice(current.lastIndexOf("/")+1, current.indexOf(" "))).slice(-2);
+const currentMonth = ("0" + current.slice(5, current.lastIndexOf("/"))).slice(-2);
+const currentDate = ("0" + current.slice(current.lastIndexOf("/") + 1, current.indexOf(" "))).slice(-2);
 const todayInt = parseInt(currentYear + currentMonth + currentDate);
 const archiveFilename = `archive-${currentYear}-${currentMonth}.json`;
 let userList = Array;
@@ -45,7 +45,7 @@ const getUserList = () => {
   userData = JSON.parse(userData)
   if (userData.length === 0) { userData.push('admin') };
   const userJsonData = JSON.stringify(userData, null, 2)
-    fs.writeFileSync(path.join(dataDir, "user", "user.json"), userJsonData);
+  fs.writeFileSync(path.join(dataDir, "user", "user.json"), userJsonData);
   return userData;
 };
 
@@ -54,7 +54,7 @@ const getActiveRecord = () => {
     if (err) throw err;
   });
   activateRecordData = JSON.parse(activateRecordData);
-  activateRecordData = activateRecordData.filter((record) => parseInt(record.time.slice(0, 10).replaceAll("-", "")) === todayInt );
+  activateRecordData = activateRecordData.filter((record) => parseInt(record.time.slice(0, 10).replaceAll("-", "")) === todayInt);
   const jsonActiveRecordData = JSON.stringify(activateRecordData, null, 2)
   fs.writeFile(path.join(dataDir, "active", "activeRecord.json"), jsonActiveRecordData, (err) => {
     if (err) throw err;
@@ -114,10 +114,13 @@ app.on('window-all-closed', () => {
 })
 
 ipcMain.on("admin-login-attempt", (event, adminLog) => {
-  console.log('Admin login Success: ', adminLog);
   userList = getUserList();
-  console.log(userList);
   createAdminWindow()
+  let adminLogData = fs.readFileSync(path.join(dataDir, "log", "adminLog.json"), 'utf-8', (err) => { if (err) throw err; });
+  adminLogData = JSON.parse(adminLogData);
+  adminLogData.push(adminLog);
+  adminLogData = JSON.stringify(adminLogData, null, 2);
+  fs.writeFileSync(path.join(dataDir, "log", "adminLog.json"), adminLogData);
 });
 
 ipcMain.handle("send-user-list", async (event) => {
@@ -152,7 +155,7 @@ ipcMain.handle("send-record", async (event, record) => {
     incTaken = false;
     // push to activeRecord json file if tagOn is false
     if (!(record.tagOn)) {
-    activateRecordData = activateRecordData.filter((activeRecord => activeRecord.username !== inputUsername || activeRecord.tagOn === true))
+      activateRecordData = activateRecordData.filter((activeRecord => activeRecord.username !== inputUsername || activeRecord.tagOn === true))
     }
     activateRecordData.push(record);
     activateRecordData = JSON.stringify(activateRecordData, null, 2)
@@ -184,11 +187,11 @@ ipcMain.handle("request-active-record", async (event) => {
 ipcMain.handle("delete-tag-record", async (event, delRcd) => {
   let activateRecordData = await fs.promises.readFile(path.join(dataDir, "active", "activeRecord.json"), 'utf8');
   activateRecordData = JSON.parse(activateRecordData);
-  const filteredActivateRecord = activateRecordData.filter((ard) => 
-  !(ard.username === delRcd.username && ard.time === delRcd.time && ard.inputValue === delRcd.inputValue))
+  const filteredActivateRecord = activateRecordData.filter((ard) =>
+    !(ard.username === delRcd.username && ard.time === delRcd.time && ard.inputValue === delRcd.inputValue))
   const faJson = JSON.stringify(filteredActivateRecord, null, 2)
-    await fsPromises.writeFile(path.join(dataDir, "active", "activeRecord.json"), faJson);
-    return filteredActivateRecord;
+  await fsPromises.writeFile(path.join(dataDir, "active", "activeRecord.json"), faJson);
+  return filteredActivateRecord;
 })
 
 ipcMain.handle("on-flash", async (event) => {
