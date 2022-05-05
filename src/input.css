@@ -405,25 +405,32 @@
   }
 
   .column-left-header #user-list-edit {
-    @apply flex h-10 px-5 items-center bg-indigo-500 text-gray-100 rounded-md shadow-md;
+    @apply flex h-10 px-5 items-center bg-indigo-400 hover:bg-indigo-500 active:ring-1 active:ring-indigo-500 text-gray-300 rounded-md shadow-md;
+  }
+
+  .column-left-header #user-list-edit.edit-on {
+    @apply bg-indigo-500 text-gray-100;
   }
 
   #userlist-input {
-    @apply w-full min-h-[300px] mx-auto mb-6 py-2 px-4 leading-5 text-gray-900 rounded-md;
+    @apply w-full min-h-[300px] mx-auto mb-6 py-2 px-4 leading-5 text-gray-900 disabled:text-gray-600 disabled:hover:cursor-not-allowed rounded-md;
+  }
+
+  #userlist-submit, #userlist-reset {
+    @apply disabled:bg-gray-400 disabled:text-gray-500 disabled:hover:bg-gray-600 disabled:hover:cursor-not-allowed active:ring-1 rounded-md shadow-md;
   }
 
   #userlist-submit {
-    @apply m-2 px-28 h-10 bg-yellow-500 text-gray-100 rounded-md shadow-md;
+    @apply m-2 px-28 h-10 bg-yellow-400 text-gray-100 hover:bg-yellow-500 active:ring-yellow-500;
   }
 
   #userlist-reset {
-    @apply m-2 px-28 h-10 bg-sky-500 text-gray-100 rounded-md shadow-md;
+    @apply m-2 px-28 h-10 bg-sky-400 text-gray-100 hover:bg-sky-500 active:ring-sky-500;
   }
 
   .export-text-file-container {
     @apply pb-12 border-b-2 border-gray-500;
   }
-
 
   .export-text-file-container p {
     @apply mb-8;

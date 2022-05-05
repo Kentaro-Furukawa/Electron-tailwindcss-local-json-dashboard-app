@@ -1,8 +1,10 @@
 document.querySelector('#admin-username').innerText = `${localStorage.user}`;
 let orgUserList = [];
 let inputDataArray = [];
+const userListEditToggle = document.querySelector('#user-list-edit');
 const userListInputArea = document.querySelector('#userlist-input');
 const userlistSubmit = document.querySelector('#userlist-submit');
+const userlistReset = document.querySelector('#userlist-reset');
 
 window.addEventListener('load', (event) => {
     getUserList();
@@ -20,15 +22,33 @@ const arrayEquals = (a, b) => {
       a.every((val, index) => val.trim() === b[index].trim());
   }
   
+userListEditToggle.addEventListener('click', (e)=> {
+    if (userListInputArea.disabled === true) {
+        userListEditToggle.classList.remove('edit-on');
+        userListInputArea.disabled = false;
+        userlistSubmit.disabled = false;
+        userlistReset.disabled = false;
+    } else {
+        userListEditToggle.classList.add('edit-on');
+        userListInputArea.disabled = true;
+        userlistSubmit.disabled = true;
+        userlistReset.disabled = true;
+    }
+})
+
 userlistSubmit.addEventListener('click' ,(e) => {
     e.preventDefault();
-    let inputData = userListInputArea.value
+    let inputData = userListInputArea.value.trim()
     inputDataArray = inputData.split('\n');
     if (!(arrayEquals(orgUserList, inputDataArray))){
         window.api.updateUserList(inputDataArray);
-    }
-  
+    }  
 });
+
+userlistReset.addEventListener('click', (e) => {
+    e.preventDefault();
+    getUserList();
+})
 
 
 
