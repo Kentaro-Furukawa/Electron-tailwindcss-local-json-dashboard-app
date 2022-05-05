@@ -5,6 +5,7 @@ const userListEditToggle = document.querySelector('#user-list-edit');
 const userListInputArea = document.querySelector('#userlist-input');
 const userlistSubmit = document.querySelector('#userlist-submit');
 const userlistReset = document.querySelector('#userlist-reset');
+const userlistMsg = document.querySelector('#userlist-msg');
 
 window.addEventListener('load', (event) => {
     getUserList();
@@ -42,7 +43,15 @@ userlistSubmit.addEventListener('click' ,(e) => {
     inputDataArray = inputData.split('\n');
     if (!(arrayEquals(orgUserList, inputDataArray))){
         window.api.updateUserList(inputDataArray);
-    }  
+        userlistMsg.innerText = 'User list updated. *Reload required'
+        setTimeout(()=> {
+            userlistMsg.innerText = '';
+            userListEditToggle.classList.add('edit-on');
+            userListInputArea.disabled = true;
+            userlistSubmit.disabled = true;
+            userlistReset.disabled = true;
+        }, 3000);
+    }
 });
 
 userlistReset.addEventListener('click', (e) => {

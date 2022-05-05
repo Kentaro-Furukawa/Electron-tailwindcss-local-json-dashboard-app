@@ -428,6 +428,10 @@
     @apply m-2 px-28 h-10 bg-sky-400 text-gray-100 hover:bg-sky-500 active:ring-sky-500;
   }
 
+  /* .user-list-msg-on {
+    @apply ;
+  } */
+
   .export-text-file-container {
     @apply pb-12 border-b-2 border-gray-500;
   }
@@ -453,5 +457,4 @@
   #export-text-file-submit {
     @apply mt-2 px-20 h-10 text-gray-50 bg-orange-500 rounded-md shadow-md;
   }
-
 }
