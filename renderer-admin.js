@@ -43,6 +43,7 @@ userlistSubmit.addEventListener('click' ,(e) => {
     inputDataArray = inputData.split('\n');
     if (!(arrayEquals(orgUserList, inputDataArray))){
         window.api.updateUserList(inputDataArray);
+        getUserList();
         userlistMsg.innerText = 'User list updated. *Reload required'
         userlistMsg.classList.add('user-list-msg-on');
         userListEditToggle.classList.add('edit-on');
