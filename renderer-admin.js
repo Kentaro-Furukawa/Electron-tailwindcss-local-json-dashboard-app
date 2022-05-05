@@ -44,10 +44,12 @@ userlistSubmit.addEventListener('click' ,(e) => {
     if (!(arrayEquals(orgUserList, inputDataArray))){
         window.api.updateUserList(inputDataArray);
         userlistMsg.innerText = 'User list updated. *Reload required'
+        userlistMsg.classList.add('user-list-msg-on');
+        userListEditToggle.classList.add('edit-on');
+        userListInputArea.disabled = true;
         setTimeout(()=> {
             userlistMsg.innerText = '';
-            userListEditToggle.classList.add('edit-on');
-            userListInputArea.disabled = true;
+            userlistMsg.classList.remove('user-list-msg-on');
             userlistSubmit.disabled = true;
             userlistReset.disabled = true;
         }, 3000);
