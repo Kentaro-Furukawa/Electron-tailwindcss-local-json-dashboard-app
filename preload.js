@@ -7,7 +7,8 @@ const API = {
   requestActiveRecord: () => ipcRenderer.invoke("request-active-record"),
   sendRecord: (record) => ipcRenderer.invoke("send-record", record),
   delTagRecord: (record) => ipcRenderer.invoke("delete-tag-record", record),
-  onFlash: () => ipcRenderer.invoke("on-flash")
+  onFlash: () => ipcRenderer.invoke("on-flash"),
+  exportJson: (date) => ipcRenderer.send("export-json", date)
 }
 
 contextBridge.exposeInMainWorld('api', API);

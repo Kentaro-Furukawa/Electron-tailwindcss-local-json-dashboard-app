@@ -6,6 +6,9 @@ const userListInputArea = document.querySelector('#userlist-input');
 const userlistSubmit = document.querySelector('#userlist-submit');
 const userlistReset = document.querySelector('#userlist-reset');
 const userlistMsg = document.querySelector('#userlist-msg');
+const exportJsonStartDate = document.querySelector('#export-json-start-date');
+const exportJsonEndDate = document.querySelector('#export-json-end-date');
+const exportJsonFileSubmit = document.querySelector('#export-json-file-submit');
 
 window.addEventListener('load', (event) => {
     getUserList();
@@ -61,6 +64,8 @@ userlistReset.addEventListener('click', (e) => {
     e.preventDefault();
     getUserList();
 })
+
+
 
 
 

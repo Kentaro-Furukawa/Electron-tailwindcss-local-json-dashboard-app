@@ -444,13 +444,13 @@
     @apply text-center;
   }
 
-  .start-date-container,
-  .end-date-container {
+  .export-json-start-date-container,
+  .export-json-end-date-container {
     @apply m-4;
   }
 
-  #start-date,
-  #end-date {
+  #export-json-start-date,
+  #export-json-end-date {
     @apply w-48 h-10 py-2 pl-4 pr-2 text-lg tracking-widest text-gray-900 rounded-md;
   }
 
