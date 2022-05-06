@@ -580,6 +580,16 @@ tagSubmitBtn.addEventListener('click', (e) => {
 
 })
 
+const escapeKey = (event) => {
+    if (event.which == 27) { // Escape key
+        tagModalClose();
+        alModalClose();
+        recordFormMessage.innerText = '';
+        recordFormMessage.classList.remove('record-form-message-on');
+    }
+}
+window.addEventListener('keyup', escapeKey, true)
+
 
 // ****************************************
 
