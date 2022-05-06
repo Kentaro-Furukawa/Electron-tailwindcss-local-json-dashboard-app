@@ -84,7 +84,6 @@ const createMainWindow = () => {
   activateRecordData = getActiveRecord();
   mainWindow.webContents.on("did-finish-load", () => {
     mainWindow.webContents.send("send-user-list", userList);
-    // mainWindow.webContents.send("send-active-record", activateRecordData);
   })
 };
 
@@ -201,7 +200,7 @@ ipcMain.handle("on-flash", async (event) => {
   return copiedItem;
 })
 
-ipcMain.on("export-json", (event, dateRange) => {
+ipcMain.handle("export-json", async (event, dateRange) => {
   const { startDate, endDate, startDateInt, endDateInt } = dateRange
   const sYearMonth = parseInt(startDateInt.toString().slice(0, 6));
   const eYearMonth = parseInt(endDateInt.toString().slice(0, 6));
@@ -221,21 +220,23 @@ ipcMain.on("export-json", (event, dateRange) => {
   console.log(jsonFileList);
   let exportJsonData = [];
 
-
   jsonFileList.forEach((file) => {
     if (fs.existsSync(path.join(dataDir, 'archive', file))) {
       let data = fs.readFileSync(path.join(dataDir, 'archive', file), 'utf-8');
       data = JSON.parse(data);
       exportJsonData = [...exportJsonData, ...data];
-    } else {
-      console.log('file does not exist.')         // let user to know file does not exit, send msg to renderer process.
-    }
+    } 
   });
   let filteredExportJsonData = exportJsonData.filter(record =>
     (parseInt(record.time.slice(0, 10).replaceAll('-', '')) >= startDateInt &&
      parseInt(record.time.slice(0, 10).replaceAll('-', '')) <= endDateInt)
   );
+const exportRecordLength = filteredExportJsonData.length;
+  if(filteredExportJsonData.length === 0) return "Target record doesn't exist.";
+
   const exportJsonFilename = `record-${startDate}-to-${endDate}.json`;
   filteredExportJsonData = JSON.stringify(filteredExportJsonData, null, 2);
   fs.writeFileSync(path.join(__dirname, exportJsonFilename), filteredExportJsonData);
+
+  return `Flie exported. Record count: ${exportRecordLength}`;
 });

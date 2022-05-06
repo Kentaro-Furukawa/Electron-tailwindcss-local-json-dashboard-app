@@ -65,9 +65,10 @@ userlistReset.addEventListener('click', (e) => {
     getUserList();
 })
 
-// const exportJsonStartDate = document.querySelector('#export-json-start-date');
-// const exportJsonEndDate = document.querySelector('#export-json-end-date');
-// const exportJsonFileSubmit = document.querySelector('#export-json-file-submit');
+const exportJsonRequest = async (dateRange) => {
+     const msg = await window.api.exportJson(dateRange);
+    console.log(msg);
+}
 
 exportJsonFileSubmit.addEventListener('click', (e) => {
     e.preventDefault();
@@ -84,15 +85,11 @@ exportJsonFileSubmit.addEventListener('click', (e) => {
             endDate: exportJsonEndDate.value,
             endDateInt: endDateInt
         }
-        console.log(dateRange);
-        window.api.exportJson(dateRange);
-        console.log('%cdata range sent', 'color:green; font-weight: bold; font-size: 1rem')
+        exportJsonRequest(dateRange);
     }
 
 
 });
-
-
 
 
 
