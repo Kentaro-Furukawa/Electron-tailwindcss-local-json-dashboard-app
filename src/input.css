@@ -4,6 +4,10 @@
 
 @layer components {
 
+  #body-content {
+  @apply bg-gray-100 dark:bg-gray-700;
+  }
+
   .state-icon-button-container .available-icon {
     @apply text-green-400 hover:bg-green-600;
   }
@@ -198,15 +202,15 @@
   }
 
   #top-navigation.top-nav-scc {
-    @apply bg-green-500;
+    @apply bg-green-500 bg-opacity-80;
   }
 
   #top-navigation.top-nav-dpl {
-    @apply bg-amber-400;
+    @apply bg-amber-400 bg-opacity-80;
   }
 
   .dpl-tr-on {
-    @apply bg-amber-400;
+    @apply bg-amber-400 bg-opacity-80;
   }
 
   .active-record-table-section {

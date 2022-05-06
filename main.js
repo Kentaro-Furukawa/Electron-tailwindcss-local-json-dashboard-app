@@ -219,7 +219,6 @@ ipcMain.handle("export-json", async (event, dateRange) => {
     }
   };
 
-  console.log(jsonFileList);
   let exportJsonData = [];
 
   jsonFileList.forEach((file) => {
