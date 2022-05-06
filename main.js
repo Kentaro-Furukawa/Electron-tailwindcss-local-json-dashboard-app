@@ -1,8 +1,10 @@
 const { app, BrowserWindow, ipcMain, clipboard } = require('electron');
 const fs = require('fs');
+// const { type } = require('os');
 const fsPromises = require('fs').promises;
 const path = require('path');
-const { stringify } = require('querystring');
+// const { stringify } = require('querystring');
+// const { start } = require('repl');
 
 const current = new Date().toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo' });
 const currentYear = current.slice(0, 4);
@@ -200,31 +202,40 @@ ipcMain.handle("on-flash", async (event) => {
 })
 
 ipcMain.on("export-json", (event, dateRange) => {
-    const { startDateInt, endDateInt } = dateRange
-  console.log(dateRange)
+  const { startDate, endDate, startDateInt, endDateInt } = dateRange
   const sYearMonth = parseInt(startDateInt.toString().slice(0, 6));
   const eYearMonth = parseInt(endDateInt.toString().slice(0, 6));
   const jsonFileList = [];
   let iYearMonth = sYearMonth;
-
-
   while (iYearMonth <= eYearMonth) {
     const iY = iYearMonth.toString().slice(0, 4);
     const iM = iYearMonth.toString().slice(4);
-    console.log('iym ---->', iYearMonth);
-    console.log('iM -->', iM);
-      jsonFileList.push(`archive-${iY}-${iM}.json`);
-
-    if(iYearMonth.toString().slice(-2) === '12') {
+    jsonFileList.push(`archive-${iY}-${iM}.json`);
+    if (iYearMonth.toString().slice(-2) === '12') {
       iYearMonth = iYearMonth + 89;
     } else {
       iYearMonth++;
     }
-
   };
 
   console.log(jsonFileList);
+  let exportJsonData = [];
 
 
-
+  jsonFileList.forEach((file) => {
+    if (fs.existsSync(path.join(dataDir, 'archive', file))) {
+      let data = fs.readFileSync(path.join(dataDir, 'archive', file), 'utf-8');
+      data = JSON.parse(data);
+      exportJsonData = [...exportJsonData, ...data];
+    } else {
+      console.log('file does not exist.')         // let user to know file does not exit, send msg to renderer process.
+    }
+  });
+  let filteredExportJsonData = exportJsonData.filter(record =>
+    (parseInt(record.time.slice(0, 10).replaceAll('-', '')) >= startDateInt &&
+     parseInt(record.time.slice(0, 10).replaceAll('-', '')) <= endDateInt)
+  );
+  const exportJsonFilename = `record-${startDate}-to-${endDate}.json`;
+  filteredExportJsonData = JSON.stringify(filteredExportJsonData, null, 2);
+  fs.writeFileSync(path.join(__dirname, exportJsonFilename), filteredExportJsonData);
 });
