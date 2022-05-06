@@ -82,8 +82,13 @@ exportJsonFileSubmit.addEventListener('click', (e) => {
     const endDateInt = parseInt(exportJsonEndDate.value.replaceAll('-', ''))
 
     if (!(exportJsonStartDate.value) || !(exportJsonEndDate.value) || endDateInt - startDateInt < 0) {
-        console.log('%cInvalid date range.', 'color: yellow; font-weight: bold; font-size: 1rem')
-
+        exportJsonMsg.innerText = 'Invalid date range.';
+        exportJsonMsg.classList.add('export-json-msg-on');
+        setTimeout(() => {
+            exportJsonMsg.innerText = '';
+            exportJsonMsg.classList.remove('export-json-msg-on');
+        }, 5000);
+    
     } else {
         const dateRange = {
             startDate: exportJsonStartDate.value,
