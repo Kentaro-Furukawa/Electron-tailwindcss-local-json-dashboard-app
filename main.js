@@ -200,6 +200,31 @@ ipcMain.handle("on-flash", async (event) => {
 })
 
 ipcMain.on("export-json", (event, dateRange) => {
+    const { startDateInt, endDateInt } = dateRange
   console.log(dateRange)
+  const sYearMonth = parseInt(startDateInt.toString().slice(0, 6));
+  const eYearMonth = parseInt(endDateInt.toString().slice(0, 6));
+  const jsonFileList = [];
+  let iYearMonth = sYearMonth;
+
+
+  while (iYearMonth <= eYearMonth) {
+    const iY = iYearMonth.toString().slice(0, 4);
+    const iM = iYearMonth.toString().slice(4);
+    console.log('iym ---->', iYearMonth);
+    console.log('iM -->', iM);
+      jsonFileList.push(`archive-${iY}-${iM}.json`);
+
+    if(iYearMonth.toString().slice(-2) === '12') {
+      iYearMonth = iYearMonth + 89;
+    } else {
+      iYearMonth++;
+    }
+
+  };
+
+  console.log(jsonFileList);
+
+
 
 });
