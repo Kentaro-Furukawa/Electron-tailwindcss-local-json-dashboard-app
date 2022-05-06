@@ -81,6 +81,11 @@ const createMainWindow = () => {
   activateRecordData = getActiveRecord();
   mainWindow.webContents.on("did-finish-load", () => {
     mainWindow.webContents.send("send-user-list", userList);
+    globalShortcut.register('Shift+CommandOrControl+E', () => {
+      const copiedItem = clipboard.readText()
+      mainWindow.webContents.send("on-spark", copiedItem);
+    })
+  
   })
 };
 

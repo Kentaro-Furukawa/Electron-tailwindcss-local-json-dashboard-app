@@ -8,6 +8,7 @@ const API = {
   sendRecord: (record) => ipcRenderer.invoke("send-record", record),
   delTagRecord: (record) => ipcRenderer.invoke("delete-tag-record", record),
   onFlash: () => ipcRenderer.invoke("on-flash"),
+  onSpark: (callback) => ipcRenderer.on("on-spark", (event, arg) => {callback(arg);} ),
   exportJson: (dateRange) => ipcRenderer.invoke("export-json", dateRange)
 }
 

@@ -580,6 +580,10 @@ tagSubmitBtn.addEventListener('click', (e) => {
 
 })
 
+window.api.onSpark((arg) => {
+    console.log(arg);
+})
+
 const escapeKey = (event) => {
     if (event.which == 27) { // Escape key
         tagModalClose();
