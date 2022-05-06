@@ -580,8 +580,24 @@ tagSubmitBtn.addEventListener('click', (e) => {
 
 })
 
-window.api.onSpark((arg) => {
-    console.log(arg);
+const spark = async (clipedItem) => {
+    if (!(incPattern.test(clipedItem))) {
+        recordFormMessage.innerText = 'No valid incNo copied.';
+        recordFormMessage.classList.add('record-form-message-on');
+        setTimeout(() => {
+            recordFormMessage.innerText = '';
+            recordFormMessage.classList.remove('record-form-message-on');
+        }, 2000);
+    } else {
+        recordInput.value = clipedItem;
+        await sendRecord();
+        recordInput.value = '';
+    }
+}
+
+
+window.api.onSpark((clipedItem) => {
+    spark(clipedItem);
 })
 
 const escapeKey = (event) => {
