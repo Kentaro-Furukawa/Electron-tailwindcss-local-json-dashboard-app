@@ -1,10 +1,7 @@
-const { app, BrowserWindow, ipcMain, clipboard } = require('electron');
+const { app, BrowserWindow, ipcMain, clipboard, globalShortcut } = require('electron');
 const fs = require('fs');
-// const { type } = require('os');
 const fsPromises = require('fs').promises;
 const path = require('path');
-// const { stringify } = require('querystring');
-// const { start } = require('repl');
 
 const current = new Date().toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo' });
 const currentYear = current.slice(0, 4);
@@ -104,11 +101,11 @@ const createAdminWindow = () => {
 
 app.whenReady().then(() => {
   createMainWindow()
+})
 
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) createMainWindow()
   })
-})
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') app.quit()
