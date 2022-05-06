@@ -457,4 +457,12 @@
   #export-json-file-submit {
     @apply mt-2 px-20 h-10 text-gray-50 bg-orange-500 rounded-md shadow-md;
   }
+
+  .export-json-msg-on {
+    @apply mt-2 py-1 font-bold text-gray-50 bg-amber-600 rounded-md shadow-md;
+  }
+
+
+
 }
+

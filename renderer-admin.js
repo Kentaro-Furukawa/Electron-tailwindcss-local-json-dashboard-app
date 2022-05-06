@@ -9,6 +9,7 @@ const userlistMsg = document.querySelector('#userlist-msg');
 const exportJsonStartDate = document.querySelector('#export-json-start-date');
 const exportJsonEndDate = document.querySelector('#export-json-end-date');
 const exportJsonFileSubmit = document.querySelector('#export-json-file-submit');
+const exportJsonMsg = document.querySelector('#export-json-msg');
 
 window.addEventListener('load', (event) => {
     getUserList();
@@ -56,7 +57,7 @@ userlistSubmit.addEventListener('click', (e) => {
             userlistMsg.classList.remove('user-list-msg-on');
             userlistSubmit.disabled = true;
             userlistReset.disabled = true;
-        }, 3000);
+        }, 5000);
     }
 });
 
@@ -66,8 +67,13 @@ userlistReset.addEventListener('click', (e) => {
 })
 
 const exportJsonRequest = async (dateRange) => {
-     const msg = await window.api.exportJson(dateRange);
-    console.log(msg);
+    const msg = await window.api.exportJson(dateRange);
+    exportJsonMsg.innerText = msg;
+    exportJsonMsg.classList.add('export-json-msg-on');
+    setTimeout(() => {
+        exportJsonMsg.innerText = '';
+        exportJsonMsg.classList.remove('export-json-msg-on');
+    }, 5000);
 }
 
 exportJsonFileSubmit.addEventListener('click', (e) => {
@@ -87,8 +93,6 @@ exportJsonFileSubmit.addEventListener('click', (e) => {
         }
         exportJsonRequest(dateRange);
     }
-
-
 });
 
 
